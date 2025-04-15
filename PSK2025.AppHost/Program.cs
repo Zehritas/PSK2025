@@ -16,11 +16,4 @@ builder.AddProject<PSK2025_MigrationService>("migrations")
 var apiService = builder.AddProject<Projects.PSK2025_ApiService>("apiservice")
     .WithReference(postgresdb);
 
-builder.AddProject<Projects.PSK2025_Web>("webfrontend")
-    .WithExternalHttpEndpoints()
-    .WithReference(cache)
-    .WaitFor(cache)
-    .WithReference(apiService)
-    .WaitFor(apiService);
-
 builder.Build().Run();
