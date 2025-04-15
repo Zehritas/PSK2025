@@ -1,7 +1,11 @@
+using PSK2025.Data.Contexts;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
+
+builder.AddNpgsqlDbContext<AppDbContext>(connectionName: "postgresdb");
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
@@ -36,6 +40,10 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast");
 
 app.MapDefaultEndpoints();
+
+//
+// app.UseAuthentication();
+// app.UseAuthorization();
 
 app.Run();
 
