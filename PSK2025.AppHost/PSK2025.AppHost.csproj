@@ -13,7 +13,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\PSK2025.ApiService\PSK2025.ApiService.csproj" />
-        <ProjectReference Include="..\PSK2025.Web\PSK2025.Web.csproj" />
         <ProjectReference Include="..\PSK2025.MigrationService\PSK2025.MigrationService.csproj" />
     </ItemGroup>
 
