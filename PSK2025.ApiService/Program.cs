@@ -1,3 +1,4 @@
+using PSK2025.ApiService.Services;
 using PSK2025.Data.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.AddNpgsqlDbContext<AppDbContext>(connectionName: "postgresdb");
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
