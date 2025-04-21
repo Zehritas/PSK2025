@@ -2,52 +2,77 @@
 using Microsoft.Extensions.Configuration;
 using PSK2025.Data.Services.Interfaces;
 using PSK2025.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens; 
-using System.IdentityModel.Tokens.Jwt;  
+using PSK2025.Data.Requests.Auth;
+using PSK2025.Data.Responses.Auth;
+using PSK2025.Data.Contexts;
+using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace PSK2025.Data.Services;
 
-public class AuthService : IAuthService
+public class AuthService(
+    UserManager<User> userManager,
+    IConfiguration configuration,
+    IJwtTokenService tokenService,
+    AppDbContext context) : IAuthService
 {
-    private readonly IConfiguration _configuration;
-    private readonly UserManager<User> _userManager;
 
-    public AuthService(IConfiguration configuration, UserManager<User> userManager)
+    public async Task<UserLoginResponse> UserLoginAsync(UserLoginRequest request, CancellationToken cancelationToken = default)
     {
-        _configuration = configuration;
-        _userManager = userManager;
-    }
+        var user = await userManager.FindByNameAsync(request.Username);
 
-    public async Task<string> GenerateJwtTokenAsync(User user)
-    {
-        var jwtSettings = _configuration.GetSection("JwtSettings");
-
-        var claims = new List<Claim>
+        if (user == null || !await userManager.CheckPasswordAsync(user, request.Password))
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Name, user.UserName ?? "")
-        };
+            throw new UnauthorizedAccessException("Invalid username or password.");
+        }
 
-        var roles = await _userManager.GetRolesAsync(user);
-        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+        var roles = await userManager.GetRolesAsync(user);
+        var token = tokenService.GenerateJwtToken(user, roles);
+        var refreshToken = tokenService.GenerateRefreshToken(user.Id);
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        context.RefreshTokens.Add(refreshToken); 
+        await context.SaveChangesAsync(cancelationToken);
 
-        var token = new JwtSecurityToken(
-            issuer: jwtSettings["Issuer"],
-            audience: jwtSettings["Audience"],
-            claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(60),
-            signingCredentials: creds);
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return new UserLoginResponse(token, user.Id, refreshToken.Token);
     }
+
+    public async Task<Result<GetRefreshTokenResponse>> GetRefreshTokenAsync(GetRefreshTokenRequest request,
+    CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(request.Token))
+        {
+            return Result<GetRefreshTokenResponse>.Failure("Refresh token must be provided.");
+        }
+
+        var refreshToken = await context.RefreshTokens
+            .Include(rt => rt.User)
+            .FirstOrDefaultAsync(rt =>
+                rt.Token == request.Token &&
+                !rt.IsRevoked &&
+                rt.ExpiresAt > DateTime.UtcNow,
+                cancellationToken);
+
+        if (refreshToken == null)
+        {
+            return Result<GetRefreshTokenResponse>.Failure("Invalid or expired refresh token.");
+        }
+
+        refreshToken.Revoke();
+        context.RefreshTokens.Update(refreshToken);
+        await context.SaveChangesAsync(cancellationToken);
+
+        var newAccessToken = tokenService.GenerateJwtToken(
+            refreshToken.User,
+            await userManager.GetRolesAsync(refreshToken.User));
+
+        var newRefreshToken = tokenService.GenerateRefreshToken(refreshToken.User.Id);
+
+        await context.RefreshTokens.AddAsync(newRefreshToken, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+
+        return Result<GetRefreshTokenResponse>.Success(
+            new GetRefreshTokenResponse(newAccessToken, newRefreshToken.Token));
+    }
+
 }

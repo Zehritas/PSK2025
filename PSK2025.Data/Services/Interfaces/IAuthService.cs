@@ -1,14 +1,11 @@
-﻿using PSK2025.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PSK2025.Data.Requests.Auth;
+using PSK2025.Data.Responses.Auth;
 
-namespace PSK2025.Data.Services.Interfaces
+
+namespace PSK2025.Data.Services.Interfaces;
+
+public interface IAuthService
 {
-    public interface IAuthService
-    {
-        Task<string> GenerateJwtTokenAsync(User user);
-    }
+    Task<UserLoginResponse> UserLoginAsync(UserLoginRequest request, CancellationToken cancelationToken = default);
+    Task<Result<GetRefreshTokenResponse>> GetRefreshTokenAsync(GetRefreshTokenRequest request, CancellationToken cancellationToken = default);
 }

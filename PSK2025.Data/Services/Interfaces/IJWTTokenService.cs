@@ -10,6 +10,7 @@ namespace PSK2025.Data.Services.Interfaces;
 
 public interface IJwtTokenService
 {
-    Task<string> GenerateJwtTokenAsync(User user);
-    Task<ClaimsPrincipal> ValidateTokenAsync(string token);
+    string GenerateJwtToken(User user, IList<string> roles);
+
+    RefreshToken GenerateRefreshToken(string userId);
 }
