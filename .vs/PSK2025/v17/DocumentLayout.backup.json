@@ -1,0 +1,1030 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\settings\\tokensettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\settings\\tokensettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\services\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\services\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CB2B6E8-7C46-476E-B1F2-20C6ADCF1A7B}|PSK2025.Models\\PSK2025.Models.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.models\\entities\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CB2B6E8-7C46-476E-B1F2-20C6ADCF1A7B}|PSK2025.Models\\PSK2025.Models.csproj|solutionrelative:psk2025.models\\entities\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\psk2025.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\psk2025.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\migrations\\20250420192957_addrefreshtokensupport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\migrations\\20250420192957_addrefreshtokensupport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\migrations\\20250421135216_previewmodelchanges.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\migrations\\20250421135216_previewmodelchanges.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\responses\\auth\\getrefreshtokenresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\responses\\auth\\getrefreshtokenresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\responses\\auth\\userloginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\responses\\auth\\userloginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\controllers\\auth\\refreshtokenendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\controllers\\auth\\refreshtokenendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\services\\interfaces\\ijwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\services\\interfaces\\ijwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apphost\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|solutionrelative:psk2025.apphost\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apphost\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|solutionrelative:psk2025.apphost\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\services\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\services\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\services\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\services\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\contexts\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\contexts\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\extensions\\endpointextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\extensions\\endpointextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\extensions\\serviceregistrationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\extensions\\serviceregistrationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\contexts\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\contexts\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\interfaces\\iendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\interfaces\\iendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\interfaces\\iroutegroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\interfaces\\iroutegroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\controllers\\auth\\authroutegroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\controllers\\auth\\authroutegroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\responses\\getuserbyidresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\responses\\getuserbyidresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CB2B6E8-7C46-476E-B1F2-20C6ADCF1A7B}|PSK2025.Models\\PSK2025.Models.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CB2B6E8-7C46-476E-B1F2-20C6ADCF1A7B}|PSK2025.Models\\PSK2025.Models.csproj|solutionrelative:psk2025.models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CB2B6E8-7C46-476E-B1F2-20C6ADCF1A7B}|PSK2025.Models\\PSK2025.Models.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.models\\entities\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CB2B6E8-7C46-476E-B1F2-20C6ADCF1A7B}|PSK2025.Models\\PSK2025.Models.csproj|solutionrelative:psk2025.models\\entities\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\extensions\\migrationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\extensions\\migrationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\psk2025.migrationservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\psk2025.migrationservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\abstractions\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\abstractions\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\migrations\\20250414172631_addidentityschema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\migrations\\20250414172631_addidentityschema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{128D63A5-17A3-4E94-B628-68B3F3ED8614}|PSK2025.ServiceDefaults\\PSK2025.ServiceDefaults.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.servicedefaults\\extensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{128D63A5-17A3-4E94-B628-68B3F3ED8614}|PSK2025.ServiceDefaults\\PSK2025.ServiceDefaults.csproj|solutionrelative:psk2025.servicedefaults\\extensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\psk2025.apiservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\psk2025.apiservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\controllers\\user\\getuserbyidendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\controllers\\user\\getuserbyidendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\enums\\routegroupname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\enums\\routegroupname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\seeding\\dataseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\seeding\\dataseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\requests\\auth\\getrefreshtokenrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\requests\\auth\\getrefreshtokenrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\requests\\auth\\userloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\requests\\auth\\userloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CB2B6E8-7C46-476E-B1F2-20C6ADCF1A7B}|PSK2025.Models\\PSK2025.Models.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.models\\psk2025.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{9CB2B6E8-7C46-476E-B1F2-20C6ADCF1A7B}|PSK2025.Models\\PSK2025.Models.csproj|solutionrelative:psk2025.models\\psk2025.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\abstractions\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\abstractions\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\abstractions\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\abstractions\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apphost\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|solutionrelative:psk2025.apphost\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apiservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{931E7380-E1A8-4DA4-87D5-2AFE081C688F}|PSK2025.ApiService\\PSK2025.ApiService.csproj|solutionrelative:psk2025.apiservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.migrationservice\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{76CB4AB4-5CE4-42EF-AFA3-56F4C53196CE}|PSK2025.MigrationService\\PSK2025.MigrationService.csproj|solutionrelative:psk2025.migrationservice\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0F7A21F-AFFF-4D71-9B9C-87358B6FEDA0}|PSK2025.Web\\PSK2025.Web.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D0F7A21F-AFFF-4D71-9B9C-87358B6FEDA0}|PSK2025.Web\\PSK2025.Web.csproj|solutionrelative:psk2025.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.data\\migrations\\20250414172631_addidentityschema.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18402F97-33AA-470A-9C66-6706CF7232D9}|PSK2025.Data\\PSK2025.Data.csproj|solutionrelative:psk2025.data\\migrations\\20250414172631_addidentityschema.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0F7A21F-AFFF-4D71-9B9C-87358B6FEDA0}|PSK2025.Web\\PSK2025.Web.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.web\\psk2025.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D0F7A21F-AFFF-4D71-9B9C-87358B6FEDA0}|PSK2025.Web\\PSK2025.Web.csproj|solutionrelative:psk2025.web\\psk2025.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apphost\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|solutionrelative:psk2025.apphost\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.apphost\\psk2025.apphost.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{E32E043E-5614-4696-8B04-14687359E744}|PSK2025.AppHost\\PSK2025.AppHost.csproj|solutionrelative:psk2025.apphost\\psk2025.apphost.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{128D63A5-17A3-4E94-B628-68B3F3ED8614}|PSK2025.ServiceDefaults\\PSK2025.ServiceDefaults.csproj|c:\\users\\lenovo\\desktop\\pskdalykas\\psk2025\\psk2025.servicedefaults\\psk2025.servicedefaults.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{128D63A5-17A3-4E94-B628-68B3F3ED8614}|PSK2025.ServiceDefaults\\PSK2025.ServiceDefaults.csproj|solutionrelative:psk2025.servicedefaults\\psk2025.servicedefaults.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\DependencyInjection.cs",
+              "RelativeToolTip": "PSK2025.Data\\DependencyInjection.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAUwBEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T17:30:24.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PSK2025.Data.csproj",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\PSK2025.Data.csproj",
+              "RelativeDocumentMoniker": "PSK2025.Data\\PSK2025.Data.csproj",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\PSK2025.Data.csproj",
+              "RelativeToolTip": "PSK2025.Data\\PSK2025.Data.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-15T18:55:12.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\UserService.cs",
+              "RelativeToolTip": "PSK2025.Data\\Services\\UserService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T12:59:30.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TokenSettings.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Settings\\TokenSettings.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Settings\\TokenSettings.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Settings\\TokenSettings.cs",
+              "RelativeToolTip": "PSK2025.Data\\Settings\\TokenSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T17:24:42.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RefreshToken.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Models\\Entities\\RefreshToken.cs",
+              "RelativeDocumentMoniker": "PSK2025.Models\\Entities\\RefreshToken.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Models\\Entities\\RefreshToken.cs",
+              "RelativeToolTip": "PSK2025.Models\\Entities\\RefreshToken.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAzwBYAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T17:57:38.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JWTTokenService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\JWTTokenService.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Services\\JWTTokenService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\JWTTokenService.cs",
+              "RelativeToolTip": "PSK2025.Data\\Services\\JWTTokenService.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAUwBkAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T11:10:11.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "20250420192957_AddRefreshTokenSupport.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\20250420192957_AddRefreshTokenSupport.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Migrations\\20250420192957_AddRefreshTokenSupport.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\20250420192957_AddRefreshTokenSupport.cs",
+              "RelativeToolTip": "PSK2025.Data\\Migrations\\20250420192957_AddRefreshTokenSupport.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T19:31:53.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "20250421135216_PreviewModelChanges.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\20250421135216_PreviewModelChanges.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Migrations\\20250421135216_PreviewModelChanges.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\20250421135216_PreviewModelChanges.cs",
+              "RelativeToolTip": "PSK2025.Data\\Migrations\\20250421135216_PreviewModelChanges.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T13:52:27.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AppDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Migrations\\AppDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeToolTip": "PSK2025.Data\\Migrations\\AppDbContextModelSnapshot.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwBoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T12:17:27.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetRefreshTokenResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Responses\\Auth\\GetRefreshTokenResponse.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Responses\\Auth\\GetRefreshTokenResponse.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Responses\\Auth\\GetRefreshTokenResponse.cs",
+              "RelativeToolTip": "PSK2025.Data\\Responses\\Auth\\GetRefreshTokenResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T18:30:26.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserLoginResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Responses\\Auth\\UserLoginResponse.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Responses\\Auth\\UserLoginResponse.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Responses\\Auth\\UserLoginResponse.cs",
+              "RelativeToolTip": "PSK2025.Data\\Responses\\Auth\\UserLoginResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T17:08:23.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RefreshTokenEndpoint.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Controllers\\Auth\\RefreshTokenEndpoint.cs",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Controllers\\Auth\\RefreshTokenEndpoint.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Controllers\\Auth\\RefreshTokenEndpoint.cs",
+              "RelativeToolTip": "PSK2025.ApiService\\Controllers\\Auth\\RefreshTokenEndpoint.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB4AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T19:48:10.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\appsettings.json",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\appsettings.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\appsettings.json",
+              "RelativeToolTip": "PSK2025.ApiService\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-17T11:59:43.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\Program.cs",
+              "RelativeDocumentMoniker": "PSK2025.AppHost\\Program.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\Program.cs",
+              "RelativeToolTip": "PSK2025.AppHost\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T18:11:29.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IJWTTokenService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\Interfaces\\IJWTTokenService.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Services\\Interfaces\\IJWTTokenService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\Interfaces\\IJWTTokenService.cs",
+              "RelativeToolTip": "PSK2025.Data\\Services\\Interfaces\\IJWTTokenService.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAiwA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T11:09:41.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Program.cs",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Program.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Program.cs",
+              "RelativeToolTip": "PSK2025.ApiService\\Program.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T12:33:14.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\appsettings.json",
+              "RelativeDocumentMoniker": "PSK2025.AppHost\\appsettings.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\appsettings.json",
+              "RelativeToolTip": "PSK2025.AppHost\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-15T12:21:36.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\Interfaces\\IUserService.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Services\\Interfaces\\IUserService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\Interfaces\\IUserService.cs",
+              "RelativeToolTip": "PSK2025.Data\\Services\\Interfaces\\IUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T12:59:16.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\Interfaces\\IAuthService.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Services\\Interfaces\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\Interfaces\\IAuthService.cs",
+              "RelativeToolTip": "PSK2025.Data\\Services\\Interfaces\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T10:45:52.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Result.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Result.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Result.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Result.cs",
+              "RelativeToolTip": "PSK2025.Data\\Result.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T19:43:18.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Contexts\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Contexts\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Contexts\\AppDbContext.cs",
+              "RelativeToolTip": "PSK2025.Data\\Contexts\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T12:17:41.396Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "EndpointExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Extensions\\EndpointExtensions.cs",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Extensions\\EndpointExtensions.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Extensions\\EndpointExtensions.cs",
+              "RelativeToolTip": "PSK2025.ApiService\\Extensions\\EndpointExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T12:10:44.322Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ServiceRegistrationExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Extensions\\ServiceRegistrationExtensions.cs",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Extensions\\ServiceRegistrationExtensions.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Extensions\\ServiceRegistrationExtensions.cs",
+              "RelativeToolTip": "PSK2025.ApiService\\Extensions\\ServiceRegistrationExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T15:10:08.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AppDbContextFactory.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Contexts\\AppDbContextFactory.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Contexts\\AppDbContextFactory.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Contexts\\AppDbContextFactory.cs",
+              "RelativeToolTip": "PSK2025.Data\\Contexts\\AppDbContextFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T12:17:37.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\appsettings.json",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\appsettings.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\appsettings.json",
+              "RelativeToolTip": "PSK2025.MigrationService\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-17T11:59:39.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Program.cs",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\Program.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Program.cs",
+              "RelativeToolTip": "PSK2025.MigrationService\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T18:51:02.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "IEndpoint.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Interfaces\\IEndpoint.cs",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Interfaces\\IEndpoint.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Interfaces\\IEndpoint.cs",
+              "RelativeToolTip": "PSK2025.ApiService\\Interfaces\\IEndpoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T18:20:04.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "IRouteGroup.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Interfaces\\IRouteGroup.cs",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Interfaces\\IRouteGroup.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Interfaces\\IRouteGroup.cs",
+              "RelativeToolTip": "PSK2025.ApiService\\Interfaces\\IRouteGroup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T12:15:14.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Services\\AuthService.cs",
+              "RelativeToolTip": "PSK2025.Data\\Services\\AuthService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAADwvw0AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T10:46:28.34Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "AuthRouteGroup.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Controllers\\Auth\\AuthRouteGroup.cs",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Controllers\\Auth\\AuthRouteGroup.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Controllers\\Auth\\AuthRouteGroup.cs",
+              "RelativeToolTip": "PSK2025.ApiService\\Controllers\\Auth\\AuthRouteGroup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T12:16:52.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "GetUserByIdResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Responses\\GetUserByIdResponse.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Responses\\GetUserByIdResponse.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Responses\\GetUserByIdResponse.cs",
+              "RelativeToolTip": "PSK2025.Data\\Responses\\GetUserByIdResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T18:26:57.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Models\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "PSK2025.Models\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Models\\Entities\\User.cs",
+              "RelativeToolTip": "PSK2025.Models\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T11:39:14.258Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PSK2025.MigrationService\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-21T12:56:18.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Worker.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Worker.cs",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\Worker.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Worker.cs",
+              "RelativeToolTip": "PSK2025.MigrationService\\Worker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T18:30:29.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Abstractions\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\Abstractions\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Abstractions\\GenericRepository.cs",
+              "RelativeToolTip": "PSK2025.MigrationService\\Abstractions\\GenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T18:33:58.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "MigrationExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Extensions\\MigrationExtensions.cs",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\Extensions\\MigrationExtensions.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Extensions\\MigrationExtensions.cs",
+              "RelativeToolTip": "PSK2025.MigrationService\\Extensions\\MigrationExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T13:40:00.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Roles.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Models\\Entities\\Roles.cs",
+              "RelativeDocumentMoniker": "PSK2025.Models\\Entities\\Roles.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Models\\Entities\\Roles.cs",
+              "RelativeToolTip": "PSK2025.Models\\Entities\\Roles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T12:12:40.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "PSK2025.MigrationService.csproj",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\PSK2025.MigrationService.csproj",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\PSK2025.MigrationService.csproj",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\PSK2025.MigrationService.csproj",
+              "RelativeToolTip": "PSK2025.MigrationService\\PSK2025.MigrationService.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-19T11:16:02.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "20250414172631_AddIdentitySchema.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\20250414172631_AddIdentitySchema.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Migrations\\20250414172631_AddIdentitySchema.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\20250414172631_AddIdentitySchema.cs",
+              "RelativeToolTip": "PSK2025.Data\\Migrations\\20250414172631_AddIdentitySchema.cs",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAYwAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T12:15:31.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Extensions.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ServiceDefaults\\Extensions.cs",
+              "RelativeDocumentMoniker": "PSK2025.ServiceDefaults\\Extensions.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ServiceDefaults\\Extensions.cs",
+              "RelativeToolTip": "PSK2025.ServiceDefaults\\Extensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T17:51:45.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "GetUserByIdEndpoint.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Controllers\\User\\GetUserByIdEndpoint.cs",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Controllers\\User\\GetUserByIdEndpoint.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Controllers\\User\\GetUserByIdEndpoint.cs",
+              "RelativeToolTip": "PSK2025.ApiService\\Controllers\\User\\GetUserByIdEndpoint.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAA4AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T18:14:38.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "PSK2025.ApiService.csproj",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\PSK2025.ApiService.csproj",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\PSK2025.ApiService.csproj",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\PSK2025.ApiService.csproj",
+              "RelativeToolTip": "PSK2025.ApiService\\PSK2025.ApiService.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-15T12:19:53.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "RouteGroupName.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Enums\\RouteGroupName.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Enums\\RouteGroupName.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Enums\\RouteGroupName.cs",
+              "RelativeToolTip": "PSK2025.Data\\Enums\\RouteGroupName.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T11:56:03.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "GetRefreshTokenRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Requests\\Auth\\GetRefreshTokenRequest.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Requests\\Auth\\GetRefreshTokenRequest.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Requests\\Auth\\GetRefreshTokenRequest.cs",
+              "RelativeToolTip": "PSK2025.Data\\Requests\\Auth\\GetRefreshTokenRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T18:26:19.999Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "DataSeeder.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Seeding\\DataSeeder.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Seeding\\DataSeeder.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Seeding\\DataSeeder.cs",
+              "RelativeToolTip": "PSK2025.Data\\Seeding\\DataSeeder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T16:20:44.546Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "UserLoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Requests\\Auth\\UserLoginRequest.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Requests\\Auth\\UserLoginRequest.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Requests\\Auth\\UserLoginRequest.cs",
+              "RelativeToolTip": "PSK2025.Data\\Requests\\Auth\\UserLoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T17:07:45.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "PSK2025.Models.csproj",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Models\\PSK2025.Models.csproj",
+              "RelativeDocumentMoniker": "PSK2025.Models\\PSK2025.Models.csproj",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Models\\PSK2025.Models.csproj",
+              "RelativeToolTip": "PSK2025.Models\\PSK2025.Models.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-19T16:58:05.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\DTOs\\UserDto.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\DTOs\\UserDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\DTOs\\UserDto.cs",
+              "RelativeToolTip": "PSK2025.Data\\DTOs\\UserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T17:04:06.479Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Abstractions\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\Abstractions\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Abstractions\\IUnitOfWork.cs",
+              "RelativeToolTip": "PSK2025.MigrationService\\Abstractions\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T18:39:47.449Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Abstractions\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\Abstractions\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\Abstractions\\UnitOfWork.cs",
+              "RelativeToolTip": "PSK2025.MigrationService\\Abstractions\\UnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T18:40:00.22Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\appsettings.Development.json",
+              "RelativeToolTip": "PSK2025.ApiService\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-15T12:17:46.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "PSK2025.AppHost\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\appsettings.Development.json",
+              "RelativeToolTip": "PSK2025.AppHost\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-17T11:59:47.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PSK2025.ApiService\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ApiService\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PSK2025.ApiService\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-15T12:17:50.003Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "PSK2025.MigrationService\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.MigrationService\\appsettings.Development.json",
+              "RelativeToolTip": "PSK2025.MigrationService\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-15T12:17:15.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Web\\appsettings.json",
+              "RelativeDocumentMoniker": "PSK2025.Web\\appsettings.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Web\\appsettings.json",
+              "RelativeToolTip": "PSK2025.Web\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-17T11:59:36.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "20250414172631_AddIdentitySchema.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\20250414172631_AddIdentitySchema.Designer.cs",
+              "RelativeDocumentMoniker": "PSK2025.Data\\Migrations\\20250414172631_AddIdentitySchema.Designer.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Data\\Migrations\\20250414172631_AddIdentitySchema.Designer.cs",
+              "RelativeToolTip": "PSK2025.Data\\Migrations\\20250414172631_AddIdentitySchema.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T12:15:27.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "PSK2025.ServiceDefaults.csproj",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ServiceDefaults\\PSK2025.ServiceDefaults.csproj",
+              "RelativeDocumentMoniker": "PSK2025.ServiceDefaults\\PSK2025.ServiceDefaults.csproj",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.ServiceDefaults\\PSK2025.ServiceDefaults.csproj",
+              "RelativeToolTip": "PSK2025.ServiceDefaults\\PSK2025.ServiceDefaults.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-15T18:35:13.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "PSK2025.AppHost",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\PSK2025.AppHost.csproj",
+              "RelativeDocumentMoniker": "PSK2025.AppHost\\PSK2025.AppHost.csproj",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\PSK2025.AppHost.csproj",
+              "RelativeToolTip": "PSK2025.AppHost\\PSK2025.AppHost.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-15T18:49:29.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PSK2025.AppHost\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.AppHost\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PSK2025.AppHost\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-15T18:49:31.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "PSK2025.Web.csproj",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Web\\PSK2025.Web.csproj",
+              "RelativeDocumentMoniker": "PSK2025.Web\\PSK2025.Web.csproj",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\PSKDalykas\\PSK2025\\PSK2025.Web\\PSK2025.Web.csproj",
+              "RelativeToolTip": "PSK2025.Web\\PSK2025.Web.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-15T18:50:15.691Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

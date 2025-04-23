@@ -10,23 +10,26 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.Testing" Version="9.1.0"/>
-        <PackageReference Include="coverlet.collector" Version="6.0.2"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0"/>
-        <PackageReference Include="xunit" Version="2.9.2"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2"/>
+        <PackageReference Include="Aspire.Hosting.Testing" Version="9.1.0" />
+        <PackageReference Include="coverlet.collector" Version="6.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.8.0" />
+        <PackageReference Include="xunit" Version="2.9.2" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\PSK2025.AppHost\PSK2025.AppHost.csproj"/>
+        <ProjectReference Include="..\PSK2025.AppHost\PSK2025.AppHost.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="System.Net"/>
-        <Using Include="Microsoft.Extensions.DependencyInjection"/>
-        <Using Include="Aspire.Hosting.ApplicationModel"/>
-        <Using Include="Aspire.Hosting.Testing"/>
-        <Using Include="Xunit"/>
+        <Using Include="System.Net" />
+        <Using Include="Microsoft.Extensions.DependencyInjection" />
+        <Using Include="Aspire.Hosting.ApplicationModel" />
+        <Using Include="Aspire.Hosting.Testing" />
+        <Using Include="Xunit" />
     </ItemGroup>
 
 </Project>
