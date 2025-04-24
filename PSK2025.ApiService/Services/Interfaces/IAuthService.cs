@@ -1,8 +1,8 @@
-﻿using PSK2025.Data.Requests.Auth;
+﻿using PSK2025.Data;
+using PSK2025.Data.Requests.Auth;
 using PSK2025.Data.Responses.Auth;
 
-
-namespace PSK2025.Data.Services.Interfaces;
+namespace PSK2025.ApiService.Services.Interfaces;
 
 public interface IAuthService
 {

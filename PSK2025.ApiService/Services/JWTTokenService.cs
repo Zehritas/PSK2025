@@ -1,20 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using PSK2025.Data.Services.Interfaces;
-using PSK2025.Data.Settings;
-using PSK2025.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using PSK2025.ApiService.Services.Interfaces;
+using PSK2025.ApiService.Settings;
+using PSK2025.Models.Entities;
 
-namespace PSK2025.Data.Services;
+namespace PSK2025.ApiService.Services;
 
 public class JwtTokenService : IJwtTokenService
 {

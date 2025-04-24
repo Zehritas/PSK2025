@@ -1,0 +1,11 @@
+namespace PSK2025.ApiService.Controllers.User;
+using PSK2025.ApiService.Interfaces;
+using PSK2025.Data.Enums;
+
+
+public class UserRouteGroup(IEnumerable<IEndpoint> endpoints) : IRouteGroup
+{
+    public RouteGroupName Group => RouteGroupName.User;
+    public string RoutePrefix => "/api/user";
+    public string Tag => "User";
+}

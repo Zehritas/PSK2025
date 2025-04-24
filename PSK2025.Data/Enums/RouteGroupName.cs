@@ -10,5 +10,4 @@ public enum RouteGroupName
 {
     Auth,
     User
-
 }
