@@ -15,6 +15,8 @@ using PSK2025.ApiService.Extensions;
 using PSK2025.ApiService.Controllers.Auth;
 using PSK2025.ApiService.Interfaces;
 using PSK2025.Data;
+using PSK2025.Data.Repositories;
+using PSK2025.Data.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -106,6 +108,8 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IRouteGroup, AuthRouteGroup>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
