@@ -72,5 +72,56 @@ public class AuthService(
         return Result<GetRefreshTokenResponse>.Success(
             new GetRefreshTokenResponse(newAccessToken, newRefreshToken.Token));
     }
+    public async Task RegisterNewUserAsync(RegisterNewUserRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        var validationResult = await validationService.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return Result.Failure(Error.ValidationError(validationResult.Errors));
+        }
 
+        var callingUserId = userContextService.GetCurrentUserId();
+        var callingUser = await userManager.FindByIdAsync(callingUserId);
+
+        if (callingUser is null)
+        {
+            return Result.Failure(AuthErrors.UserNotFound);
+        }
+        var businessId = callingUser.BusinessId;
+
+        var existingUser = await userManager.FindByNameAsync(request.Username);
+        if (existingUser != null)
+        {
+            return Result.Failure(AuthErrors.UserAlreadyExistsError);
+        }
+
+        var user = new User
+        {
+            UserName = request.Username,
+            Email = request.Email,
+            EmailConfirmed = true,
+        };
+        user.AssignBusiness(businessId);
+
+        var createResult = await userManager.CreateAsync(user, request.Password);
+        if (!createResult.Succeeded)
+        {
+            return Result.Failure(AuthErrors.FailedToCreateUserError(createResult.Errors));
+        }
+
+        if (!await roleManager.RoleExistsAsync(request.Role))
+        {
+            return Result.Failure(AuthErrors.RoleAlreadyExistsError);
+        }
+
+        var addToRoleResult = await userManager.AddToRoleAsync(user, request.Role);
+
+        if (!addToRoleResult.Succeeded)
+        {
+            return Result.Failure(AuthErrors.FailedToAddRoleToUserError);
+        }
+
+        return Result.Success();
+    }
 }

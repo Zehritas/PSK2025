@@ -159,18 +159,6 @@ using (var scope = app.Services.CreateScope())
     await DataSeeder.SeedAsync(services);
 }
 
-app.MapPost("/login", async ( //grynai testavimui, istrint padarius proper login endpoint
-    [FromBody] UserLoginRequest request,
-    IAuthService authService) =>
-{
-    var result = await authService.UserLoginAsync(request);
-
-    return result is not null
-        ? Results.Ok(result)
-        : Results.Unauthorized();
-})
-.WithName("Login")
-.AllowAnonymous();
 
 app.MapGroupedEndpoints();
 
