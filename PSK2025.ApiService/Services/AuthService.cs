@@ -13,6 +13,7 @@ public class AuthService(
     UserManager<User> userManager,
     IConfiguration configuration,
     IJwtTokenService tokenService,
+    IUserContextService userContextService,
     AppDbContext context) : IAuthService
 {
 
@@ -72,28 +73,13 @@ public class AuthService(
         return Result<GetRefreshTokenResponse>.Success(
             new GetRefreshTokenResponse(newAccessToken, newRefreshToken.Token));
     }
-    public async Task RegisterNewUserAsync(RegisterNewUserRequest request,
-        CancellationToken cancellationToken = default)
+
+    public async Task<Result<User>> RegisterNewUserAsync(RegisterNewUserRequest request, CancellationToken cancellationToken = default)
     {
-        var validationResult = await validationService.ValidateAsync(request, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            return Result.Failure(Error.ValidationError(validationResult.Errors));
-        }
-
-        var callingUserId = userContextService.GetCurrentUserId();
-        var callingUser = await userManager.FindByIdAsync(callingUserId);
-
-        if (callingUser is null)
-        {
-            return Result.Failure(AuthErrors.UserNotFound);
-        }
-        var businessId = callingUser.BusinessId;
-
         var existingUser = await userManager.FindByNameAsync(request.Username);
         if (existingUser != null)
         {
-            return Result.Failure(AuthErrors.UserAlreadyExistsError);
+            return Result<User>.Failure("User already exists.");
         }
 
         var user = new User
@@ -102,26 +88,24 @@ public class AuthService(
             Email = request.Email,
             EmailConfirmed = true,
         };
-        user.AssignBusiness(businessId);
 
         var createResult = await userManager.CreateAsync(user, request.Password);
+
         if (!createResult.Succeeded)
         {
-            return Result.Failure(AuthErrors.FailedToCreateUserError(createResult.Errors));
-        }
-
-        if (!await roleManager.RoleExistsAsync(request.Role))
-        {
-            return Result.Failure(AuthErrors.RoleAlreadyExistsError);
+            var errors = string.Join(", ", createResult.Errors.Select(e => e.Description));
+            return Result<User>.Failure($"Failed to create user: {errors}");
         }
 
         var addToRoleResult = await userManager.AddToRoleAsync(user, request.Role);
-
         if (!addToRoleResult.Succeeded)
         {
-            return Result.Failure(AuthErrors.FailedToAddRoleToUserError);
+            return Result<User>.Failure("Failed to add role to user.");
         }
 
-        return Result.Success();
+        await context.SaveChangesAsync(cancellationToken);
+
+        return Result<User>.Success(user);
     }
+
 }
