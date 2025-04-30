@@ -13,6 +13,7 @@ public class AuthService(
     UserManager<User> userManager,
     IConfiguration configuration,
     IJwtTokenService tokenService,
+    IUserContextService userContextService,
     AppDbContext context) : IAuthService
 {
 
@@ -71,6 +72,40 @@ public class AuthService(
 
         return Result<GetRefreshTokenResponse>.Success(
             new GetRefreshTokenResponse(newAccessToken, newRefreshToken.Token));
+    }
+
+    public async Task<Result<User>> RegisterNewUserAsync(RegisterNewUserRequest request, CancellationToken cancellationToken = default)
+    {
+        var existingUser = await userManager.FindByNameAsync(request.Username);
+        if (existingUser != null)
+        {
+            return Result<User>.Failure("User already exists.");
+        }
+
+        var user = new User
+        {
+            UserName = request.Username,
+            Email = request.Email,
+            EmailConfirmed = true,
+        };
+
+        var createResult = await userManager.CreateAsync(user, request.Password);
+
+        if (!createResult.Succeeded)
+        {
+            var errors = string.Join(", ", createResult.Errors.Select(e => e.Description));
+            return Result<User>.Failure($"Failed to create user: {errors}");
+        }
+
+        var addToRoleResult = await userManager.AddToRoleAsync(user, request.Role);
+        if (!addToRoleResult.Succeeded)
+        {
+            return Result<User>.Failure("Failed to add role to user.");
+        }
+
+        await context.SaveChangesAsync(cancellationToken);
+
+        return Result<User>.Success(user);
     }
 
 }
