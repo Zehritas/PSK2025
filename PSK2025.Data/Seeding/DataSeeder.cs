@@ -18,10 +18,6 @@ public static class DataSeeder
 
 
         const string roleName = "Admin";
-        if (!await roleManager.RoleExistsAsync(roleName))
-        {
-            await roleManager.CreateAsync(new IdentityRole(roleName));
-        }
 
         const string defaultUserName = "admin";
         var user = await userManager.FindByNameAsync(defaultUserName);

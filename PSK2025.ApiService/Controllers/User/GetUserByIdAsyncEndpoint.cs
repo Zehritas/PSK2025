@@ -4,6 +4,7 @@ using PSK2025.Data.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PSK2025.ApiService.Services.Interfaces;
+using PSK2025.Models.DTOs;
 
 namespace PSK2025.ApiService.Controllers.User;
 
@@ -13,14 +14,18 @@ public class GetUserById : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapPost("/get-user-by-id", async ([FromBody] GetUserByIdAsyncRequest request, IUserService service) =>
+        group.MapGet("/users/{id}", async ([FromRoute] Guid id, IUserService service) =>
         {
+            var request = new GetUserByIdAsyncRequest(id);
             var user = await service.GetUserByIdAsync(request);
 
-            if (user == null)
-                return Results.NotFound();
-
-            return Results.Ok(user);
-        });
+            return user is not null
+                ? Results.Ok(user)
+                : Results.NotFound();
+        })
+        .WithName("Get User")
+        .Produces<UserDto>(200)
+        .Produces(404)
+        .Produces(500);
     }
 }

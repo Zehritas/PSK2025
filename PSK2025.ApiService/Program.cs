@@ -8,15 +8,10 @@ using PSK2025.ApiService.Services;
 using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.ApiService.Settings;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using PSK2025.Data.Seeding;
-using PSK2025.Data.Requests.Auth;
-using Microsoft.AspNetCore.Mvc;
 using PSK2025.ApiService.Extensions;
 using PSK2025.ApiService.Controllers.Auth;
 using PSK2025.ApiService.Interfaces;
-using PSK2025.ApiService.Services.Interfaces;
-using PSK2025.Data;
 using PSK2025.Data.Repositories;
 using PSK2025.Data.Repositories.Interfaces;
 using PSK2025.MigrationService.Abstractions;
@@ -96,7 +91,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.AddServiceDefaults();
 
-// builder.Services.AddApplication(builder.Configuration);
+//builder.Services.AddApplication(builder.Configuration);
 
 
 builder.AddNpgsqlDbContext<AppDbContext>(connectionName: "postgresdb");
