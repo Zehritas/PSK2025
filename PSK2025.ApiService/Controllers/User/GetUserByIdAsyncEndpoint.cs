@@ -14,7 +14,7 @@ public class GetUserById : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapGet("/users/{id}", async ([FromRoute] Guid id, IUserService service) =>
+        group.MapGet("/{id}", async ([FromRoute] Guid id, IUserService service) =>
         {
             var request = new GetUserByIdAsyncRequest(id);
             var user = await service.GetUserByIdAsync(request);

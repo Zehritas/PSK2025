@@ -90,9 +90,10 @@ public class AuthService(
         var user = new User
         {
             Email = request.Email,
-            EmailConfirmed = true,
+            EmailConfirmed = true,  
             FirstName = request.FirstName,
-            LastName = request.LastName
+            LastName = request.LastName,
+            UserName = request.Email
         };
 
         var createResult = await userManager.CreateAsync(user, request.Password);
