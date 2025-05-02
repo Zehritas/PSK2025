@@ -15,7 +15,7 @@ builder.AddProject<PSK2025_MigrationService>("migrations")
     .WithReference(postgresdb)
     .WaitFor(postgresdb);
 
-var apiService = builder.AddProject<Projects.PSK2025_ApiService>("apiservice")
+var apiService = builder.AddProject<PSK2025_ApiService>("apiservice")
     .WithReference(postgresdb);
 
 apiService.WithCommand(
@@ -36,5 +36,14 @@ apiService.WithCommand(
     iconName: "Document", 
     iconVariant: IconVariant.Filled 
 );
+
+var web = builder.AddYarnApp("web", "../PSK2025.Web", "dev")
+       .WithReference(apiService)
+       .WaitFor(apiService)
+       .WithHttpEndpoint(env: "PORT")
+       .WithExternalHttpEndpoints()
+       .WithEnvironment("NUXT_PUBLIC_API_URL", apiService.GetEndpoint("http"));
+
+apiService.WithEnvironment("ALLOWED_ORIGIN", web.GetEndpoint("http"));
 
 builder.Build().Run();
