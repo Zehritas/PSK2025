@@ -9,6 +9,7 @@
     <ItemGroup>
         <ProjectReference Include="..\PSK2025.ServiceDefaults\PSK2025.ServiceDefaults.csproj" />
         <ProjectReference Include="..\PSK2025.Data\PSK2025.Data.csproj" />
+        <ProjectReference Include="..\PSK2025.MigrationService\PSK2025.MigrationService.csproj" />
     </ItemGroup>
 
     <ItemGroup>

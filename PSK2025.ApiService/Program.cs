@@ -4,17 +4,17 @@ using PSK2025.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using PSK2025.ApiService;
+using PSK2025.ApiService.Services;
+using PSK2025.ApiService.Services.Interfaces;
+using PSK2025.ApiService.Settings;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using PSK2025.Data.Seeding;
-using PSK2025.Data.Requests.Auth;
-using PSK2025.Data.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using PSK2025.ApiService.Extensions;
 using PSK2025.ApiService.Controllers.Auth;
 using PSK2025.ApiService.Interfaces;
-using PSK2025.Data;
+using PSK2025.Data.Repositories;
+using PSK2025.Data.Repositories.Interfaces;
+using PSK2025.MigrationService.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,7 +91,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.AddServiceDefaults();
 
-builder.Services.AddApplication(builder.Configuration);
+//builder.Services.AddApplication(builder.Configuration);
 
 
 builder.AddNpgsqlDbContext<AppDbContext>(connectionName: "postgresdb");
@@ -106,6 +106,16 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IRouteGroup, AuthRouteGroup>();
+
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -146,18 +156,6 @@ using (var scope = app.Services.CreateScope())
     await DataSeeder.SeedAsync(services);
 }
 
-app.MapPost("/login", async ( //grynai testavimui, istrint padarius proper login endpoint
-    [FromBody] UserLoginRequest request,
-    IAuthService authService) =>
-{
-    var result = await authService.UserLoginAsync(request);
-
-    return result is not null
-        ? Results.Ok(result)
-        : Results.Unauthorized();
-})
-.WithName("Login")
-.AllowAnonymous();
 
 app.MapGroupedEndpoints();
 
