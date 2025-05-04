@@ -140,8 +140,19 @@ builder.Services.ConfigureApplicationCookie(options =>
     };
 });
 
-var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowWeb",
+        configurePolicy: policy =>
+        {
+            policy.WithOrigins(builder.Configuration["ALLOWED_ORIGIN"] ?? "")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
 
+var app = builder.Build();
 
 app.UseExceptionHandler();
 
@@ -167,6 +178,7 @@ using (var scope = app.Services.CreateScope())
 
 
 app.MapGroupedEndpoints();
+app.UseCors("AllowWeb");
 
 app.Run();
 
