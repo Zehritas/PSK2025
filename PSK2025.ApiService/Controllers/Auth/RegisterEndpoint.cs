@@ -3,6 +3,8 @@ using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Data.Enums;
 using PSK2025.Data.Requests.Auth;
 using Microsoft.AspNetCore.Mvc;
+using PSK2025.Models.DTOs;
+using PSK2025.ApiService.Extensions;
 
 namespace PSK2025.ApiService.Controllers.Auth;
 
@@ -16,10 +18,11 @@ public class RegisterEndpoint : IEndpoint
         {
             var result = await service.RegisterNewUserAsync(request);
 
-            return result is not null ? Results.Ok(result) : Results.Unauthorized();
+            return result.IsSuccess ?
+                Results.Ok(new { Message = "User registered successfully." }) :
+                result.Error.MapErrorToResponse();
         })
             .WithName("Register")
-            .AllowAnonymous()
             .Produces(200)
             .Produces(400);
     }

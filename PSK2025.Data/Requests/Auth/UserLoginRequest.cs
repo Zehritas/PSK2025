@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 
 namespace PSK2025.Data.Requests.Auth;
 
-public record UserLoginRequest(string Username, string Password);
+public record UserLoginRequest(string Email, string Password);

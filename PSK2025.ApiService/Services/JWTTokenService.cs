@@ -17,12 +17,12 @@ public class JwtTokenService : IJwtTokenService
     private readonly ILogger<JwtTokenService> _logger;
 
     public JwtTokenService(
-        IOptions<TokenSettings> tokenSettingsOptions,
-        ILogger<JwtTokenService> logger)
+    IOptions<JwtSettings> jwtOptions,
+    IOptions<RefreshTokenSettings> refreshOptions,
+    ILogger<JwtTokenService> logger)
     {
-        var tokenSettings = tokenSettingsOptions.Value;
-        _jwtSettings = tokenSettings.Jwt;
-        _refreshTokenSettings = tokenSettings.RefreshToken;
+        _jwtSettings = jwtOptions.Value;
+        _refreshTokenSettings = refreshOptions.Value;
         _logger = logger;
     }
 
@@ -30,6 +30,7 @@ public class JwtTokenService : IJwtTokenService
     public string GenerateJwtToken(User user, IList<string> roles)
     {
         var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
+
 
         var claims = new List<Claim>
         {

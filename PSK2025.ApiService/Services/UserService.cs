@@ -10,34 +10,9 @@ using PSK2025.Models.DTOs;
 
 namespace PSK2025.ApiService.Services;
 
-public class UserService(
-    IUnitOfWork unitOfWork,
-    IUserRepository userRepository,
-    UserManager<User> userManager) : IUserService
+public class UserService(IUserRepository userRepository) : IUserService
 {
-    // public async Task<Result<GetUserByIdResponse>> GetUserByIdAsync(Guid Id, CancellationToken cancellationToken = default)
-    // {
-    //     var currentUserId = userContextService.GetCurrentUserId();
-    //     var currentUser = await userManager.FindByIdAsync(currentUserId);
-    //
-    //     if (currentUser is null)
-    //         return Result.Failure<GetUserByIdResponse>(AuthErrors.UserNotFound);
-    //
-    //     var user = await userRepository.GetByIdAsync(Id, cancellationToken);
-    //
-    //     if (user == null)
-    //         return Result.Failure<GetUserByIdResponse>(UserErrors.UserNotFoundError);
-    //
-    //     return Result<GetUserByIdResponse>.Success(
-    //         new GetUserByIdResponse(
-    //             new UserDto(
-    //                 user.Id,
-    //                 user.BusinessId
-    //             )
-    //         )
-    //     );
-    // }
-    
+
     public async Task<UserDto?> GetUserByIdAsync(GetUserByIdAsyncRequest request, CancellationToken cancellationToken = default)
     {
         var user = await userRepository.GetByIdAsync(request.UserId, cancellationToken);

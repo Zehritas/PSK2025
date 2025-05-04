@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 
 namespace PSK2025.Data.Requests.Auth;
 
-public record RegisterNewUserRequest(string Username, string Email, string Password, string Role);
+public record RegisterNewUserRequest(string FirstName, string LastName, string Email, string Password);

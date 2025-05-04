@@ -24,7 +24,7 @@ public class UserContextService(IHttpContextAccessor httpContextAccessor) : IUse
         return userId;
     }
 
-    public string GetCurrentUsername()
+    public string GetUserEmail()
     {
         var user = httpContextAccessor.HttpContext?.User;
 
@@ -33,13 +33,13 @@ public class UserContextService(IHttpContextAccessor httpContextAccessor) : IUse
             throw new UnauthorizedAccessException("The user is not authenticated.");
         }
 
-        var username = user.FindFirst(ClaimTypes.Name)?.Value;
+        var email = user.FindFirst(ClaimTypes.Email)?.Value;
 
-        if (string.IsNullOrEmpty(username))
+        if (string.IsNullOrEmpty(email))
         {
-            throw new InvalidOperationException("The username claim is missing.");
+            throw new InvalidOperationException("The email claim is missing.");
         }
 
-        return username;
+        return email;
     }
 }
