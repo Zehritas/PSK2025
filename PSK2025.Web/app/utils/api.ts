@@ -3,11 +3,21 @@ export const getErrorMessage = (error: Error | unknown): string => {
     if (
       'data' in error &&
       typeof error.data === 'object' &&
-      error.data != null &&
-      'title' in error.data &&
-      typeof error.data.title === 'string'
+      error.data != null
     ) {
-      return error.data.title
+      if (
+        'title' in error.data &&
+        typeof error.data.title === 'string'
+      ) {
+        return error.data.title
+      }
+
+      if (
+        'description' in error.data &&
+        typeof error.data.description === 'string'
+      ) {
+        return error.data.description
+      }
     }
 
     if (
