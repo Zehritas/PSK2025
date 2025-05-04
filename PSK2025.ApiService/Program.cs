@@ -15,8 +15,15 @@ using PSK2025.ApiService.Interfaces;
 using PSK2025.Data.Repositories;
 using PSK2025.Data.Repositories.Interfaces;
 using PSK2025.MigrationService.Abstractions;
+using PSK2025.ApiService.Validators.Auth;
+using FluentValidation;
+using PSK2025.Data.Requests.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IValidator<UserLoginRequest>, UserLoginRequestValidator>();
+builder.Services.AddScoped<IValidator<RegisterNewUserRequest>, RegisterUserRequestValidator>();
+
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
@@ -55,6 +62,7 @@ builder.Services.AddAuthentication(options =>
         }
     };
 });
+
 
 builder.Services.AddEndpoints();
 
@@ -114,6 +122,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
+builder.Services.AddScoped<IValidationService, ValidationService>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
 

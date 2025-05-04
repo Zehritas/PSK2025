@@ -6,6 +6,6 @@ using PSK2025.Data.Enums;
 public class UserRouteGroup(IEnumerable<IEndpoint> endpoints) : IRouteGroup
 {
     public RouteGroupName Group => RouteGroupName.User;
-    public string RoutePrefix => "/api/user";
+    public string RoutePrefix => "/api/users";
     public string Tag => "User";
 }

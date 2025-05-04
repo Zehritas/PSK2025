@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Data.Responses.Auth;
+using PSK2025.ApiService.Extensions;
 
 namespace PSK2025.ApiService.Controllers.Auth;
 
@@ -16,23 +17,15 @@ public class RefreshTokenEndpoint : IEndpoint
     {
         group.MapPost("/refresh-token", async ([FromBody] GetRefreshTokenRequest request, IAuthService service) =>
         {
-         
-          var result = await service.GetRefreshTokenAsync(request);
+            var result = await service.GetRefreshTokenAsync(request);
 
-          if (!result.IsSuccess)
-          {
-              return Results.Json(new { error = result.Error }, statusCode: StatusCodes.Status401Unauthorized);
-          }
-
-          var response = new GetRefreshTokenResponse(result.Value!.AccessToken, result.Value.RefreshToken);
-
-          return Results.Ok(response);
-            
+            return result.IsSuccess ?
+                Results.Ok(new { result.Value!.AccessToken, result.Value.RefreshToken }) :
+                result.Error.MapErrorToResponse();
         })
-        .WithName("Refresh Token")
-        .AllowAnonymous()  
-        .Produces<GetRefreshTokenResponse>(200)  
-        .Produces(401)
-        .Produces(500);  
+            .WithName("RefreshToken")
+            .Produces(200)
+            .Produces(401);
+
     }
 }
