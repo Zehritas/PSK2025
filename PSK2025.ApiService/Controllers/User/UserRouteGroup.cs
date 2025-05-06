@@ -1,7 +1,7 @@
+using PSK2025.Models.Enums;
+
 namespace PSK2025.ApiService.Controllers.User;
 using PSK2025.ApiService.Interfaces;
-using PSK2025.Data.Enums;
-
 
 public class UserRouteGroup(IEnumerable<IEndpoint> endpoints) : IRouteGroup
 {

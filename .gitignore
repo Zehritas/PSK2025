@@ -65,3 +65,8 @@ yarn-error.log
 .pnpm-debug.log
 
 .vs/
+
+# Yarn
+
+*/**/yarn.lock
+/.yarn
