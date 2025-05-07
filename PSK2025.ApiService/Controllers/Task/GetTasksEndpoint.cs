@@ -1,0 +1,45 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using PSK2025.ApiService.Interfaces;
+using PSK2025.ApiService.Services.Interfaces;
+using PSK2025.Models.Entities;
+using PSK2025.Models.Enums;
+using Microsoft.AspNetCore.Mvc;
+using PSK2025.Data.Requests;
+using PSK2025.Data.Requests.Task;
+using PSK2025.ApiService.Extensions;
+
+namespace PSK2025.ApiService.Controllers.Task;
+
+public class GetTasksEndpoint : IEndpoint
+{
+    public RouteGroupName Group => RouteGroupName.Task;
+
+    public void MapEndpoints(RouteGroupBuilder group)
+    {
+        group.MapGet("/",
+                async ([FromQuery] int pageNumber,
+                    [FromQuery] int pageSize,
+                    [FromQuery] Guid projectId, 
+                    ITaskService service) =>
+                {
+                    var request = new GetProjectTasksRequest(
+                        projectId,
+                        new GetPagedListRequest(pageNumber, pageSize)
+                    );
+
+                    var result = await service.GetTasksAsync(request);
+
+                    return result.IsSuccess
+                        ? Results.Ok(result.Value)
+                        : result.Error.MapErrorToResponse();
+                })
+            .RequireAuthorization(new AuthorizeAttribute
+            {
+                Roles = $"{Roles.Admin.ToString()}, {Roles.User.ToString()}"
+            })
+            .WithName("Get Tasks")
+            .Produces(200)
+            .Produces(400)
+            .Produces(500);
+    }
+}

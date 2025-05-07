@@ -116,6 +116,7 @@ builder.Services.AddIdentity<User, IdentityRole>()
 builder.Services.AddSingleton<IRouteGroup, AuthRouteGroup>();
 
 builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -123,8 +124,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IValidationService, ValidationService>();
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
-
+builder.Services.AddScoped<ITaskService,  TaskService>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -173,6 +174,9 @@ app.UseAuthorization();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await RoleSeeder.SeedRolesAsync(roleManager);
+
     await DataSeeder.SeedAsync(services);
 }
 

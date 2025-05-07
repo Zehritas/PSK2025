@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 
 namespace PSK2025.Data.Requests.Task;
 
-public record CreateTaskRequest(Guid ProjectId, string Name);
+public record GetProjectTasksRequest(Guid ProjectId, GetPagedListRequest Pagination);

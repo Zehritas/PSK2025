@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PSK2025.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,10 @@ namespace PSK2025.Models.DTOs;
 
 public record TaskDto(
     Guid Id,
-    Guid? UserID,
-    DateTime CreatedAt,
-    DateTime? ClosedAt,
-    string TaskStatus);
+    string? UserId,
+    string Name,
+    DateTime StartedAt,
+    DateTime? FinishedAt,
+    DateTime? Deadline,
+    TaskEntityStatus Status
+);
