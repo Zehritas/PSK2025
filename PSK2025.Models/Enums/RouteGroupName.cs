@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PSK2025.Data.Enums;
+namespace PSK2025.Models.Enums;
 
 public enum RouteGroupName
 {
