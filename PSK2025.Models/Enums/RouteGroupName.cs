@@ -3,5 +3,7 @@
 public enum RouteGroupName
 {
     Auth,
-    User
+    User,
+    Project,
+    UserProject
 }
