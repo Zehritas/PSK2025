@@ -25,11 +25,8 @@ public class CreateTaskEndpoint : IEndpoint
                         ? Results.Ok(new { Message = "Task created successfully.", Id = result.Value })
                         : result.Error.MapErrorToResponse();
                 })
-            //.RequireAuthorization(new AuthorizeAttribute
-            //{
-            //    Roles = $"{Roles.Admin.ToString()}, {Roles.Manager.ToString()}"
-            //})
-            .WithName("Create Discount")
+            .RequireAuthorization()
+            .WithName("Create Task")
             .Produces(200)
             .Produces(400)
             .Produces(500);

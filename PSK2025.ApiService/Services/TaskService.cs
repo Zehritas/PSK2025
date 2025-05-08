@@ -37,11 +37,14 @@ public class TaskService(
 
     public async Task<Result> EditTaskAsync(UpdateTaskRequest request, CancellationToken cancellationToken = default)
     {
-        var employeeId = userContextService.GetCurrentUserId();
 
-        var employee = await userManager.FindByIdAsync(employeeId);
-        if (employee == null)
-            return Result.Failure<Guid>(AuthErrors.UserNotFound);
+        //var userId = userContextService.GetCurrentUserId();
+
+        //var user = await userManager.FindByIdAsync(userId);
+        //if (user is null)
+        //{
+        //    return Result.Failure<GetTasksResponse>(AuthErrors.UserNotFound);
+        //}
 
         var currentTask = await taskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 
@@ -79,13 +82,13 @@ public class TaskService(
 
     public async Task<Result<GetTasksResponse>> GetTasksAsync(GetProjectTasksRequest request, CancellationToken cancellationToken = default)
     {
-        var userId = userContextService.GetCurrentUserId();
+        //var userId = userContextService.GetCurrentUserId();
 
-        var user = await userManager.FindByIdAsync(userId);
-        if (user is null)
-        {
-            return Result.Failure<GetTasksResponse>(AuthErrors.UserNotFound);
-        }
+        //var user = await userManager.FindByIdAsync(userId);
+        //if (user is null)
+        //{
+        //    return Result.Failure<GetTasksResponse>(AuthErrors.UserNotFound);
+        //}
 
         var tasks = await taskRepository.GetListAsync(
             request.ProjectId,

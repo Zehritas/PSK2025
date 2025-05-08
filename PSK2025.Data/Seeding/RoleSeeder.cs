@@ -2,7 +2,9 @@
 using PSK2025.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +16,19 @@ public static class RoleSeeder
     {
         foreach (var roleName in Enum.GetNames(typeof(Roles)))
         {
-            if (!await roleManager.RoleExistsAsync(roleName))
+            var roleExists = await roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
             {
-                await roleManager.CreateAsync(new IdentityRole(roleName));
+                var role = new IdentityRole(roleName);
+                var result = await roleManager.CreateAsync(role);
+
+                if (!result.Succeeded)
+                {
+                    Console.WriteLine($"Failed to create role {roleName}");
+                    continue;
+                }
+
+                await roleManager.AddClaimAsync(role, new Claim(ClaimTypes.Role, roleName));
             }
         }
     }

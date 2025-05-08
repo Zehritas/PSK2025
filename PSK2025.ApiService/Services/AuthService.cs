@@ -17,7 +17,8 @@ public class AuthService(
     UserManager<User> userManager,
     IJwtTokenService tokenService,
     AppDbContext context,
-    IValidationService validationService) : IAuthService
+    IValidationService validationService,
+    RoleManager<IdentityRole> roleManager) : IAuthService
 {
 
     public async Task<Result<UserLoginResponse>> UserLoginAsync(UserLoginRequest request, CancellationToken cancellationToken = default)
@@ -115,6 +116,13 @@ public class AuthService(
         {
             return Result<UserDto>.Failure(AuthErrors.FailedToCreateUserError(createResult.Errors));
         }
+
+        if (!await roleManager.RoleExistsAsync("User"))
+        {
+            await roleManager.CreateAsync(new IdentityRole("User"));
+        }
+
+        await userManager.AddToRoleAsync(user, "User");
 
         await context.SaveChangesAsync(cancellationToken);
 

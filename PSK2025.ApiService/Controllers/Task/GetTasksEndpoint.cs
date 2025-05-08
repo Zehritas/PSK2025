@@ -33,10 +33,10 @@ public class GetTasksEndpoint : IEndpoint
                         ? Results.Ok(result.Value)
                         : result.Error.MapErrorToResponse();
                 })
-            .RequireAuthorization(new AuthorizeAttribute
-            {
-                Roles = $"{Roles.Admin.ToString()}, {Roles.User.ToString()}"
-            })
+            //.RequireAuthorization(new AuthorizeAttribute
+            //{
+            //    Roles = $"{Roles.Admin.ToString()}, {Roles.User.ToString()}"
+            //})
             .WithName("Get Tasks")
             .Produces(200)
             .Produces(400)

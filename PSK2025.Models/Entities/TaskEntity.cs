@@ -40,6 +40,8 @@ public class TaskEntity
 
     public static TaskEntity Create(Guid projectId, string name, string? userId = null, DateTime? deadline = null)
     {
+        userId = string.IsNullOrWhiteSpace(userId) ? null : userId;
+
         var task = new TaskEntity(Guid.NewGuid(), projectId, userId, name)
         {
             Deadline = deadline
