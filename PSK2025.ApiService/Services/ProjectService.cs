@@ -89,4 +89,22 @@ public class ProjectService : IProjectService
         _context.Projects.Remove(entity);
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<List<UserDto>> GetProjectUsersAsync(Guid projectId)
+    {
+        var users = await _context.UserProjects
+            .Where(up => up.ProjectId == projectId)
+            .Select(up => up.User) // Get the User entities
+            .ToListAsync();
+
+        return users.Select(u => new UserDto
+        {
+            Id = u.Id,
+            Email = u.Email,
+            FirstName = u.FirstName,
+            LastName = u.LastName,
+            // Map other fields if needed
+        }).ToList();
+    }
+
 }

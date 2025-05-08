@@ -126,7 +126,7 @@ builder.Services.AddScoped<IValidationService, ValidationService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IUserProjectService, UserProjectService>();
-// builder.Services.AddScoped<IUserProjectRepo, >();
+builder.Services.AddScoped<IUserProjectRepository, UserProjectRepository>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 

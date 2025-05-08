@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Models.DTOs;
+using PSK2025.Models.Entities;
 using PSK2025.Models.Enums;
 
 namespace PSK2025.ApiService.Controllers.Project;
