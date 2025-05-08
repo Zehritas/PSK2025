@@ -25,7 +25,6 @@ public class CreateTaskEndpoint : IEndpoint
                         ? Results.Ok(new { Message = "Task created successfully.", Id = result.Value })
                         : result.Error.MapErrorToResponse();
                 })
-            .RequireAuthorization()
             .WithName("Create Task")
             .Produces(200)
             .Produces(400)

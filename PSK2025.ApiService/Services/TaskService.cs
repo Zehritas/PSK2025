@@ -27,7 +27,8 @@ public class TaskService(
 
         var task = TaskEntity.Create(
             request.ProjectId,
-            request.Name);
+            request.Name,
+            null);
 
         await taskRepository.AddAsync(task, cancellationToken);
         await context.SaveChangesAsync();
@@ -54,11 +55,11 @@ public class TaskService(
         }
 
         currentTask.Update(
-        request.Name,
-        request.UserId,
-        request.Deadline,
-        request.Status,
-        request.FinishedAt
+            request.Name,
+            request.UserId,
+            request.Deadline,
+            request.Status,
+            request.FinishedAt
         );
 
         taskRepository.Update(currentTask);

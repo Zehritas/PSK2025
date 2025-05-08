@@ -25,10 +25,6 @@ public class DeleteTaskEndpoint : IEndpoint
                         ? Results.Ok(new { Message = "Task deleted successfully." })
                         : result.Error.MapErrorToResponse();
                 })
-            //.RequireAuthorization(new AuthorizeAttribute
-            //{
-            //    Roles = $"{Roles.Admin.ToString()}, {Roles.User.ToString()}"
-            //})
             .WithName("Delete Order")
             .Produces(200)
             .Produces(400)

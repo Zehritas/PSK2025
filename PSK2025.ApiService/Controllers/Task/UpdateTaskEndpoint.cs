@@ -24,10 +24,6 @@ public class UpdateTaskEndpoint : IEndpoint
                         ? Results.Ok(new { Message = "Task updated successfully." })
                         : result.Error.MapErrorToResponse();
                 })
-            //.RequireAuthorization(new AuthorizeAttribute
-            //{
-            //    Roles = $"{Roles.Admin.ToString()}, {Roles.User.ToString()}"
-            //})
             .WithName("Updated Order")
             .Produces(200)
             .Produces(400)
