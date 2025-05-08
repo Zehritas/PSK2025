@@ -5,6 +5,7 @@ using PSK2025.Data.Requests.Project;
 using PSK2025.Data.Responses.Project;
 using PSK2025.Models.DTOs;
 using PSK2025.Models.Entities;
+using PSK2025.Models.Enums;
 
 namespace PSK2025.ApiService.Services;
 
@@ -22,8 +23,8 @@ public class ProjectService : IProjectService
         var entity = new Project
         {
             Id = Guid.NewGuid(),
-            Name = request.Project.Name,
-            Status = request.Project.Status
+            Name = request.ProjectName,
+            Status = ProjectStatus.Planned
         };
 
         _context.Projects.Add(entity);

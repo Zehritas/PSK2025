@@ -14,17 +14,17 @@ public class GetByIdAsyncEndpoint : IEndpoint
     
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapGet("/{id}", async ([FromRoute] Guid id, IProjectService service) =>
+        group.MapGet("/{id}", async ([FromRoute] Guid id,  IProjectService service) =>
             {
                 var request = new ProjectRequest(id);
-                var user = await service.GetByIdAsync(request);
+                var project = await service.GetByIdAsync(request);
 
-                return user is not null
-                    ? Results.Ok(user)
+                return project is not null
+                    ? Results.Ok(project)
                     : Results.NotFound();
             })
-            .WithName("Get User")
-            .Produces<UserDto>(200)
+            .WithName("Get Project")
+            .Produces<ProjectDto>(200)
             .Produces(404)
             .Produces(500);
     }
