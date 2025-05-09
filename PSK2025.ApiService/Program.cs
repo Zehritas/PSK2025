@@ -107,6 +107,11 @@ builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IValidationService, ValidationService>();
 builder.Services.AddScoped<ITaskService,  TaskService>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IUserProjectService, UserProjectService>();
+builder.Services.AddScoped<IUserProjectRepository, UserProjectRepository>();
+
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
