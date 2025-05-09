@@ -3,7 +3,7 @@ using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Data.Requests.Auth;
 using Microsoft.AspNetCore.Mvc;
 using PSK2025.Data.Responses.Auth;
-using PSK2025.Data;
+using PSK2025.Models.Enums;
 using PSK2025.ApiService.Extensions;
 using PSK2025.Models.Enums;
 

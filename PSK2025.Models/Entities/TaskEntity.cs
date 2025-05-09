@@ -11,16 +11,57 @@ namespace PSK2025.Models.Entities;
 
 public class TaskEntity
 {
-    public Guid Id { get; set; }
-    public Guid Projectid { get;  set; }
-    public string UserId { get; set; } = null!;
-    public String Name { get;  set; }
-    public DateTime StartedAt { get;  set; }
-    public DateTime? FinishedAt { get;  set; }
-    
-    public DateTime? Deadline { get;  set; }
-    public TaskEntityStatus Status { get;  set; }
-    
 
+    public TaskEntity() { }
+    private TaskEntity(
+      Guid id,
+      Guid projectid,
+      String? userid,
+      String name,
+      DateTime? deadline = null)
+    {
+        Id = id;
+        Projectid = projectid;
+        UserId = userid;
+        Name = name;
+        StartedAt = DateTime.UtcNow;
+        Status = TaskEntityStatus.ToBeDone;
+        Deadline = deadline;
+    }
 
+    public Guid Id { get; private set; }
+    public Guid Projectid { get; private set; }
+    public String? UserId { get; private set; }
+    public String Name { get; private set; }
+    public DateTime StartedAt { get; private set; }
+    public DateTime? FinishedAt { get; private set; }
+    public DateTime? Deadline { get; set; }
+    public TaskEntityStatus Status { get; private set; }
+
+    public static TaskEntity Create(Guid projectId, string name, string? userId = null, DateTime? deadline = null)
+    {
+        userId = string.IsNullOrWhiteSpace(userId) ? null : userId;
+
+        var task = new TaskEntity(Guid.NewGuid(), projectId, userId, name)
+        {
+            Deadline = deadline
+        };
+
+        return task;
+    }
+
+    public void Update(string? name, string? userId, DateTime? deadline, TaskEntityStatus status, DateTime? finishedAt)
+    {
+        if (!string.IsNullOrWhiteSpace(name))
+            Name = name;
+
+        UserId = userId;
+        Deadline = deadline;
+        Status = status;
+
+        if (status == TaskEntityStatus.Complete)
+            FinishedAt = finishedAt ?? DateTime.UtcNow;
+        else
+            FinishedAt = null;
+    }
 }
