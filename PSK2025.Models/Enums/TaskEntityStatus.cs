@@ -1,4 +1,4 @@
-namespace PSK2025.Models.Enums;
+﻿namespace PSK2025.Models.Enums;
 public enum TaskEntityStatus
 {
     ToBeDone,

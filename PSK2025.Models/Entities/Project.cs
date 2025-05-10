@@ -10,7 +10,7 @@ public class Project
 
     public ProjectStatus Status { get; set; }
 
-    public ICollection<TaskEntity> Tasks { get; set; } = new List<TaskEntity>();
+    public ICollection<Task> Tasks { get; set; } = new List<Task>();
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     public ICollection<UserProject> UserProjects { get; set; } = new List<UserProject>();
 

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace PSK2025.MigrationService.Abstractions;
+namespace PSK2025.Data.Abstractions;
 
 public abstract class GenericRepository<TEntity>(AppDbContext context)
     where TEntity : class

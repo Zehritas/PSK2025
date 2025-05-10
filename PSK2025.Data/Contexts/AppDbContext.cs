@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PSK2025.Models.Entities;
+using TaskEntity = PSK2025.Models.Entities.Task;
+
 
 namespace PSK2025.Data.Contexts;
 
@@ -11,7 +13,7 @@ public class AppDbContext : IdentityDbContext<User>
     }
 
     public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
-    public DbSet<TaskEntity> Tasks { get; set; } = null!;
+    public DbSet<Models.Entities.Task> Tasks { get; set; } = null!;
     public DbSet<Project> Projects { get; set; } = null!;
     public DbSet<Comment> Comments { get; set; } = null!;
     public DbSet<UserProject> UserProjects { get; set; } = null!;
