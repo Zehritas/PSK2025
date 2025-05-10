@@ -11,7 +11,7 @@ public class AppDbContext : IdentityDbContext<User>
     }
 
     public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
-    public DbSet<TaskEntity> Tasks { get; set; } = null!;
+    public DbSet<Models.Entities.Task> Tasks { get; set; } = null!;
     public DbSet<Project> Projects { get; set; } = null!;
     public DbSet<Comment> Comments { get; set; } = null!;
     public DbSet<UserProject> UserProjects { get; set; } = null!;
@@ -35,12 +35,12 @@ public class AppDbContext : IdentityDbContext<User>
             .HasForeignKey(up => up.ProjectId);
 
  
-        modelBuilder.Entity<TaskEntity>()
+        modelBuilder.Entity<Models.Entities.Task>()
             .HasOne<Project>()
             .WithMany(p => p.Tasks)
             .HasForeignKey(t => t.Projectid);
 
-        modelBuilder.Entity<TaskEntity>()
+        modelBuilder.Entity<Models.Entities.Task>()
             .HasOne<User>()
             .WithMany()
             .HasForeignKey(t => t.UserId)

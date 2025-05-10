@@ -8,10 +8,11 @@ using PSK2025.Models.Entities;
 using PSK2025.Data.Contexts;
 using PSK2025.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using TaskEntity = PSK2025.Models.Entities.Task;
 
 namespace PSK2025.Data.Repositories;
 
-public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEntity>(dbContext), ITaskRepository
+public class TaskRepository(AppDbContext dbContext) : GenericRepository<Models.Entities.Task>(dbContext), ITaskRepository
 {
     public async Task<List<TaskEntity>> GetListAsync(Guid projectId, int skip = 0, int take = 50, CancellationToken cancellationToken = default)
     {

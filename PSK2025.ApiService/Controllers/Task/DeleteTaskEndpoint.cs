@@ -15,7 +15,7 @@ public class DeleteTaskEndpoint : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapDelete("/delete",
+        group.MapDelete("/",
                 async ([FromQuery] Guid id,
                     ITaskService service) =>
                 {
@@ -25,7 +25,7 @@ public class DeleteTaskEndpoint : IEndpoint
                         ? Results.Ok(new { Message = "Task deleted successfully." })
                         : result.Error.MapErrorToResponse();
                 })
-            .WithName("Delete Order")
+            .WithName("Delete Task")
             .Produces(200)
             .Produces(400)
             .Produces(500);

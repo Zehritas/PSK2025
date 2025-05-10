@@ -70,7 +70,7 @@ builder.Services.AddAuthentication(options =>
         OnTokenValidated = context =>
         {
             Console.WriteLine("Token is valid.");
-            return Task.CompletedTask;
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     };
 });
@@ -118,12 +118,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Events.OnRedirectToLogin = context =>
     {
         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-        return Task.CompletedTask;
+        return System.Threading.Tasks.Task.CompletedTask;
     };
     options.Events.OnRedirectToAccessDenied = context =>
     {
         context.Response.StatusCode = StatusCodes.Status403Forbidden;
-        return Task.CompletedTask;
+        return System.Threading.Tasks.Task.CompletedTask;
     };
 });
 
@@ -201,10 +201,5 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapGet("/debug", [Authorize] (ClaimsPrincipal user) =>
-{
-    var claims = user.Claims.Select(c => new { c.Type, c.Value }).ToList();
-    return Results.Ok(claims);
-});
 app.Run();
 

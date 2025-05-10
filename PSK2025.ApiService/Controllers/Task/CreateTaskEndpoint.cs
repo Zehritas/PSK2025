@@ -15,7 +15,7 @@ public class CreateTaskEndpoint : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapPost("/create",
+        group.MapPost("/",
                 async (CreateTaskRequest request,
                     ITaskService service) =>
                 {

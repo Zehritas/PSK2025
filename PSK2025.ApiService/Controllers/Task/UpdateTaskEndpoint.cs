@@ -14,7 +14,7 @@ public class UpdateTaskEndpoint : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapPost("/update",
+        group.MapPut("/{id}",
                 async (UpdateTaskRequest request,
                     ITaskService service) =>
                 {
@@ -24,7 +24,7 @@ public class UpdateTaskEndpoint : IEndpoint
                         ? Results.Ok(new { Message = "Task updated successfully." })
                         : result.Error.MapErrorToResponse();
                 })
-            .WithName("Updated Order")
+            .WithName("Updated Task")
             .Produces(200)
             .Produces(400)
             .Produces(500);

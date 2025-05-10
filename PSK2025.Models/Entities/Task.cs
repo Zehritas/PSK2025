@@ -9,11 +9,10 @@ using PSK2025.Models.Enums;
 
 namespace PSK2025.Models.Entities;
 
-public class TaskEntity
+public class Task
 {
-
-    public TaskEntity() { }
-    private TaskEntity(
+    public Task() { }
+    private Task(
       Guid id,
       Guid projectid,
       String? userid,
@@ -38,11 +37,11 @@ public class TaskEntity
     public DateTime? Deadline { get; set; }
     public TaskEntityStatus Status { get; private set; }
 
-    public static TaskEntity Create(Guid projectId, string name, string? userId = null, DateTime? deadline = null)
+    public static Task Create(Guid projectId, string name, string? userId = null, DateTime? deadline = null)
     {
         userId = string.IsNullOrWhiteSpace(userId) ? null : userId;
 
-        var task = new TaskEntity(Guid.NewGuid(), projectId, userId, name)
+        var task = new Task(Guid.NewGuid(), projectId, userId, name)
         {
             Deadline = deadline
         };

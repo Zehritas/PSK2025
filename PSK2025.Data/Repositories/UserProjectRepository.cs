@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using PSK2025.Data.Contexts;
 using PSK2025.Data.Repositories.Interfaces;
 using PSK2025.Models.Entities;
+using SystemTask = System.Threading.Tasks.Task;
+
 
 namespace PSK2025.Data.Repositories
 {
@@ -30,7 +32,7 @@ namespace PSK2025.Data.Repositories
                 .AnyAsync(up => up.UserId == userId && up.ProjectId == projectId);
         }
 
-        public async Task AssignUserToProjectAsync(UserProject userProject)
+        public async SystemTask AssignUserToProjectAsync(UserProject userProject)
         {
             _context.UserProjects.Add(userProject);
             await _context.SaveChangesAsync();
@@ -41,7 +43,7 @@ namespace PSK2025.Data.Repositories
             return await _context.UserProjects.FindAsync(userId, projectId);
         }
 
-        public async Task RemoveAssignmentAsync(UserProject userProject)
+        public async SystemTask RemoveAssignmentAsync(UserProject userProject)
         {
             _context.UserProjects.Remove(userProject);
             await _context.SaveChangesAsync();

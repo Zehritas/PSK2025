@@ -25,7 +25,7 @@ public class TaskService(
     public async Task<Result<Guid>> CreateTaskAsync(CreateTaskRequest request, CancellationToken cancellationToken = default)
     {
 
-        var task = TaskEntity.Create(
+        var task = Models.Entities.Task.Create(
             request.ProjectId,
             request.Name,
             null);
@@ -38,14 +38,6 @@ public class TaskService(
 
     public async Task<Result> EditTaskAsync(UpdateTaskRequest request, CancellationToken cancellationToken = default)
     {
-
-        //var userId = userContextService.GetCurrentUserId();
-
-        //var user = await userManager.FindByIdAsync(userId);
-        //if (user is null)
-        //{
-        //    return Result.Failure<GetTasksResponse>(AuthErrors.UserNotFound);
-        //}
 
         var currentTask = await taskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 
@@ -83,20 +75,15 @@ public class TaskService(
 
     public async Task<Result<GetTasksResponse>> GetTasksAsync(GetProjectTasksRequest request, CancellationToken cancellationToken = default)
     {
-        //var userId = userContextService.GetCurrentUserId();
-
-        //var user = await userManager.FindByIdAsync(userId);
-        //if (user is null)
-        //{
-        //    return Result.Failure<GetTasksResponse>(AuthErrors.UserNotFound);
-        //}
-
         var tasks = await taskRepository.GetListAsync(
             request.ProjectId,
             (request.Pagination.PageNumber - 1) * request.Pagination.PageSize,
             request.Pagination.PageSize,
             cancellationToken
         );
+
+        if (!tasks.Any())
+            return Result<GetTasksResponse>.Failure(TaskErrors.NoTasksFoundError);
 
         var taskDtos = tasks.Select(task => new TaskDto(
             task.Id,               

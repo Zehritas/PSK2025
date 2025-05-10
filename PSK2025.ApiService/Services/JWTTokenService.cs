@@ -29,34 +29,6 @@ public class JwtTokenService : IJwtTokenService
         _configuration = configuration;
     }
 
-    //public string GenerateJwtToken(User user, IList<string> roles)
-    //{
-    //    var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
-    //    var issuer = _configuration["Jwt:Issuer"];
-    //    var audience = _configuration["Jwt:Audience"];
-    //    var tokenValidityMinutes = int.Parse(_configuration["Jwt:TokenValidityMins"]);
-
-    //    var tokenDescriptor = new SecurityTokenDescriptor
-    //    {
-    //        Subject = new ClaimsIdentity(new[]
-    //        {
-    //            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-    //        }),
-    //        Expires = DateTime.UtcNow.AddMinutes(tokenValidityMinutes),
-    //        Issuer = issuer,
-    //        Audience = audience,
-    //        SigningCredentials = new SigningCredentials(
-    //            new SymmetricSecurityKey(key),
-    //            SecurityAlgorithms.HmacSha256Signature)
-    //    };
-
-    //    var tokenHandler = new JwtSecurityTokenHandler();
-    //    var token = tokenHandler.CreateToken(tokenDescriptor);
-    //    var jwt = tokenHandler.WriteToken(token);
-
-    //    return jwt;
-    //}
-
     public string GenerateJwtToken(User user, IList<string> roles)
     {
         var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
