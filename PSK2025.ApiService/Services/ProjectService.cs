@@ -7,6 +7,7 @@ using PSK2025.Models.DTOs;
 using PSK2025.Models.Entities;
 using PSK2025.Models.Enums;
 using PSK2025.Models.Entities;
+using SystemTask = System.Threading.Tasks.Task;
 
 namespace PSK2025.ApiService.Services;
 
@@ -82,7 +83,7 @@ public class ProjectService : IProjectService
             .ToListAsync();
     }
 
-    public async System.Threading.Tasks.Task DeleteAsync(ProjectRequest request)
+    public async SystemTask DeleteAsync(ProjectRequest request)
     {
         var entity = await _context.Projects.FindAsync(request.id);
         if (entity == null) throw new KeyNotFoundException("Project not found");

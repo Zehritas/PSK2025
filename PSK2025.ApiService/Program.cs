@@ -18,8 +18,8 @@ using PSK2025.MigrationService.Abstractions;
 using PSK2025.ApiService.Validators.Auth;
 using FluentValidation;
 using PSK2025.Data.Requests.Auth;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+using TaskEntity = PSK2025.Models.Entities.Task;
+using SystemTask = System.Threading.Tasks.Task;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,7 +70,7 @@ builder.Services.AddAuthentication(options =>
         OnTokenValidated = context =>
         {
             Console.WriteLine("Token is valid.");
-            return System.Threading.Tasks.Task.CompletedTask;
+            return SystemTask.CompletedTask;
         }
     };
 });
@@ -118,12 +118,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Events.OnRedirectToLogin = context =>
     {
         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-        return System.Threading.Tasks.Task.CompletedTask;
+        return SystemTask.CompletedTask;
     };
     options.Events.OnRedirectToAccessDenied = context =>
     {
         context.Response.StatusCode = StatusCodes.Status403Forbidden;
-        return System.Threading.Tasks.Task.CompletedTask;
+        return SystemTask.CompletedTask;
     };
 });
 

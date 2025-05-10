@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using PSK2025.Data.Contexts;
 using PSK2025.Data.Responses.Task;
 using PSK2025.Models.DTOs;
-using System.Linq;
+using TaskEntity = PSK2025.Models.Entities.Task;
 
 
 namespace PSK2025.ApiService.Services;
@@ -25,7 +25,7 @@ public class TaskService(
     public async Task<Result<Guid>> CreateTaskAsync(CreateTaskRequest request, CancellationToken cancellationToken = default)
     {
 
-        var task = Models.Entities.Task.Create(
+        var task = TaskEntity.Create(
             request.ProjectId,
             request.Name,
             null);

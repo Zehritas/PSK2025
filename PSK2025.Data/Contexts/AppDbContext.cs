@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PSK2025.Models.Entities;
+using TaskEntity = PSK2025.Models.Entities.Task;
+
 
 namespace PSK2025.Data.Contexts;
 
@@ -35,12 +37,12 @@ public class AppDbContext : IdentityDbContext<User>
             .HasForeignKey(up => up.ProjectId);
 
  
-        modelBuilder.Entity<Models.Entities.Task>()
+        modelBuilder.Entity<TaskEntity>()
             .HasOne<Project>()
             .WithMany(p => p.Tasks)
             .HasForeignKey(t => t.Projectid);
 
-        modelBuilder.Entity<Models.Entities.Task>()
+        modelBuilder.Entity<TaskEntity>()
             .HasOne<User>()
             .WithMany()
             .HasForeignKey(t => t.UserId)
