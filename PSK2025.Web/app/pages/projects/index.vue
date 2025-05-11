@@ -66,9 +66,9 @@ const columns: TableColumn<Project> [] = [
     })
   },
   {
-    id: 'ownerId',
-    accessorKey: 'ownerId',
-    header: 'Owner'
+    id: 'owner',
+    header: 'Owner',
+    cell: ({ row }) => h('div', undefined, `${row.original.owner.firstName} ${row.original.owner.lastName}`)
   },
   {
     id: 'startDate',

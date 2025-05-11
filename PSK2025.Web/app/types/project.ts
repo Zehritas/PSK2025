@@ -1,7 +1,11 @@
 export interface Project {
   id: string;
   name: string;
-  ownerId: string;
+  owner: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  }
   startDate: string | null;
   endDate: string | null;
   description: string | null;

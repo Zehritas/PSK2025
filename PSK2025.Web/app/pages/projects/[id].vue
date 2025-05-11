@@ -20,7 +20,8 @@
           </PropertyItem>
 
           <PropertyItem label="Owner">
-            {{ data.project.ownerId }}
+            {{ data.project.owner.firstName }}
+            {{ data.project.owner.lastName }}
           </PropertyItem>
 
           <PropertyItem v-if="data.project.startDate" label="Start date">
