@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PSK2025.ApiService.Interfaces;
 using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Models.DTOs;
+using PSK2025.Models.Entities;
 using PSK2025.Models.Enums;
 
 
@@ -29,6 +31,7 @@ public class GetProjectsAsyncEndpoint : IEndpoint
                     PageSize = result.PageSize
                 });
             })
+            .RequireAuthorization()
             .WithName("Get All Projects")
             .Produces<PaginatedResult<ProjectDto>>(200)
             .Produces(500);
