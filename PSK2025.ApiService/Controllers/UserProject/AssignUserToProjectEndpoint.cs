@@ -13,7 +13,7 @@ public class AssignUserToProjectEndpoint : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapPost("/assign-user", async ([FromBody] AssignUserToProjectRequest request, IUserProjectService service) =>
+        group.MapPost("/", async ([FromBody] AssignUserToProjectRequest request, IUserProjectService service) =>
             {
                 var response = await service.AssignAsync(request);
                 return Results.Ok(response.UserProject);

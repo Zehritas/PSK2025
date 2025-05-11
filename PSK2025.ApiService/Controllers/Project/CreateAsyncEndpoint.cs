@@ -16,7 +16,7 @@ public class CreateAsyncEndpoint : IEndpoint
         group.MapPost("/", async ([FromBody] CreateProjectRequest request, IProjectService service) =>
             {
                 var result = await service.CreateAsync(request);
-                return Results.Created($"/api/project/{result.Project.Id}", result.Project);
+                return Results.Created($"/api/projects/{result.Project.Id}", result.Project);
             })
             .WithName("Create Project")
             .Produces<ProjectDto>(201)

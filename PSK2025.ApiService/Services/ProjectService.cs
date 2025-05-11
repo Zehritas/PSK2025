@@ -20,7 +20,7 @@ public class ProjectService : IProjectService
         _context = context;
     }
 
-    public async Task<ProjectResponse> CreateAsync(CreateProjectRequest request)
+    public async Task<ProjectsResponse> CreateAsync(CreateProjectRequest request)
     {
         var entity = new Project
         {
@@ -32,7 +32,7 @@ public class ProjectService : IProjectService
         _context.Projects.Add(entity);
         await _context.SaveChangesAsync();
 
-        return new ProjectResponse(new ProjectDto
+        return new ProjectsResponse(new ProjectDto
         {
             Id = entity.Id,
             Name = entity.Name,
@@ -40,7 +40,7 @@ public class ProjectService : IProjectService
         });
     }
 
-    public async Task<ProjectResponse> UpdateAsync(UpdateProjectRequest request)
+    public async Task<ProjectsResponse> UpdateAsync(UpdateProjectRequest request)
     {
         var entity = await _context.Projects.FindAsync(request.Project.Id);
         if (entity == null) throw new KeyNotFoundException("Project not found");
@@ -50,7 +50,7 @@ public class ProjectService : IProjectService
 
         await _context.SaveChangesAsync();
 
-        return new ProjectResponse(new ProjectDto
+        return new ProjectsResponse(new ProjectDto
         {
             Id = entity.Id,
             Name = entity.Name,
@@ -58,12 +58,12 @@ public class ProjectService : IProjectService
         });
     }
 
-    public async Task<ProjectResponse> GetByIdAsync(ProjectRequest request)
+    public async Task<ProjectsResponse> GetByIdAsync(ProjectRequest request)
     {
         var entity = await _context.Projects.FindAsync(request.id);
         if (entity == null) throw new KeyNotFoundException("Project not found");
 
-        return new ProjectResponse(new ProjectDto
+        return new ProjectsResponse(new ProjectDto
         {
             Id = entity.Id,
             Name = entity.Name,
@@ -71,10 +71,13 @@ public class ProjectService : IProjectService
         });
     }
 
-    public async Task<IEnumerable<ProjectResponse>> GetAllAsync()
+    public async Task<IEnumerable<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize)
     {
         return await _context.Projects
-            .Select(p => new ProjectResponse(new ProjectDto
+            .OrderBy(p => p.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(p => new ProjectsResponse(new ProjectDto
             {
                 Id = p.Id,
                 Name = p.Name,

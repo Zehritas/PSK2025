@@ -13,7 +13,7 @@ public class RemoveUserFromProjectEndpoint : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapDelete("/remove-user", async ([FromBody] RemoveUserFromProjectRequest request, IUserProjectService service) =>
+        group.MapDelete("/", async ([FromBody] RemoveUserFromProjectRequest request, IUserProjectService service) =>
             {
                 try
                 {

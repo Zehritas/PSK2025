@@ -6,10 +6,10 @@ namespace PSK2025.ApiService.Services.Interfaces;
 
 public interface IProjectService
 {
-    Task<ProjectResponse> CreateAsync(CreateProjectRequest request);
-    Task<ProjectResponse> UpdateAsync(UpdateProjectRequest request);
-    Task<ProjectResponse> GetByIdAsync(ProjectRequest request);
-    Task<IEnumerable<ProjectResponse>> GetAllAsync();
+    Task<ProjectsResponse> CreateAsync(CreateProjectRequest request);
+    Task<ProjectsResponse> UpdateAsync(UpdateProjectRequest request);
+    Task<ProjectsResponse> GetByIdAsync(ProjectRequest request);
+    Task<IEnumerable<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize);
     Task DeleteAsync(ProjectRequest request);
     
     Task<List<UserDto>> GetProjectUsersAsync(Guid projectId);

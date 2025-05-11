@@ -6,15 +6,18 @@ using PSK2025.Models.Enums;
 
 namespace PSK2025.ApiService.Controllers.Project;
 
-public class GetAllAsyncEndpoint : IEndpoint
+public class GetProjectsAsyncEndpoint : IEndpoint
 {
     public RouteGroupName Group => RouteGroupName.Project;
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapGet("/all", async ( IProjectService service) =>
+        group.MapGet("/", async (
+                [FromQuery] int pageNumber,
+                [FromQuery] int pageSize,
+                IProjectService service) =>
             {
-                var result = await service.GetAllAsync();
+                var result = await service.GetProjectsAsync(pageNumber, pageSize);
                 return Results.Ok(result.Select(r => r.Project));
             })
             .WithName("Get All Projects")

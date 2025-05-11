@@ -13,7 +13,7 @@ public class UpdateAsyncEndpoint : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapPut("/", async ([FromBody] UpdateProjectRequest request, IProjectService service) =>
+        group.MapPut("/{id}", async ([FromBody] UpdateProjectRequest request, IProjectService service) =>
             {
                 var result = await service.UpdateAsync(request);
 

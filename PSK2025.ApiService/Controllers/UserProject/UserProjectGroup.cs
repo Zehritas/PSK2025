@@ -6,6 +6,6 @@ namespace PSK2025.ApiService.Controllers.UserProject;
 public class UserProjectRouteGroup(IEnumerable<IEndpoint> endpoints) : IRouteGroup
 {
     public RouteGroupName Group => RouteGroupName.UserProject;
-    public string RoutePrefix => "/api/user-project";
-    public string Tag => "User Project";
+    public string RoutePrefix => "/api/project-members";
+    public string Tag => "Project Members";
 }
