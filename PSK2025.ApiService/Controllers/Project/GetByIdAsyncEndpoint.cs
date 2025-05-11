@@ -24,6 +24,7 @@ public class GetByIdAsyncEndpoint : IEndpoint
                     ? Results.Ok(project)
                     : Results.NotFound();
             })
+            .RequireAuthorization()
             .WithName("Get Project")
             .Produces<ProjectDto>(200)
             .Produces(404)

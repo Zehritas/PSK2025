@@ -20,6 +20,7 @@ using FluentValidation;
 using PSK2025.Data.Requests.Auth;
 using TaskEntity = PSK2025.Models.Entities.Task;
 using SystemTask = System.Threading.Tasks.Task;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,47 +36,7 @@ builder.Services.AddEndpoints();
 builder.Services.AddEndpointsApiExplorer();
 
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    var jwtSettings = builder.Configuration.GetSection("Jwt");
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings["Issuer"],
-        ValidAudience = jwtSettings["Audience"],
-        NameClaimType = JwtRegisteredClaimNames.Sub,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
 
-
-    };
-
-    options.Events = new JwtBearerEvents
-    {
-        OnAuthenticationFailed = context =>
-        {
-            Console.WriteLine($"Authentication failed: {context.Exception.Message}");
-            context.Response.StatusCode = 401;
-            context.Response.ContentType = "application/json";
-            return context.Response.WriteAsync("{\"error\":\"Authentication failed: " + context.Exception.Message + "\"}");
-        },
-        OnTokenValidated = context =>
-        {
-            Console.WriteLine("Token is valid.");
-            return SystemTask.CompletedTask;
-        }
-    };
-});
-
-builder.Services.AddAuthorization();
 
 
 builder.AddServiceDefaults();
@@ -169,7 +130,63 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    var jwtSettings = builder.Configuration.GetSection("Jwt");
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
 
+
+    };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            var logger = context.HttpContext.RequestServices
+                .GetRequiredService<ILoggerFactory>()
+                .CreateLogger("JwtBearer");
+
+            logger.LogWarning(context.Exception, "Authentication failed: {Message}", context.Exception.Message);
+
+            context.Response.StatusCode = 401;
+            context.Response.ContentType = "application/json";
+
+            var errorResponse = new
+            {
+                error = $"Authentication failed: {context.Exception.Message}"
+            };
+
+            var json = JsonSerializer.Serialize(errorResponse);
+            return context.Response.WriteAsync(json);
+        },
+        OnTokenValidated = context =>
+        {
+            var logger = context.HttpContext.RequestServices
+                .GetRequiredService<ILoggerFactory>()
+                .CreateLogger("JwtBearer");
+
+            logger.LogInformation("Token is valid.");
+            return SystemTask.CompletedTask;
+        }
+    };
+
+});
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

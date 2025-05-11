@@ -19,6 +19,7 @@ public class CreateAsyncEndpoint : IEndpoint
                 return Results.Created($"/api/projects/{result.Project.Id}", result.Project);
             })
             .WithName("Create Project")
+            .RequireAuthorization()
             .Produces<ProjectDto>(201)
             .Produces(400)
             .Produces(500);

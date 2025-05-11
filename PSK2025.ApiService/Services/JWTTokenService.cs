@@ -31,30 +31,33 @@ public class JwtTokenService : IJwtTokenService
 
     public string GenerateJwtToken(User user, IList<string> roles)
     {
-        var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
+        var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+        var issuer = _configuration["Jwt:Issuer"];
+        var audience = _configuration["Jwt:Audience"];
+        var expiryMinutes = int.Parse(_configuration["Jwt:TokenValidityMins"]!);
+
         var claims = new List<Claim>
-    {
-        new(JwtRegisteredClaimNames.Sub, user.Id.ToString()), 
-        new(JwtRegisteredClaimNames.Email, user.Email!),     
-        new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) 
-    };
+        {
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new(JwtRegisteredClaimNames.Email, user.Email!),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(claims), 
-            Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.AccessTokenExpirationMinutes),
-            Issuer = _jwtSettings.Issuer, 
-            Audience = _jwtSettings.Audience,
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.UtcNow.AddMinutes(expiryMinutes),
+            Issuer = issuer,
+            Audience = audience,
             SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key), 
-                SecurityAlgorithms.HmacSha256Signature) 
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature)
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var token = tokenHandler.CreateToken(tokenDescriptor); 
-        var jwt = tokenHandler.WriteToken(token); 
+        var token = tokenHandler.CreateToken(tokenDescriptor);
 
-        return jwt; 
+        return tokenHandler.WriteToken(token);
     }
 
     public RefreshToken GenerateRefreshToken(string userId)
