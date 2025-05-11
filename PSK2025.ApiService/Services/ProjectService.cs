@@ -8,16 +8,18 @@ using PSK2025.Models.Entities;
 using PSK2025.Models.Enums;
 using PSK2025.Models.Entities;
 using SystemTask = System.Threading.Tasks.Task;
+using Microsoft.Extensions.Logging;
 
 namespace PSK2025.ApiService.Services;
 
 public class ProjectService : IProjectService
 {
     private readonly AppDbContext _context;
-
-    public ProjectService(AppDbContext context)
+    private readonly IUserContextService _userContextService;
+    public ProjectService(AppDbContext context, IUserContextService userContextService, ILogger<ProjectService> logger)
     {
         _context = context;
+        _userContextService = userContextService;
     }
 
     public async Task<ProjectsResponse> CreateAsync(CreateProjectRequest request)
@@ -72,12 +74,15 @@ public class ProjectService : IProjectService
         var entity = await _context.Projects.FindAsync(request.Project.Id);
         if (entity == null) throw new KeyNotFoundException("Project not found");
 
+        
+
         entity.Name = request.Project.Name;
         entity.Status = request.Project.Status;
         entity.OwnerId = request.Project.OwnerId;
         entity.Description = request.Project.Description;
         entity.StartDate = request.Project.StartDate;
         entity.EndDate = request.Project.EndDate;
+
 
         await _context.SaveChangesAsync();
 
@@ -98,6 +103,16 @@ public class ProjectService : IProjectService
         var entity = await _context.Projects.FindAsync(request.id);
         if (entity == null) throw new KeyNotFoundException("Project not found");
 
+        var currentUserId = _userContextService.GetCurrentUserId();
+
+        var isOwner = entity.OwnerId == currentUserId;
+        var isMember = entity.UserProjects.Any(up => up.UserId == currentUserId);
+
+        if (!isOwner && !isMember)
+            throw new UnauthorizedAccessException("User does not have access to this project.");
+
+        var Owner = await _context.Users.FindAsync(entity.OwnerId);
+
         return new ProjectsResponse(new ProjectDto
         {
             Id = entity.Id,
@@ -105,6 +120,8 @@ public class ProjectService : IProjectService
             Status = entity.Status,
             Description = entity.Description,
             OwnerId = entity.OwnerId,
+            OwnerName = Owner.FirstName,
+            OwnerLastName = Owner.LastName,
             StartDate = entity.StartDate,
             EndDate = entity.EndDate
         });
@@ -114,8 +131,12 @@ public class ProjectService : IProjectService
     {
         pageNumber = Math.Max(1, pageNumber);
         pageSize = Math.Clamp(pageSize, 1, 50);
+        var userId = _userContextService.GetCurrentUserId();
 
-        var query = _context.Projects.AsQueryable();
+        var query = _context.Projects
+            .Include(p => p.Owner) 
+            .Include(p => p.UserProjects)
+            .Where(p => p.OwnerId == userId || p.UserProjects.Any(up => up.UserId == userId));
 
         if (status.HasValue)
         {
@@ -134,6 +155,8 @@ public class ProjectService : IProjectService
                 Name = p.Name,
                 Status = p.Status,
                 OwnerId = p.OwnerId,
+                OwnerName = p.Owner.FirstName,    
+                OwnerLastName = p.Owner.LastName,
                 Description = p.Description,
                 StartDate = p.StartDate,
                 EndDate = p.EndDate
@@ -175,5 +198,6 @@ public class ProjectService : IProjectService
             // Map other fields if needed
         }).ToList();
     }
+
 
 }
