@@ -4,6 +4,7 @@ using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Models.DTOs;
 using PSK2025.Models.Enums;
 
+
 namespace PSK2025.ApiService.Controllers.Project;
 
 public class GetProjectsAsyncEndpoint : IEndpoint
@@ -15,13 +16,21 @@ public class GetProjectsAsyncEndpoint : IEndpoint
         group.MapGet("/", async (
                 [FromQuery] int pageNumber,
                 [FromQuery] int pageSize,
+                [FromQuery] ProjectStatus? status,
                 IProjectService service) =>
             {
-                var result = await service.GetProjectsAsync(pageNumber, pageSize);
-                return Results.Ok(result.Select(r => r.Project));
+                var result = await service.GetProjectsAsync(pageNumber, pageSize, status);
+                
+                return Results.Ok(new PaginatedResult<ProjectDto>
+                {
+                    Items = result.Items.Select(r => r.Project).ToList(),
+                    TotalCount = result.TotalCount,
+                    CurrentPage = result.CurrentPage,
+                    PageSize = result.PageSize
+                });
             })
             .WithName("Get All Projects")
-            .Produces<IEnumerable<ProjectDto>>(200)
+            .Produces<PaginatedResult<ProjectDto>>(200)
             .Produces(500);
     }
 }

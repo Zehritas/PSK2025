@@ -28,13 +28,11 @@ public class ProjectService : IProjectService
         {
             throw new KeyNotFoundException("Owner with the specified ID does not exist.");
         }
-
-
+        
         var startDate = request.StartDate ?? DateTime.UtcNow;
-
-
         DateTime endDate = request.EndDate ?? startDate.AddDays(30);
-
+        ProjectStatus status = request.Status ?? ProjectStatus.Planned;
+        
         if (request.EndDate.HasValue && request.EndDate.Value < startDate)
         {
             throw new ArgumentException("End date must be after the start date.");
@@ -48,7 +46,7 @@ public class ProjectService : IProjectService
             Description = request.Description,
             StartDate = startDate,
             EndDate = endDate,
-            Status = ProjectStatus.Planned
+            Status = status
         };
 
         _context.Projects.Add(entity);
@@ -112,9 +110,21 @@ public class ProjectService : IProjectService
         });
     }
 
-    public async Task<IEnumerable<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize)
+    public async Task<PaginatedResult<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize, ProjectStatus? status = null)
     {
-        return await _context.Projects
+        pageNumber = Math.Max(1, pageNumber);
+        pageSize = Math.Clamp(pageSize, 1, 50);
+
+        var query = _context.Projects.AsQueryable();
+
+        if (status.HasValue)
+        {
+            query = query.Where(p => p.Status == status.Value);
+        }
+
+        var totalCount = await query.CountAsync();
+
+        var items = await query
             .OrderBy(p => p.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
@@ -129,7 +139,16 @@ public class ProjectService : IProjectService
                 EndDate = p.EndDate
             }))
             .ToListAsync();
+
+        return new PaginatedResult<ProjectsResponse>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            CurrentPage = pageNumber,
+            PageSize = pageSize
+        };
     }
+
 
     public async SystemTask DeleteAsync(ProjectRequest request)
     {
