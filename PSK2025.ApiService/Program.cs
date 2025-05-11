@@ -111,6 +111,7 @@ builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IUserProjectService, UserProjectService>();
 builder.Services.AddScoped<IUserProjectRepository, UserProjectRepository>();
+builder.Services.AddScoped<ProjectSeeder>(); 
 
 
 builder.Services.ConfigureApplicationCookie(options =>

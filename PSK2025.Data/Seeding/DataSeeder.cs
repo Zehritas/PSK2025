@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PSK2025.Data.Contexts;
 using PSK2025.Models.Entities;
 using SystemTask = System.Threading.Tasks.Task;
 
@@ -11,7 +12,7 @@ public class DataSeeder
     public static async SystemTask SeedAsync(IServiceProvider serviceProvider)
     {
         var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-
+        var context = serviceProvider.GetRequiredService<AppDbContext>();
         var adminUser = await userManager.FindByNameAsync("admin");
         if (adminUser == null)
         {
@@ -35,6 +36,9 @@ public class DataSeeder
                     Console.WriteLine($"Error creating admin user: {error.Description}");
                 }
             }
+            
+            var projectSeeder = serviceProvider.GetRequiredService<ProjectSeeder>();
+            await projectSeeder.SeedProjectsAsync();
         }
     }
 }
