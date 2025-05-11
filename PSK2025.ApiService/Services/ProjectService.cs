@@ -22,20 +22,19 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectsResponse> CreateAsync(CreateProjectRequest request)
     {
-        // Validate that the OwnerId exists in the database
+
         var owner = await _context.Users.FindAsync(request.OwnerId);
         if (owner == null)
         {
             throw new KeyNotFoundException("Owner with the specified ID does not exist.");
         }
 
-        // If StartDate is not provided, set it to the current date (now).
+
         var startDate = request.StartDate ?? DateTime.UtcNow;
 
-        // If EndDate is not provided, set it to 30 days after the StartDate.
+
         DateTime endDate = request.EndDate ?? startDate.AddDays(30);
 
-        // If EndDate is provided and it's before the StartDate, throw an error.
         if (request.EndDate.HasValue && request.EndDate.Value < startDate)
         {
             throw new ArgumentException("End date must be after the start date.");
