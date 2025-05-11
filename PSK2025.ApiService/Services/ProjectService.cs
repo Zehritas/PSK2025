@@ -44,8 +44,9 @@ public class ProjectService : IProjectService
         var entity = new Project
         {
             Id = Guid.NewGuid(),
-            Name = request.ProjectName,
+            Name = request.Name,
             OwnerId = request.OwnerId,
+            Description = request.Description,
             StartDate = startDate,
             EndDate = endDate,
             Status = ProjectStatus.Planned
@@ -59,6 +60,7 @@ public class ProjectService : IProjectService
             Id = entity.Id,
             Name = entity.Name,
             OwnerId = entity.OwnerId,
+            Description = request.Description,
             StartDate = entity.StartDate,
             EndDate = entity.EndDate,
             Status = entity.Status
@@ -76,6 +78,7 @@ public class ProjectService : IProjectService
         entity.Name = request.Project.Name;
         entity.Status = request.Project.Status;
         entity.OwnerId = request.Project.OwnerId;
+        entity.Description = request.Project.Description;
         entity.StartDate = request.Project.StartDate;
         entity.EndDate = request.Project.EndDate;
 
@@ -87,6 +90,7 @@ public class ProjectService : IProjectService
             Name = entity.Name,
             Status = entity.Status,
             OwnerId = entity.OwnerId,
+            Description = entity.Description,
             StartDate = entity.StartDate,
             EndDate = entity.EndDate
         });
@@ -102,6 +106,7 @@ public class ProjectService : IProjectService
             Id = entity.Id,
             Name = entity.Name,
             Status = entity.Status,
+            Description = entity.Description,
             OwnerId = entity.OwnerId,
             StartDate = entity.StartDate,
             EndDate = entity.EndDate
@@ -120,6 +125,7 @@ public class ProjectService : IProjectService
                 Name = p.Name,
                 Status = p.Status,
                 OwnerId = p.OwnerId,
+                Description = p.Description,
                 StartDate = p.StartDate,
                 EndDate = p.EndDate
             }))
