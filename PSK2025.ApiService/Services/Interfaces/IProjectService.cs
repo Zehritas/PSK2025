@@ -10,7 +10,7 @@ public interface IProjectService
     Task<ProjectsResponse> CreateAsync(CreateProjectRequest request);
     Task<ProjectsResponse> UpdateAsync(UpdateProjectRequest request);
     Task<ProjectsResponse> GetByIdAsync(ProjectRequest request);
-    Task<IEnumerable<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize, ProjectStatus? status = null);
+    Task<PaginatedResult<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize, ProjectStatus? status = null);
     Task DeleteAsync(ProjectRequest request);
     
     Task<List<UserDto>> GetProjectUsersAsync(Guid projectId);

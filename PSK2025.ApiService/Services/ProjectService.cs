@@ -110,8 +110,11 @@ public class ProjectService : IProjectService
         });
     }
 
-    public async Task<IEnumerable<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize, ProjectStatus? status = null)
+    public async Task<PaginatedResult<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize, ProjectStatus? status = null)
     {
+        pageNumber = Math.Max(1, pageNumber);
+        pageSize = Math.Clamp(pageSize, 1, 50);
+
         var query = _context.Projects.AsQueryable();
 
         if (status.HasValue)
@@ -119,7 +122,9 @@ public class ProjectService : IProjectService
             query = query.Where(p => p.Status == status.Value);
         }
 
-        return await query
+        var totalCount = await query.CountAsync();
+
+        var items = await query
             .OrderBy(p => p.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
@@ -134,6 +139,14 @@ public class ProjectService : IProjectService
                 EndDate = p.EndDate
             }))
             .ToListAsync();
+
+        return new PaginatedResult<ProjectsResponse>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            CurrentPage = pageNumber,
+            PageSize = pageSize
+        };
     }
 
 
