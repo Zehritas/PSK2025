@@ -16,10 +16,12 @@ public class ProjectService : IProjectService
 {
     private readonly AppDbContext _context;
     private readonly IUserContextService _userContextService;
+    private readonly ILogger _logger;
     public ProjectService(AppDbContext context, IUserContextService userContextService, ILogger<ProjectService> logger)
     {
         _context = context;
         _userContextService = userContextService;
+        _logger = logger;
     }
 
     public async Task<ProjectsResponse> CreateAsync(CreateProjectRequest request)
@@ -58,7 +60,10 @@ public class ProjectService : IProjectService
         {
             Id = entity.Id,
             Name = entity.Name,
-            OwnerId = entity.OwnerId,
+            Owner = new OwnerDto
+            {
+                Id = entity.Owner.Id
+            },
             Description = request.Description,
             StartDate = entity.StartDate,
             EndDate = entity.EndDate,
@@ -75,10 +80,9 @@ public class ProjectService : IProjectService
         if (entity == null) throw new KeyNotFoundException("Project not found");
 
         
-
         entity.Name = request.Project.Name;
         entity.Status = request.Project.Status;
-        entity.OwnerId = request.Project.OwnerId;
+        entity.OwnerId = request.Project.Owner.Id;
         entity.Description = request.Project.Description;
         entity.StartDate = request.Project.StartDate;
         entity.EndDate = request.Project.EndDate;
@@ -91,7 +95,10 @@ public class ProjectService : IProjectService
             Id = entity.Id,
             Name = entity.Name,
             Status = entity.Status,
-            OwnerId = entity.OwnerId,
+            Owner = new OwnerDto
+            {
+                Id = entity.Owner.Id
+            },
             Description = entity.Description,
             StartDate = entity.StartDate,
             EndDate = entity.EndDate
@@ -100,18 +107,28 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectsResponse> GetByIdAsync(ProjectRequest request)
     {
-        var entity = await _context.Projects.FindAsync(request.id);
-        if (entity == null) throw new KeyNotFoundException("Project not found");
-
         var currentUserId = _userContextService.GetCurrentUserId();
+
+        var entity = await _context.Projects
+            .Include(p => p.Owner) 
+            .Include(p => p.UserProjects) 
+            .ThenInclude(up => up.User) 
+            .Where(p => p.Id == request.id) 
+            .FirstOrDefaultAsync(); 
+
+        if (entity == null)
+        {
+            throw new KeyNotFoundException("Project not found");
+        }
 
         var isOwner = entity.OwnerId == currentUserId;
         var isMember = entity.UserProjects.Any(up => up.UserId == currentUserId);
 
         if (!isOwner && !isMember)
-            throw new UnauthorizedAccessException("User does not have access to this project.");
+        {
 
-        var Owner = await _context.Users.FindAsync(entity.OwnerId);
+            throw new KeyNotFoundException("Project not found"); 
+        }
 
         return new ProjectsResponse(new ProjectDto
         {
@@ -119,9 +136,12 @@ public class ProjectService : IProjectService
             Name = entity.Name,
             Status = entity.Status,
             Description = entity.Description,
-            OwnerId = entity.OwnerId,
-            OwnerName = Owner.FirstName,
-            OwnerLastName = Owner.LastName,
+            Owner = new OwnerDto
+            {
+                Id = entity.Owner.Id, 
+                FirstName = entity.Owner.FirstName,
+                LastName = entity.Owner.LastName
+            },
             StartDate = entity.StartDate,
             EndDate = entity.EndDate
         });
@@ -154,9 +174,12 @@ public class ProjectService : IProjectService
                 Id = p.Id,
                 Name = p.Name,
                 Status = p.Status,
-                OwnerId = p.OwnerId,
-                OwnerName = p.Owner.FirstName,    
-                OwnerLastName = p.Owner.LastName,
+                Owner = new OwnerDto
+                {
+                    Id = p.Owner.Id,
+                    FirstName = p.Owner.FirstName,
+                    LastName = p.Owner.LastName
+                },
                 Description = p.Description,
                 StartDate = p.StartDate,
                 EndDate = p.EndDate

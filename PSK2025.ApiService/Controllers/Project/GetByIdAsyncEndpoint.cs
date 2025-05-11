@@ -24,10 +24,6 @@ public class GetByIdAsyncEndpoint : IEndpoint
                     ? Results.Ok(project)
                     : Results.NotFound();
             })
-            .RequireAuthorization(new AuthorizeAttribute
-            {
-               Roles = $"{Roles.User.ToString()}"
-            })
             .RequireAuthorization()
             .WithName("Get Project")
             .Produces<ProjectDto>(200)

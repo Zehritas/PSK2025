@@ -9,9 +9,7 @@ public class ProjectDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;
-    public string OwnerId { get; set; }
-    public string OwnerName { get; set; }    
-    public string OwnerLastName { get; set; } 
+    public OwnerDto Owner { get; set; } = null!;
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public string? Description { get; set; }
