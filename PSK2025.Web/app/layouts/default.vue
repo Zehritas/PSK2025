@@ -9,6 +9,10 @@
       :ui="{ footer: 'lg:border-t lg:border-default' }"
     >
       <template #default="{ collapsed }">
+        <div class="text-xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted) ml-1 mt-3">
+          <span class="text-primary">Co</span>Student
+        </div>
+
         <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" />
 
         <UNavigationMenu
