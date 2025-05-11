@@ -15,13 +15,15 @@ public class GetProjectsAsyncEndpoint : IEndpoint
         group.MapGet("/", async (
                 [FromQuery] int pageNumber,
                 [FromQuery] int pageSize,
+                [FromQuery] ProjectStatus? status,
                 IProjectService service) =>
             {
-                var result = await service.GetProjectsAsync(pageNumber, pageSize);
+                var result = await service.GetProjectsAsync(pageNumber, pageSize, status);
                 return Results.Ok(result.Select(r => r.Project));
             })
             .WithName("Get All Projects")
             .Produces<IEnumerable<ProjectDto>>(200)
             .Produces(500);
+
     }
 }
