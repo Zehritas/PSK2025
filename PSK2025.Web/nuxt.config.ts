@@ -4,12 +4,13 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxt/ui',
+    '@nuxt/ui-pro',
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/icon',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
+    '@vueuse/nuxt',
   ],
 
   runtimeConfig: {

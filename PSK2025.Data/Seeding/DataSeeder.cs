@@ -19,6 +19,8 @@ public class DataSeeder
             adminUser = new User
             {
                 UserName = "admin",
+                FirstName = "Admin",
+                LastName = "User",
                 Email = "admin@example.com",
                 EmailConfirmed = true,
             };

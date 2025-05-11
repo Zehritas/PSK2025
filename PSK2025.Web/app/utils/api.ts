@@ -21,6 +21,19 @@ export const getErrorMessage = (error: Error | unknown): string => {
     }
 
     if (
+      'response' in error &&
+      typeof error.response === 'object' &&
+      error.response != null &&
+      '_data' in error.response &&
+      typeof error.response._data === 'object' &&
+      error.response._data != null &&
+      'title' in error.response._data &&
+      typeof error.response._data.title === 'string'
+    ) {
+      return error.response._data.title
+    }
+
+    if (
       'name' in error &&
       error.name === 'FetchError'
     ) {
