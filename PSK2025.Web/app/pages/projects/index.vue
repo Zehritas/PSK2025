@@ -5,6 +5,10 @@
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
+
+        <template #right>
+          <ProjectAddModal />
+        </template>
       </UDashboardNavbar>
     </template>
 
@@ -26,8 +30,7 @@
             thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',
             tbody: '[&>tr]:last:[&>td]:border-b-0',
             th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
-            td: 'border-b border-default',
-            tr: 'cursor-pointer'
+            td: 'border-b border-default'
           }"
         @select="async (row: TableRow<Project>) => await navigateTo(`/projects/${row.original.id}`)"
       />
@@ -36,7 +39,7 @@
         <UPagination
           :default-page="1"
           :items-per-page="pageSize"
-          :total="data?.totalPages"
+          :total="data?.totalCount"
           @update:page="(v: number) => page = v"
         />
       </div>
@@ -50,7 +53,7 @@ import { type Project, ProjectStatus } from '~/types/project'
 import type { TableColumn, TableRow } from '@nuxt/ui'
 import { projectStatusColor, projectStatusText } from '~/constants/project'
 
-const propertyDateTime = resolveComponent('PropertyDateTime')
+const propertyDate = resolveComponent('PropertyDate')
 
 const columns: TableColumn<Project> [] = [
   {
@@ -73,14 +76,14 @@ const columns: TableColumn<Project> [] = [
   {
     id: 'startDate',
     header: 'Start date',
-    cell: ({ row }) => h(propertyDateTime, {
+    cell: ({ row }) => h(propertyDate, {
       value: row.original.startDate
     })
   },
   {
     id: 'endDate',
     header: 'End date',
-    cell: ({ row }) => h(propertyDateTime, {
+    cell: ({ row }) => h(propertyDate, {
       value: row.original.endDate
     })
   }
@@ -100,7 +103,7 @@ const projectStatusItems = [
 ]
 
 const page = ref(1)
-const pageSize = ref(20)
+const pageSize = ref(10)
 const projectStatus = ref<string | undefined>(undefined)
 const query = computed(() => {
   const q: Record<string, string | number> = {

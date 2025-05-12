@@ -10,7 +10,12 @@
     >
       <template #default="{ collapsed }">
         <div class="text-xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted) ml-1 mt-3">
+          <span v-if="!collapsed">
           <span class="text-primary">Co</span>Student
+          </span>
+          <span v-else class="text-primary">
+            CS
+          </span>
         </div>
 
         <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" />

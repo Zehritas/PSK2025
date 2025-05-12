@@ -9,7 +9,7 @@ export interface Project {
   startDate: string | null;
   endDate: string | null;
   description: string | null;
-  status: number;
+  status: ProjectStatus;
 }
 
 export interface NestedProject {
@@ -21,4 +21,20 @@ export enum ProjectStatus {
   ACTIVE,
   COMPLETED,
   ARCHIVED
+}
+
+export interface CreateProjectRequest {
+  name: string;
+  startDate: string | null;
+  endDate: string | null;
+  description: string | null;
+  status: ProjectStatus;
+}
+
+export interface UpdateProjectRequest {
+  name: string;
+  startDate: string | null;
+  endDate: string | null;
+  description: string | null;
+  status: ProjectStatus;
 }
