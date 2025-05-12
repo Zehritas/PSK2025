@@ -26,7 +26,6 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectsResponse> CreateAsync(CreateProjectRequest request)
     {
-
         var ownerid = _userContextService.GetCurrentUserId(); 
         var startDate = request.StartDate ?? DateTime.UtcNow;
         DateTime endDate = request.EndDate ?? startDate.AddDays(30);
@@ -50,6 +49,7 @@ public class ProjectService : IProjectService
 
         _context.Projects.Add(entity);
         await _context.SaveChangesAsync();
+        await _context.Entry(entity).Reference(p => p.Owner).LoadAsync();
 
         return new ProjectsResponse(new ProjectDto
         {
@@ -58,8 +58,8 @@ public class ProjectService : IProjectService
             Owner = new OwnerDto
             {
                 Id = entity.Owner.Id, 
-                FirstName = entity.Owner.FirstName,
-                LastName = entity.Owner.LastName
+                FirstName = entity.Owner.FirstName!,
+                LastName = entity.Owner.LastName!
             },
             Description = request.Description,
             StartDate = entity.StartDate,
@@ -69,11 +69,13 @@ public class ProjectService : IProjectService
     }
 
 
-    public async Task<ProjectsResponse> UpdateAsync(UpdateProjectRequest request)
+    public async Task<ProjectsResponse> UpdateAsync(Guid id, UpdateProjectRequest request)
     {
-        var entity = await _context.Projects.FindAsync(request.Id);
+        var entity = await _context.Projects.Include("Owner")
+                                   .Where(p => p.Id == id)
+                                   .FirstOrDefaultAsync();
         if (entity == null) throw new KeyNotFoundException("Project not found");
-        
+
         entity.Name = request.Name;
         entity.Status = request.Status;
         entity.Description = request.Description;
@@ -91,8 +93,8 @@ public class ProjectService : IProjectService
             Owner = new OwnerDto
             {
                 Id = entity.Owner.Id, 
-                FirstName = entity.Owner.FirstName,
-                LastName = entity.Owner.LastName
+                FirstName = entity.Owner.FirstName!,
+                LastName = entity.Owner.LastName!
             },
             Description = entity.Description,
             StartDate = entity.StartDate,
