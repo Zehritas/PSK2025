@@ -1,22 +1,19 @@
 <template>
-  <div>
-    <h1>
-      Dashboard
-    </h1>
+  <UDashboardPanel id="dashboard">
+    <template #header>
+      <UDashboardNavbar title="Dashboard">
+        <template #leading>
+          <UDashboardSidebarCollapse />
+        </template>
+      </UDashboardNavbar>
+    </template>
 
-    <UButton @click="logout">
-      Logout
-    </UButton>
-  </div>
+    <template #body />
+  </UDashboardPanel>
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '~/store/user'
-
-const userSt = useUserStore()
-
-const logout = async () => {
-  userSt.logout()
-  await navigateTo('/')
-}
+useSeoMeta({
+  title: 'Dashboard | CoStudent'
+})
 </script>

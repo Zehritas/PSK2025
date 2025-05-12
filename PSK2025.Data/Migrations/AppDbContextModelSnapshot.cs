@@ -154,46 +154,35 @@ namespace PSK2025.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PSK2025.Models.Entities.Comment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
-                });
-
             modelBuilder.Entity("PSK2025.Models.Entities.Project", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Projects");
                 });
@@ -228,7 +217,7 @@ namespace PSK2025.Data.Migrations
                     b.ToTable("RefreshTokens");
                 });
 
-            modelBuilder.Entity("PSK2025.Models.Entities.TaskEntity", b =>
+            modelBuilder.Entity("PSK2025.Models.Entities.Task", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -401,23 +390,15 @@ namespace PSK2025.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PSK2025.Models.Entities.Comment", b =>
+            modelBuilder.Entity("PSK2025.Models.Entities.Project", b =>
                 {
-                    b.HasOne("PSK2025.Models.Entities.Project", "Project")
-                        .WithMany("Comments")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PSK2025.Models.Entities.User", "User")
+                    b.HasOne("PSK2025.Models.Entities.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Project");
-
-                    b.Navigation("User");
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("PSK2025.Models.Entities.RefreshToken", b =>
@@ -431,7 +412,7 @@ namespace PSK2025.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PSK2025.Models.Entities.TaskEntity", b =>
+            modelBuilder.Entity("PSK2025.Models.Entities.Task", b =>
                 {
                     b.HasOne("PSK2025.Models.Entities.Project", null)
                         .WithMany("Tasks")
@@ -465,8 +446,6 @@ namespace PSK2025.Data.Migrations
 
             modelBuilder.Entity("PSK2025.Models.Entities.Project", b =>
                 {
-                    b.Navigation("Comments");
-
                     b.Navigation("Tasks");
 
                     b.Navigation("UserProjects");

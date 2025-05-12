@@ -1,10 +1,12 @@
 ﻿using PSK2025.ApiService.Interfaces;
 using PSK2025.Data.Requests.User;
+using PSK2025.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Models.DTOs;
 using PSK2025.Models.Enums;
+using PSK2025.Models.Entities;
 
 namespace PSK2025.ApiService.Controllers.User;
 
@@ -23,6 +25,7 @@ public class GetUserById : IEndpoint
                 ? Results.Ok(user)
                 : Results.NotFound();
         })
+        .RequireAuthorization()
         .WithName("Get User")
         .Produces<UserDto>(200)
         .Produces(404)

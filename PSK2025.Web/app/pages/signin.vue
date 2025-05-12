@@ -35,7 +35,20 @@
                 :ui="{ trailing: 'pe-1' }"
                 class="w-full"
                 autocomplete="current-password"
-              />
+              >
+                <template #trailing>
+                  <UButton
+                    color="neutral"
+                    variant="link"
+                    size="sm"
+                    :icon="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+                    :aria-label="showPassword ? 'Hide password' : 'Show password'"
+                    :aria-pressed="showPassword"
+                    aria-controls="password"
+                    @click="showPassword = !showPassword"
+                  />
+                </template>
+              </UInput>
             </UFormField>
           </div>
 
@@ -95,7 +108,8 @@ const submit = async (event: FormSubmitEvent<Schema>) => {
         password: event.data.password
       } as LoginRequest,
       showError: false,
-      guest: true
+      guest: true,
+      handleUnauthorized: false
     })
 
     userSt.setAccessToken(resp.token)

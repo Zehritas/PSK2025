@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PSK2025.Models.Entities;
+using TaskEntity = PSK2025.Models.Entities.Task;
+
 
 namespace PSK2025.Data.Contexts;
 
@@ -11,9 +13,9 @@ public class AppDbContext : IdentityDbContext<User>
     }
 
     public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
-    public DbSet<TaskEntity> Tasks { get; set; } = null!;
+    public DbSet<Models.Entities.Task> Tasks { get; set; } = null!;
     public DbSet<Project> Projects { get; set; } = null!;
-    public DbSet<Comment> Comments { get; set; } = null!;
+
     public DbSet<UserProject> UserProjects { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,15 +48,6 @@ public class AppDbContext : IdentityDbContext<User>
             .HasForeignKey(t => t.UserId)
             .IsRequired(false); // since it's nullable
 
-        // Optional: Configure Comment relationships
-        modelBuilder.Entity<Comment>()
-            .HasOne(c => c.Project)
-            .WithMany(p => p.Comments)
-            .HasForeignKey(c => c.ProjectId);
-
-        modelBuilder.Entity<Comment>()
-            .HasOne(c => c.User)
-            .WithMany()
-            .HasForeignKey(c => c.UserId);
+ 
     }
 }

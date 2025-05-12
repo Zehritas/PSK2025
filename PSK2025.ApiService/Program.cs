@@ -18,6 +18,9 @@ using PSK2025.MigrationService.Abstractions;
 using PSK2025.ApiService.Validators.Auth;
 using FluentValidation;
 using PSK2025.Data.Requests.Auth;
+using TaskEntity = PSK2025.Models.Entities.Task;
+using SystemTask = System.Threading.Tasks.Task;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,46 +30,77 @@ builder.Services.AddScoped<IValidator<RegisterNewUserRequest>, RegisterUserReque
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        NameClaimType = JwtRegisteredClaimNames.Sub,
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
-        ),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true
-    };
-    options.Events = new JwtBearerEvents
-    {
-        OnAuthenticationFailed = context =>
-        {
-            Console.WriteLine("Authentication failed: " + context.Exception.Message);
-            return Task.CompletedTask;
-        },
-        OnTokenValidated = context =>
-        {
-            Console.WriteLine("Token is valid.");
-            return Task.CompletedTask;
-        }
-    };
-});
-
 
 builder.Services.AddEndpoints();
 
 builder.Services.AddEndpointsApiExplorer();
+
+
+
+
+
+builder.AddServiceDefaults();
+
+//builder.Services.AddApplication(builder.Configuration);
+
+
+builder.AddNpgsqlDbContext<AppDbContext>(connectionName: "postgresdb");
+
+builder.Services.AddProblemDetails();
+
+builder.Services.AddOpenApi();
+
+
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddSingleton<IRouteGroup, AuthRouteGroup>();
+
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
+builder.Services.AddScoped<IValidationService, ValidationService>();
+builder.Services.AddScoped<ITaskService,  TaskService>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IUserProjectService, UserProjectService>();
+builder.Services.AddScoped<IUserProjectRepository, UserProjectRepository>();
+builder.Services.AddScoped<ProjectSeeder>(); 
+
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        return SystemTask.CompletedTask;
+    };
+    options.Events.OnRedirectToAccessDenied = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status403Forbidden;
+        return SystemTask.CompletedTask;
+    };
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowWeb",
+        configurePolicy: policy =>
+        {
+            policy.WithOrigins(builder.Configuration["ALLOWED_ORIGIN"] ?? "")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Your API", Version = "v1" });
@@ -96,61 +130,63 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    var jwtSettings = builder.Configuration.GetSection("Jwt");
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
 
-builder.AddServiceDefaults();
 
-//builder.Services.AddApplication(builder.Configuration);
+    };
 
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            var logger = context.HttpContext.RequestServices
+                .GetRequiredService<ILoggerFactory>()
+                .CreateLogger("JwtBearer");
 
-builder.AddNpgsqlDbContext<AppDbContext>(connectionName: "postgresdb");
+            logger.LogWarning(context.Exception, "Authentication failed: {Message}", context.Exception.Message);
 
-builder.Services.AddProblemDetails();
+            context.Response.StatusCode = 401;
+            context.Response.ContentType = "application/json";
 
-builder.Services.AddOpenApi();
+            var errorResponse = new
+            {
+                error = $"Authentication failed: {context.Exception.Message}"
+            };
+
+            var json = JsonSerializer.Serialize(errorResponse);
+            return context.Response.WriteAsync(json);
+        },
+        OnTokenValidated = context =>
+        {
+            var logger = context.HttpContext.RequestServices
+                .GetRequiredService<ILoggerFactory>()
+                .CreateLogger("JwtBearer");
+
+            logger.LogInformation("Token is valid.");
+            return SystemTask.CompletedTask;
+        }
+    };
+
+});
 
 builder.Services.AddAuthorization();
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
-
-builder.Services.AddSingleton<IRouteGroup, AuthRouteGroup>();
-
-builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
-builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IUserContextService, UserContextService>();
-builder.Services.AddScoped<IValidationService, ValidationService>();
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
-
-
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.Events.OnRedirectToLogin = context =>
-    {
-        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-        return Task.CompletedTask;
-    };
-    options.Events.OnRedirectToAccessDenied = context =>
-    {
-        context.Response.StatusCode = StatusCodes.Status403Forbidden;
-        return Task.CompletedTask;
-    };
-});
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "AllowWeb",
-        configurePolicy: policy =>
-        {
-            policy.WithOrigins(builder.Configuration["ALLOWED_ORIGIN"] ?? "")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod()
-                  .AllowCredentials();
-        });
-});
 
 var app = builder.Build();
 
@@ -167,18 +203,21 @@ if (app.Environment.IsDevelopment())
 app.MapDefaultEndpoints();
 
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await RoleSeeder.SeedRolesAsync(roleManager);
     await DataSeeder.SeedAsync(services);
 }
 
 
 app.MapGroupedEndpoints();
 app.UseCors("AllowWeb");
+
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
 

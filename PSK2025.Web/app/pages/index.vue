@@ -4,7 +4,7 @@
           lg:py-40 gap-16 sm:gap-y-24 lg:grid-cols-2 lg:items-center -mt-15">
     <div>
       <h1 class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted)">
-        CoStudent
+        <span class="text-primary">Co</span>Student
       </h1>
       <p class="text-lg sm:text-xl/8 text-(--ui-text-muted) text-pretty mt-6">
         A collaborative task and group management tool built to simplify university projects — organize your team,

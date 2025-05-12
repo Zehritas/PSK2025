@@ -44,7 +44,5 @@ The solution consists of multiple projects:
 - **PSK2025.ApiService**: Backend API service
 - **PSK2025.AppHost**: Aspire project orchestrator
 - **PSK2025.ServiceDefaults**: Shared service configuration
-- **PSK2025.Web**: *** frontend
+- **PSK2025.Web**: Nuxt frontend
 - **PSK2025.Tests**: Test project
-
-
