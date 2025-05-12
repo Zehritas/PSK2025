@@ -8,7 +8,7 @@ namespace PSK2025.ApiService.Services.Interfaces;
 public interface IProjectService
 {
     Task<ProjectsResponse> CreateAsync(CreateProjectRequest request);
-    Task<ProjectsResponse> UpdateAsync(UpdateProjectRequest request);
+    Task<ProjectsResponse> UpdateAsync(Guid id, UpdateProjectRequest request);
     Task<ProjectsResponse> GetByIdAsync(ProjectRequest request);
     Task<PaginatedResult<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize, ProjectStatus? status = null);
     Task DeleteAsync(ProjectRequest request);

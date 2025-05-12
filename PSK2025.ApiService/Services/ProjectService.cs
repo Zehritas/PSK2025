@@ -26,13 +26,7 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectsResponse> CreateAsync(CreateProjectRequest request)
     {
-
-        var owner = await _context.Users.FindAsync(request.OwnerId);
-        if (owner == null)
-        {
-            throw new KeyNotFoundException("Owner with the specified ID does not exist.");
-        }
-        
+        var ownerid = _userContextService.GetCurrentUserId(); 
         var startDate = request.StartDate ?? DateTime.UtcNow;
         DateTime endDate = request.EndDate ?? startDate.AddDays(30);
         ProjectStatus status = request.Status ?? ProjectStatus.Planned;
@@ -46,7 +40,7 @@ public class ProjectService : IProjectService
         {
             Id = Guid.NewGuid(),
             Name = request.Name,
-            OwnerId = request.OwnerId,
+            OwnerId = ownerid,
             Description = request.Description,
             StartDate = startDate,
             EndDate = endDate,
@@ -55,6 +49,7 @@ public class ProjectService : IProjectService
 
         _context.Projects.Add(entity);
         await _context.SaveChangesAsync();
+        await _context.Entry(entity).Reference(p => p.Owner).LoadAsync();
 
         return new ProjectsResponse(new ProjectDto
         {
@@ -62,7 +57,9 @@ public class ProjectService : IProjectService
             Name = entity.Name,
             Owner = new OwnerDto
             {
-                Id = entity.Owner.Id
+                Id = entity.Owner.Id, 
+                FirstName = entity.Owner.FirstName!,
+                LastName = entity.Owner.LastName!
             },
             Description = request.Description,
             StartDate = entity.StartDate,
@@ -72,20 +69,18 @@ public class ProjectService : IProjectService
     }
 
 
-
-
-    public async Task<ProjectsResponse> UpdateAsync(UpdateProjectRequest request)
+    public async Task<ProjectsResponse> UpdateAsync(Guid id, UpdateProjectRequest request)
     {
-        var entity = await _context.Projects.FindAsync(request.Project.Id);
+        var entity = await _context.Projects.Include("Owner")
+                                   .Where(p => p.Id == id)
+                                   .FirstOrDefaultAsync();
         if (entity == null) throw new KeyNotFoundException("Project not found");
 
-        
-        entity.Name = request.Project.Name;
-        entity.Status = request.Project.Status;
-        entity.OwnerId = request.Project.Owner.Id;
-        entity.Description = request.Project.Description;
-        entity.StartDate = request.Project.StartDate;
-        entity.EndDate = request.Project.EndDate;
+        entity.Name = request.Name;
+        entity.Status = request.Status;
+        entity.Description = request.Description;
+        entity.StartDate = request.StartDate;
+        entity.EndDate = request.EndDate;
 
 
         await _context.SaveChangesAsync();
@@ -97,7 +92,9 @@ public class ProjectService : IProjectService
             Status = entity.Status,
             Owner = new OwnerDto
             {
-                Id = entity.Owner.Id
+                Id = entity.Owner.Id, 
+                FirstName = entity.Owner.FirstName!,
+                LastName = entity.Owner.LastName!
             },
             Description = entity.Description,
             StartDate = entity.StartDate,
