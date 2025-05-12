@@ -1,5 +1,6 @@
 import { jwtDecode } from 'jwt-decode'
 import type { RefreshRequest, RefreshResponse } from '~/types/auth'
+import type { User } from '~/types/user'
 
 interface JWTMeta {
   aud: string
@@ -20,6 +21,7 @@ export const useUserStore = defineStore(
     const refreshToken = ref<string | null>(null)
     const refreshTokenExpiry = ref<number | null>(null)
     const refreshPromise = ref<Promise<void> | null>(null)
+    const user = ref<User | null>(null)
 
     const setAccessToken = (access: string): void => {
       accessToken.value = access
@@ -62,15 +64,16 @@ export const useUserStore = defineStore(
             body: {
               token: refreshToken.value
             } as RefreshRequest,
-            showError: false
+            showError: false,
+            guest: true
           })
 
           setAccessToken(resp.token)
           setRefreshToken(resp.refreshToken)
-        } catch (err) {
+        } catch (e) {
           logout()
 
-          throw err
+          throw e
         } finally {
           refreshPromise.value = null
         }
@@ -84,14 +87,15 @@ export const useUserStore = defineStore(
       refreshToken.value = null
       refreshTokenExpiry.value = null
       refreshPromise.value = null
+      user.value = null
     }
 
     const getAccessToken = async (): Promise<string> => {
       if (!isLoggedIn()) {
         try {
           await refresh()
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (_) { /* empty */
+        } catch (e) {
+          console.debug(e)
         }
       }
 
@@ -99,15 +103,25 @@ export const useUserStore = defineStore(
         return accessToken.value
       }
 
-      useToast().add({
-        title: 'Your session has expired',
-        description: 'Please sign in again to continue using the application.',
-        color: 'error'
+      throw new Error('No access token')
+    }
+
+    const getCurrentUser = async (refresh: boolean = false): Promise<User> => {
+      if (user.value && !refresh) {
+        return user.value
+      }
+
+      const id = jwtMeta.value?.sub
+
+      if (!id) {
+        throw new Error('Unable to retrieve user ID from JWT meta')
+      }
+
+      const u = await useApiDollarFetch<User>(`/api/users/${id}`, {
+        showError: false
       })
 
-      await navigateTo('/signin')
-
-      throw new Error('No access token')
+      return user.value = u
     }
 
     return {
@@ -120,13 +134,15 @@ export const useUserStore = defineStore(
       canRefresh,
       refresh,
       logout,
-      getAccessToken
+      getAccessToken,
+      getCurrentUser
     }
   },
   {
     persist: {
       key: 'cs-user',
-      storage: piniaPluginPersistedstate.cookies()
+      storage: piniaPluginPersistedstate.cookies(),
+      pick: ['accessToken', 'refreshToken', 'refreshTokenExpiry']
     }
   }
 )
