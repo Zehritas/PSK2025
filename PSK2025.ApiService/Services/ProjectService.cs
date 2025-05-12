@@ -57,7 +57,9 @@ public class ProjectService : IProjectService
             Name = entity.Name,
             Owner = new OwnerDto
             {
-                Id = entity.Owner.Id
+                Id = entity.Owner.Id, 
+                FirstName = entity.Owner.FirstName,
+                LastName = entity.Owner.LastName
             },
             Description = request.Description,
             StartDate = entity.StartDate,
@@ -86,6 +88,12 @@ public class ProjectService : IProjectService
             Id = entity.Id,
             Name = entity.Name,
             Status = entity.Status,
+            Owner = new OwnerDto
+            {
+                Id = entity.Owner.Id, 
+                FirstName = entity.Owner.FirstName,
+                LastName = entity.Owner.LastName
+            },
             Description = entity.Description,
             StartDate = entity.StartDate,
             EndDate = entity.EndDate
