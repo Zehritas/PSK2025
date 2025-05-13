@@ -51,6 +51,7 @@ public class TaskService(
             request.UserId,
             request.Deadline,
             request.Status,
+            request.PriorityStatus,
             request.FinishedAt
         );
 
@@ -91,8 +92,9 @@ public class TaskService(
             task.Name,             
             task.StartedAt,        
             task.FinishedAt,       
-            task.Deadline,         
-            task.Status)).ToList();
+            task.Deadline,
+            task.Status,
+            task.Priority)).ToList();
 
         var response = new GetTasksResponse(taskDtos);
 

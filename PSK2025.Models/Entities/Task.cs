@@ -24,7 +24,7 @@ public class Task
         UserId = userid;
         Name = name;
         StartedAt = DateTime.UtcNow;
-        Status = TaskEntityStatus.ToBeDone;
+        Status = TaskEntityStatus.NotStarted;
         Deadline = deadline;
     }
 
@@ -35,6 +35,8 @@ public class Task
     public DateTime StartedAt { get; private set; }
     public DateTime? FinishedAt { get; private set; }
     public DateTime? Deadline { get; set; }
+
+    public PriorityStatus? Priority { get; private set; }
     public TaskEntityStatus Status { get; private set; }
 
     public static Task Create(Guid projectId, string name, string? userId = null, DateTime? deadline = null)
@@ -49,7 +51,7 @@ public class Task
         return task;
     }
 
-    public void Update(string? name, string? userId, DateTime? deadline, TaskEntityStatus status, DateTime? finishedAt)
+    public void Update(string? name, string? userId, DateTime? deadline, TaskEntityStatus status, PriorityStatus priority, DateTime? finishedAt)
     {
         if (!string.IsNullOrWhiteSpace(name))
             Name = name;
@@ -57,8 +59,9 @@ public class Task
         UserId = userId;
         Deadline = deadline;
         Status = status;
+        Priority = priority;
 
-        if (status == TaskEntityStatus.Complete)
+        if (status == TaskEntityStatus.Completed)
             FinishedAt = finishedAt ?? DateTime.UtcNow;
         else
             FinishedAt = null;
