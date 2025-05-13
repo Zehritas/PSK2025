@@ -82,22 +82,21 @@ public class TaskService(
         Guid? projectId = request.ProjectId;
         String? userId = request.UserId;
         var currentUserId = userContextService.GetCurrentUserId();
-        List<TaskEntity> tasks = new();
+        List<TaskEntity> tasks;
 
         
         // Case 1: projectId is provided
         if (projectId.HasValue)
         {
-            // Check: current user must be in the project
+            // Check if current user is in the project
             if (!await userProjectRepository.IsUserAssignedToProjectAsync(currentUserId, projectId.Value))
             {
-                return Result<GetTasksResponse>.Failure(TaskErrors.ForbiddenTasksError);
+                return Result<GetTasksResponse>.Failure(TaskErrors.UserNotInProjectError);
             }
 
-            // Optional: check that the userId (if provided) is also in the project
             if (userId != null && !await userProjectRepository.IsUserAssignedToProjectAsync(userId, projectId.Value))
             {
-                return Result<GetTasksResponse>.Failure(TaskErrors.ForbiddenTasksError);
+                return Result<GetTasksResponse>.Failure(TaskErrors.QueriedUserNotInProjectError);
             }
 
             // Get tasks for the project, optionally filtered by userId
@@ -109,15 +108,15 @@ public class TaskService(
                 cancellationToken
             );
         }
+        // Project ID not provided
         else
         {
-            // Case 2: projectId is NOT provided
             if (userId != null)
             {
                 // Only allow if accessing own tasks
                 if (userId != currentUserId)
                 {
-                    return Result<GetTasksResponse>.Failure(TaskErrors.ForbiddenTasksError);
+                    return Result<GetTasksResponse>.Failure(TaskErrors.UserIdMismatchError);
                 }
             }
             else
