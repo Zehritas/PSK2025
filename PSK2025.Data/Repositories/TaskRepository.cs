@@ -15,7 +15,7 @@ namespace PSK2025.Data.Repositories;
 public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEntity>(dbContext), ITaskRepository
 {
     public async Task<List<TaskEntity>> GetListAsync(
-        Guid? projectId = null,
+        Guid? ProjectId = null,
         string? userId = null,
         int skip = 0,
         int take = 50,
@@ -23,9 +23,9 @@ public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEnti
     {
         var query = Context.Tasks.AsQueryable();
 
-        if (projectId.HasValue)
+        if (ProjectId.HasValue)
         {
-            query = query.Where(t => t.Projectid == projectId.Value);
+            query = query.Where(t => t.ProjectId == ProjectId.Value);
         }
 
         if (!string.IsNullOrEmpty(userId))
@@ -42,23 +42,19 @@ public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEnti
 
     public async Task<List<TaskEntity>> GetUserAccessibleTasksAsync(
         string currentUserId,
-        Guid? projectId = null,
+        Guid? ProjectId = null,
         string? userId = null,
         int skip = 0,
         int take = 50,
         CancellationToken cancellationToken = default)
     {
-        var userProjectIds = await Context.UserProjects
-            .Where(up => up.UserId == currentUserId)
-            .Select(up => up.ProjectId)
-            .ToListAsync(cancellationToken);
         
-        var query = Context.Tasks.AsQueryable()
-            .Where(t => userProjectIds.Contains(t.Projectid) || t.UserId == currentUserId);
+        var query = Context.Tasks.Where(t
+            => t.Project.OwnerId == currentUserId || t.Project.UserProjects.Any(up => up.UserId == currentUserId));
         
-        if (projectId.HasValue)
+        if (ProjectId.HasValue)
         {
-            query = query.Where(t => t.Projectid == projectId.Value);
+            query = query.Where(t => t.ProjectId == ProjectId.Value);
         }
 
         if (!string.IsNullOrEmpty(userId))
@@ -73,11 +69,11 @@ public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEnti
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<bool> IsUserInProjectAsync(Guid projectId, string userId,
+    public async Task<bool> IsUserInProjectAsync(Guid ProjectId, string userId,
         CancellationToken cancellationToken = default)
     {
         return await Context.UserProjects
-            .AnyAsync(up => up.ProjectId == projectId && up.UserId == userId, cancellationToken);
+            .AnyAsync(up => up.ProjectId == ProjectId && up.UserId == userId, cancellationToken);
     }
 
     public override async Task<TaskEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
