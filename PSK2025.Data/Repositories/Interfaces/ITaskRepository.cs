@@ -15,5 +15,18 @@ public interface ITaskRepository
     SystemTask AddAsync(TaskEntity item, CancellationToken cancellationToken = default);
     void Update(TaskEntity item);
     Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
-    Task<List<TaskEntity>> GetListAsync(Guid projectid, int skip = 0, int take = 50, CancellationToken cancellationToken = default);
+    Task<List<TaskEntity>> GetListAsync(Guid? projectid, string? userid, int skip = 0, int take = 50, CancellationToken cancellationToken = default);
+        
+    Task<List<TaskEntity>> GetUserAccessibleTasksAsync(
+        string currentUserId,
+        Guid? projectId = null,
+        string? userId = null,
+        int skip = 0,
+        int take = 50,
+        CancellationToken cancellationToken = default);
+        
+    Task<bool> IsUserInProjectAsync(
+        Guid projectId, 
+        string userId, 
+        CancellationToken cancellationToken = default);
 }

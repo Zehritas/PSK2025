@@ -19,11 +19,13 @@ public class GetTasksEndpoint : IEndpoint
         group.MapGet("/",
                 async ([FromQuery] int pageNumber,
                     [FromQuery] int pageSize,
-                    [FromQuery] Guid projectId, 
+                    [FromQuery] Guid? projectId,
+                    [FromQuery] String? userId,
                     ITaskService service) =>
                 {
-                    var request = new GetProjectTasksRequest(
+                    var request = new GetTasksRequest(
                         projectId,
+                        userId,
                         new GetPagedListRequest(pageNumber, pageSize)
                     );
 

@@ -40,7 +40,7 @@ public class AppDbContext : IdentityDbContext<User>
         modelBuilder.Entity<TaskEntity>()
             .HasOne<Project>()
             .WithMany(p => p.Tasks)
-            .HasForeignKey(t => t.Projectid);
+            .HasForeignKey(t => t.ProjectId);
 
         modelBuilder.Entity<TaskEntity>()
             .HasOne<User>()

@@ -12,12 +12,17 @@ using PSK2025.Data.Contexts;
 using PSK2025.Data.Responses.Task;
 using PSK2025.Models.DTOs;
 using TaskEntity = PSK2025.Models.Entities.Task;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+
 
 
 namespace PSK2025.ApiService.Services;
 
 public class TaskService(
     ITaskRepository taskRepository, 
+    IUserProjectRepository userProjectRepository,
     UserManager<User> userManager, 
     IUserContextService userContextService,
     AppDbContext context) : ITaskService
@@ -74,30 +79,63 @@ public class TaskService(
         return Result.Success();
     }
 
-    public async Task<Result<GetTasksResponse>> GetTasksAsync(GetProjectTasksRequest request, CancellationToken cancellationToken = default)
+
+    public async System.Threading.Tasks.Task<Result<GetTasksResponse>> GetTasksAsync(
+        GetTasksRequest request,
+        CancellationToken cancellationToken = default)
     {
-        var tasks = await taskRepository.GetListAsync(
-            request.ProjectId,
-            (request.Pagination.PageNumber - 1) * request.Pagination.PageSize,
-            request.Pagination.PageSize,
-            cancellationToken
-        );
+        var currentUserId = userContextService.GetCurrentUserId();
+        Guid? projectId = request.ProjectId;
+        string? userId = request.UserId;
+    
 
-        if (!tasks.Any())
-            return Result<GetTasksResponse>.Failure(TaskErrors.NoTasksFoundError);
+        if (projectId.HasValue)
+        {
+            bool currentUserInProject = await taskRepository.IsUserInProjectAsync(
+                projectId.Value, currentUserId, cancellationToken);
 
-        var taskDtos = tasks.Select(task => new TaskDto(
-            task.Id,               
-            task.UserId ?? string.Empty, 
-            task.Name,             
-            task.StartedAt,        
-            task.FinishedAt,       
+            if (!currentUserInProject)
+                return Result<GetTasksResponse>.Failure(TaskErrors.UserNotInProjectError);
+
+            if (userId != null)
+            {
+                bool targetUserInProject = await taskRepository.IsUserInProjectAsync(
+                    projectId.Value, userId, cancellationToken);
+
+                if (!targetUserInProject)
+                    return Result<GetTasksResponse>.Failure(TaskErrors.QueriedUserNotInProjectError);
+            }
+        }
+        else if (userId != null && userId != currentUserId)
+        {
+            return Result<GetTasksResponse>.Failure(TaskErrors.UserIdMismatchError);
+        }
+        
+        int skip = (request.Pagination.PageNumber - 1) * request.Pagination.PageSize;
+        int take = request.Pagination.PageSize;
+        
+        var taskEntities = await taskRepository.GetUserAccessibleTasksAsync(
+            currentUserId,
+            projectId,
+            userId,
+            skip, 
+            take,
+            cancellationToken);
+
+        var taskDtos = taskEntities.Select(task => new TaskDto(
+            task.Id,
+            task.UserId ?? string.Empty,
+            task.Name,
+            task.StartedAt,
+            task.FinishedAt,
             task.Deadline,
             task.Status,
-            task.Priority)).ToList();
+            task.Priority
+        )).ToList();
 
         var response = new GetTasksResponse(taskDtos);
-
         return Result<GetTasksResponse>.Success(response);
     }
+
+
 }
