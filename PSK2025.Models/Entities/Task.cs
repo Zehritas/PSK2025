@@ -20,7 +20,7 @@ public class Task
       DateTime? deadline = null)
     {
         Id = id;
-        ProjectId = projectid;
+        ProjectId = projectId;
         UserId = userid;
         Name = name;
         StartedAt = DateTime.UtcNow;
