@@ -12,12 +12,16 @@ using PSK2025.Data.Contexts;
 using PSK2025.Data.Responses.Task;
 using PSK2025.Models.DTOs;
 using TaskEntity = PSK2025.Models.Entities.Task;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+
 
 
 namespace PSK2025.ApiService.Services;
 
 public class TaskService(
-    ITaskRepository taskRepository,
+    ITaskRepository taskRepository, 
     IUserProjectRepository userProjectRepository,
     UserManager<User> userManager, 
     IUserContextService userContextService,
@@ -136,4 +140,6 @@ public class TaskService(
         var response = new GetTasksResponse(taskDtos);
         return Result<GetTasksResponse>.Success(response);
     }
+
+
 }

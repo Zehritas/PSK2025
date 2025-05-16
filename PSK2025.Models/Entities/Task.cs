@@ -14,7 +14,7 @@ public class Task
     public Task() { }
     private Task(
       Guid id,
-      Guid projectid,
+      Guid projectId,
       String? userid,
       String name,
       DateTime? deadline = null)

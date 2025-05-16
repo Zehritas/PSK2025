@@ -65,5 +65,5 @@ public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEnti
             .FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
     }
 
-    
+
 }
