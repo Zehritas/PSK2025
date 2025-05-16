@@ -11,5 +11,5 @@ public interface ITaskService
     Task<Result<Guid>> CreateTaskAsync(CreateTaskRequest request, CancellationToken cancellationToken = default);
     Task<Result> EditTaskAsync(UpdateTaskRequest request, CancellationToken cancellationToken = default);
     Task<Result> DeleteTaskByIdAsync(Guid taskId, CancellationToken cancellationToken = default);
-    Task<Result<GetTasksResponse>> GetTasksAsync(GetProjectTasksRequest request, CancellationToken cancellationToken = default);
+    Task<Result<GetTasksResponse>> GetTasksAsync(GetTasksRequest request, CancellationToken cancellationToken = default);
 }
