@@ -17,7 +17,7 @@ public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEnti
     public async Task<List<TaskEntity>> GetListAsync(Guid projectId, int skip = 0, int take = 50, CancellationToken cancellationToken = default)
     {
         return await Context.Tasks
-            .Where(t => t.Projectid == projectId)
+            .Where(t => t.ProjectId == projectId)
             .OrderBy(t => t.StartedAt)
             .Skip(skip)
             .Take(take)
