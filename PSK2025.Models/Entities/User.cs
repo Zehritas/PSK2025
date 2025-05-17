@@ -14,6 +14,8 @@ namespace PSK2025.Models.Entities
         private readonly List<RefreshToken> _refreshTokens = new();
 
         public IReadOnlyCollection<RefreshToken> RefreshTokens => _refreshTokens.AsReadOnly();
+
+        public ICollection<Task> Tasks { get; set; } = new List<Task>();
         public void AddRefreshToken(RefreshToken refreshToken)
         {
             _refreshTokens.Add(refreshToken);

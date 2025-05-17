@@ -29,8 +29,8 @@ public class Task
     }
 
     public Guid Id { get; private set; }
-    public Guid ProjectId { get; private set; }
-    public String? UserId { get; private set; }
+    public Guid ProjectId { get; set; }
+    public String? UserId { get; set; }
     public String Name { get; private set; }
     public DateTime StartedAt { get; private set; }
     public DateTime? FinishedAt { get; private set; }
@@ -39,9 +39,9 @@ public class Task
     public PriorityStatus? Priority { get; private set; }
     public TaskEntityStatus Status { get; private set; }
 
-    public Project Project { get; set; } = null!;
-    public User User { get; set; } = null!;
-    
+    public virtual Project Project { get; set; } = null!;
+    public virtual User? User { get; set; }
+
     public static Task Create(Guid projectId, string name, string? userId = null, DateTime? deadline = null)
     {
         userId = string.IsNullOrWhiteSpace(userId) ? null : userId;

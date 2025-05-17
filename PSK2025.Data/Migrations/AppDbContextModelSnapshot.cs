@@ -239,9 +239,6 @@ namespace PSK2025.Data.Migrations
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProjectId1")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("StartedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -251,19 +248,11 @@ namespace PSK2025.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("ProjectId1");
-
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Tasks");
                 });
@@ -428,27 +417,15 @@ namespace PSK2025.Data.Migrations
 
             modelBuilder.Entity("PSK2025.Models.Entities.Task", b =>
                 {
-                    b.HasOne("PSK2025.Models.Entities.Project", null)
+                    b.HasOne("PSK2025.Models.Entities.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PSK2025.Models.Entities.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PSK2025.Models.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.HasOne("PSK2025.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Tasks")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Project");
 
@@ -484,6 +461,8 @@ namespace PSK2025.Data.Migrations
             modelBuilder.Entity("PSK2025.Models.Entities.User", b =>
                 {
                     b.Navigation("RefreshTokens");
+
+                    b.Navigation("Tasks");
 
                     b.Navigation("UserProjects");
                 });

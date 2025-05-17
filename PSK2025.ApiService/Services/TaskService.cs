@@ -3,7 +3,7 @@ using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Data.Errors;
 using PSK2025.Data.Requests;
 using PSK2025.Data;
-using PSK2025.MigrationService.Abstractions;
+using PSK2025.Models.Enums;
 using PSK2025.Data.Repositories.Interfaces;
 using PSK2025.Models.Entities;
 using PSK2025.Data.Requests.Task;
@@ -79,15 +79,14 @@ public class TaskService(
         return Result.Success();
     }
 
-
-    public async System.Threading.Tasks.Task<Result<GetTasksResponse>> GetTasksAsync(
+    public async Task<Result<GetTasksResponse>> GetTasksAsync(
         GetTasksRequest request,
         CancellationToken cancellationToken = default)
     {
         var currentUserId = userContextService.GetCurrentUserId();
         Guid? projectId = request.ProjectId;
         string? userId = request.UserId;
-    
+
 
         if (projectId.HasValue)
         {
@@ -110,15 +109,20 @@ public class TaskService(
         {
             return Result<GetTasksResponse>.Failure(TaskErrors.UserIdMismatchError);
         }
-        
+
         int skip = (request.Pagination.PageNumber - 1) * request.Pagination.PageSize;
         int take = request.Pagination.PageSize;
-        
+        PriorityStatus? priorityStatus = request.Priority;
+        TaskEntityStatus? entityStatus = request.Status;
+
+
         var taskEntities = await taskRepository.GetUserAccessibleTasksAsync(
             currentUserId,
             projectId,
             userId,
-            skip, 
+            priorityStatus,
+            entityStatus,
+            skip,
             take,
             cancellationToken);
 
