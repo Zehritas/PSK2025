@@ -14,5 +14,6 @@ public record TaskDto(
     DateTime StartedAt,
     DateTime? FinishedAt,
     DateTime? Deadline,
-    TaskEntityStatus Status
+    TaskEntityStatus Status,
+    PriorityStatus? Priority
 );

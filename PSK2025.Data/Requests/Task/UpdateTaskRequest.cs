@@ -24,4 +24,6 @@ public class UpdateTaskRequest
 
     [Required(ErrorMessage = "Status is required.")]
     public TaskEntityStatus Status { get; set; }
+
+    public PriorityStatus PriorityStatus { get; set; }
 }

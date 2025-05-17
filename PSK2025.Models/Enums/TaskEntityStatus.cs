@@ -1,8 +1,7 @@
 ﻿namespace PSK2025.Models.Enums;
 public enum TaskEntityStatus
 {
-    ToBeDone,
+    NotStarted,
     InProgress,
-    InReview,
-    Complete
+    Completed
 }
