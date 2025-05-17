@@ -29,9 +29,10 @@ public class TaskService(
 {
     public async Task<Result<Guid>> CreateTaskAsync(CreateTaskRequest request, CancellationToken cancellationToken = default)
     {
+        var project = await context.Projects.FindAsync([request.ProjectId], cancellationToken);
 
         var task = TaskEntity.Create(
-            request.ProjectId,
+            project,
             request.Name,
             null);
 
@@ -51,9 +52,13 @@ public class TaskService(
             return Result.Failure(TaskErrors.TaskNotFoundError);
         }
 
+        User? user = null;
+        if (!string.IsNullOrWhiteSpace(request.UserId))
+            user = await userManager.FindByIdAsync(request.UserId);
+
         currentTask.Update(
             request.Name,
-            request.UserId,
+            user,
             request.Deadline,
             request.Status,
             request.PriorityStatus,
@@ -128,7 +133,7 @@ public class TaskService(
 
         var taskDtos = taskEntities.Select(task => new TaskDto(
             task.Id,
-            task.UserId ?? string.Empty,
+            task.User?.Id ?? string.Empty,
             task.Name,
             task.StartedAt,
             task.FinishedAt,

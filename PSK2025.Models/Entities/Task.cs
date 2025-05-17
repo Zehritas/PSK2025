@@ -12,25 +12,18 @@ namespace PSK2025.Models.Entities;
 public class Task
 {
     public Task() { }
-    private Task(
-      Guid id,
-      Guid projectId,
-      String? userid,
-      String name,
-      DateTime? deadline = null)
+    private Task(Guid id, string name, Project project, User? user = null, DateTime? deadline = null)
     {
         Id = id;
-        ProjectId = projectId;
-        UserId = userid;
         Name = name;
+        Project = project;
+        User = user;
         StartedAt = DateTime.UtcNow;
         Status = TaskEntityStatus.NotStarted;
         Deadline = deadline;
     }
 
     public Guid Id { get; private set; }
-    public Guid ProjectId { get; set; }
-    public String? UserId { get; set; }
     public String Name { get; private set; }
     public DateTime StartedAt { get; private set; }
     public DateTime? FinishedAt { get; private set; }
@@ -42,11 +35,9 @@ public class Task
     public virtual Project Project { get; set; } = null!;
     public virtual User? User { get; set; }
 
-    public static Task Create(Guid projectId, string name, string? userId = null, DateTime? deadline = null)
+    public static Task Create(Project project, string name, User? user = null, DateTime? deadline = null)
     {
-        userId = string.IsNullOrWhiteSpace(userId) ? null : userId;
-
-        var task = new Task(Guid.NewGuid(), projectId, userId, name)
+        var task = new Task(Guid.NewGuid(), name, project, user)
         {
             Deadline = deadline
         };
@@ -54,19 +45,16 @@ public class Task
         return task;
     }
 
-    public void Update(string? name, string? userId, DateTime? deadline, TaskEntityStatus status, PriorityStatus priority, DateTime? finishedAt)
+    public void Update(string? name, User? user, DateTime? deadline, TaskEntityStatus status, PriorityStatus priority, DateTime? finishedAt)
     {
         if (!string.IsNullOrWhiteSpace(name))
             Name = name;
 
-        UserId = userId;
+        User = user;
         Deadline = deadline;
         Status = status;
         Priority = priority;
 
-        if (status == TaskEntityStatus.Completed)
-            FinishedAt = finishedAt ?? DateTime.UtcNow;
-        else
-            FinishedAt = null;
+        FinishedAt = status == TaskEntityStatus.Completed ? finishedAt ?? DateTime.UtcNow : null;
     }
 }

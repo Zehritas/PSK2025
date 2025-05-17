@@ -40,13 +40,13 @@ public class AppDbContext : IdentityDbContext<User>
         modelBuilder.Entity<TaskEntity>()
             .HasOne(t => t.Project)
             .WithMany(p => p.Tasks)
-            .HasForeignKey(t => t.ProjectId);
+            .HasForeignKey("ProjectId"); 
 
         modelBuilder.Entity<TaskEntity>()
             .HasOne(t => t.User)
             .WithMany(u => u.Tasks)
-            .HasForeignKey(t => t.UserId)
-            .IsRequired(false); // since it's nullable
+            .HasForeignKey("UserId")     
+            .IsRequired(false);
 
 
     }

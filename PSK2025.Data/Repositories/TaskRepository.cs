@@ -31,12 +31,12 @@ public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEnti
 
         if (ProjectId.HasValue)
         {
-            query = query.Where(t => t.ProjectId == ProjectId.Value);
+            query = query.Where(t => t.Project.Id == ProjectId.Value);
         }
 
         if (!string.IsNullOrEmpty(userId))
         {
-            query = query.Where(t => t.UserId == userId);
+            query = query.Where(t => t.User != null && t.User.Id == userId);
         }
 
         if (priority.HasValue)
