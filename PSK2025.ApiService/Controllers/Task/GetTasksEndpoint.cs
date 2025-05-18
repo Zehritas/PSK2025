@@ -43,6 +43,7 @@ public class GetTasksEndpoint : IEndpoint
             .WithName("Get Tasks")
             .Produces(200)
             .Produces(400)
-            .Produces(500);
+            .Produces(500)
+            .RequireAuthorization();
     }
 }
