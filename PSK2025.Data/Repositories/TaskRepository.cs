@@ -26,9 +26,12 @@ public class TaskRepository(AppDbContext dbContext) : GenericRepository<TaskEnti
         CancellationToken cancellationToken = default)
     {
 
-        var query = Context.Tasks.Where(t
-            => t.Project.OwnerId == currentUserId || t.Project.UserProjects.Any(up => up.UserId == currentUserId));
-
+        var query = Context.Tasks
+            .Include(t => t.User)
+            .Where(t =>
+                t.Project.OwnerId == currentUserId ||
+                t.Project.UserProjects.Any(up => up.UserId == currentUserId)
+            );
         if (ProjectId.HasValue)
         {
             query = query.Where(t => t.Project.Id == ProjectId.Value);

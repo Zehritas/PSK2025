@@ -9,7 +9,7 @@ namespace PSK2025.Models.DTOs;
 
 public record TaskDto(
     Guid Id,
-    string? UserId,
+    TaskAssigneeDto? Assignee,
     string Name,
     DateTime StartedAt,
     DateTime? FinishedAt,

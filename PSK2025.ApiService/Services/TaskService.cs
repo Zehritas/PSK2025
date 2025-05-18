@@ -23,6 +23,7 @@ namespace PSK2025.ApiService.Services;
 public class TaskService(
     ITaskRepository taskRepository, 
     IUserProjectRepository userProjectRepository,
+    IProjectRepository projectRepository,
     UserManager<User> userManager, 
     IUserContextService userContextService,
     AppDbContext context) : ITaskService
@@ -70,6 +71,7 @@ public class TaskService(
 
         return Result.Success();
     }
+
 
 
     public async Task<Result> DeleteTaskByIdAsync(Guid taskId, CancellationToken cancellationToken = default)
@@ -131,16 +133,32 @@ public class TaskService(
             take,
             cancellationToken);
 
-        var taskDtos = taskEntities.Select(task => new TaskDto(
+        var taskDtos = taskEntities.Select(task => {
+        // Create the TaskAssigneeDto if we have user information
+        TaskAssigneeDto? assigneeDto = null;
+        Console.WriteLine("User null: ");
+        if (task.User != null)
+        {
+            Console.WriteLine("User not null: ");
+            Console.WriteLine(task.User.UserName);
+            assigneeDto = new TaskAssigneeDto(
+                task.User.Id,
+                task.User.FirstName ?? string.Empty,
+                task.User.LastName ?? string.Empty
+            );
+        }
+        
+        return new TaskDto(
             task.Id,
-            task.User?.Id ?? string.Empty,
+            assigneeDto, // Pass the assignee dto
             task.Name,
             task.StartedAt,
             task.FinishedAt,
             task.Deadline,
             task.Status,
             task.Priority
-        )).ToList();
+        );
+    }).ToList();
 
         var response = new GetTasksResponse(taskDtos);
         return Result<GetTasksResponse>.Success(response);
