@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PSK2025.Data.Contexts;
@@ -11,9 +12,11 @@ using PSK2025.Data.Contexts;
 namespace PSK2025.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250513132233_AddPriorityToTask")]
+    partial class AddPriorityToTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,7 +239,7 @@ namespace PSK2025.Data.Migrations
                     b.Property<int?>("Priority")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid>("Projectid")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("StartedAt")
@@ -250,7 +253,7 @@ namespace PSK2025.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("Projectid");
 
                     b.HasIndex("UserId");
 
@@ -417,19 +420,15 @@ namespace PSK2025.Data.Migrations
 
             modelBuilder.Entity("PSK2025.Models.Entities.Task", b =>
                 {
-                    b.HasOne("PSK2025.Models.Entities.Project", "Project")
+                    b.HasOne("PSK2025.Models.Entities.Project", null)
                         .WithMany("Tasks")
-                        .HasForeignKey("ProjectId")
+                        .HasForeignKey("Projectid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PSK2025.Models.Entities.User", "User")
-                        .WithMany("Tasks")
+                    b.HasOne("PSK2025.Models.Entities.User", null)
+                        .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.Navigation("Project");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PSK2025.Models.Entities.UserProject", b =>
@@ -461,8 +460,6 @@ namespace PSK2025.Data.Migrations
             modelBuilder.Entity("PSK2025.Models.Entities.User", b =>
                 {
                     b.Navigation("RefreshTokens");
-
-                    b.Navigation("Tasks");
 
                     b.Navigation("UserProjects");
                 });
