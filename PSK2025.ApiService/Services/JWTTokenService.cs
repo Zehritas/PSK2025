@@ -43,6 +43,11 @@ public class JwtTokenService : IJwtTokenService
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
