@@ -12,6 +12,7 @@ using PSK2025.Data.Seeding;
 using PSK2025.ApiService.Extensions;
 using PSK2025.ApiService.Controllers.Auth;
 using PSK2025.ApiService.Interfaces;
+using PSK2025.ApiService.Services.Decorators;
 using PSK2025.Data.Repositories;
 using PSK2025.Data.Repositories.Interfaces;
 using PSK2025.MigrationService.Abstractions;
@@ -61,6 +62,7 @@ builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("Toke
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.Decorate<IAuthService, AuthServiceValidationDecorator>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
