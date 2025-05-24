@@ -9,6 +9,8 @@ using PSK2025.Models.Enums;
 using PSK2025.Models.Entities;
 using SystemTask = System.Threading.Tasks.Task;
 using Microsoft.Extensions.Logging;
+using PSK2025.Data.Errors;
+using PSK2025.Data;
 
 namespace PSK2025.ApiService.Services;
 
@@ -76,12 +78,13 @@ public class ProjectService : IProjectService
                                    .FirstOrDefaultAsync();
         if (entity == null) throw new KeyNotFoundException("Project not found");
 
+        _logger.LogInformation("Current Project Version before update: {Version}", entity.Version);
+
         entity.Name = request.Name;
         entity.Status = request.Status;
         entity.Description = request.Description;
         entity.StartDate = request.StartDate;
         entity.EndDate = request.EndDate;
-
 
         await _context.SaveChangesAsync();
 
