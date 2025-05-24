@@ -12,8 +12,6 @@ using PSK2025.Data.Contexts;
 using PSK2025.Data.Responses.Task;
 using PSK2025.Models.DTOs;
 using TaskEntity = PSK2025.Models.Entities.Task;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 
@@ -42,9 +40,8 @@ public class TaskService(
         return Result<Guid>.Success(task.Id);
     }
 
-    public async Task<Result> EditTaskAsync(UpdateTaskRequest request, CancellationToken cancellationToken = default)
+    public async Task<Result> EditTaskAsync(UpdateTaskRequest request, bool bypassConcurrency = false, CancellationToken cancellationToken = default)
     {
-
         var currentTask = await taskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 
         if (currentTask == null)
@@ -62,9 +59,44 @@ public class TaskService(
         );
 
         taskRepository.Update(currentTask);
-        await context.SaveChangesAsync();
 
-        return Result.Success();
+        try
+        {
+            await context.SaveChangesAsync(cancellationToken);
+            return Result.Success();
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            var entry = ex.Entries.Single();
+            var databaseValues = await entry.GetDatabaseValuesAsync();
+
+            if (databaseValues == null)
+                return Result.Failure(TaskErrors.TaskNotFoundError);
+
+            var databaseEntity = (TaskEntity)databaseValues.ToObject();
+
+            if (bypassConcurrency)
+            {
+                databaseEntity.Update(
+                    request.Name,
+                    request.UserId,
+                    request.Deadline,
+                    request.Status,
+                    request.PriorityStatus,
+                    request.FinishedAt
+                );
+
+                entry.OriginalValues.SetValues(databaseValues);
+                entry.CurrentValues.SetValues(databaseEntity);
+
+                await context.SaveChangesAsync(cancellationToken);
+                return Result.Success();
+            }
+            else
+            {
+                return Result<TaskDto>.Failure(ConcurrencyErrors.OptimisticLockingError);
+            }
+        }
     }
 
 

@@ -9,7 +9,7 @@ namespace PSK2025.ApiService.Services.Interfaces;
 public interface ITaskService
 {
     Task<Result<Guid>> CreateTaskAsync(CreateTaskRequest request, CancellationToken cancellationToken = default);
-    Task<Result> EditTaskAsync(UpdateTaskRequest request, CancellationToken cancellationToken = default);
+    Task<Result> EditTaskAsync(UpdateTaskRequest request, bool bypassConcurrency = false, CancellationToken cancellationToken = default);
     Task<Result> DeleteTaskByIdAsync(Guid taskId, CancellationToken cancellationToken = default);
     Task<Result<GetTasksResponse>> GetTasksAsync(GetTasksRequest request, CancellationToken cancellationToken = default);
 }
