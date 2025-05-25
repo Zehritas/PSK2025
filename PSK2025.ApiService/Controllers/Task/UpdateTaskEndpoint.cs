@@ -5,6 +5,7 @@ using PSK2025.Models.Enums;
 using PSK2025.ApiService.Services.Interfaces;
 using PSK2025.Data.Requests.Task;
 using PSK2025.ApiService.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PSK2025.ApiService.Controllers.Task;
 
@@ -16,17 +17,19 @@ public class UpdateTaskEndpoint : IEndpoint
     {
         group.MapPut("/{id}",
                 async (UpdateTaskRequest request,
-                    ITaskService service) =>
+                ITaskService service,
+                [FromQuery] bool bypassConcurrency = false) =>
                 {
-                    var result = await service.EditTaskAsync(request);
+                    var result = await service.EditTaskAsync(request, bypassConcurrency);
 
                     return result.IsSuccess
                         ? Results.Ok(new { Message = "Task updated successfully." })
                         : result.Error.MapErrorToResponse();
                 })
-            .WithName("Updated Task")
+            .WithName("Update Task")
             .Produces(200)
             .Produces(400)
+            .Produces(409) 
             .Produces(500);
     }
 }

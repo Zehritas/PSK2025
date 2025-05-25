@@ -19,9 +19,9 @@ using PSK2025.MigrationService.Abstractions;
 using PSK2025.ApiService.Validators.Auth;
 using FluentValidation;
 using PSK2025.Data.Requests.Auth;
-using TaskEntity = PSK2025.Models.Entities.Task;
 using SystemTask = System.Threading.Tasks.Task;
 using System.Text.Json;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +37,14 @@ builder.Services.AddEndpoints();
 builder.Services.AddEndpointsApiExplorer();
 
 
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+builder.Services.AddHttpContextAccessor();
 
 
 
@@ -74,8 +82,12 @@ builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IUserProjectService, UserProjectService>();
 builder.Services.AddScoped<IUserProjectRepository, UserProjectRepository>();
-builder.Services.AddScoped<ProjectSeeder>(); 
+builder.Services.AddBusinessOperationLogging(interfaceType =>
+    interfaceType.Name.StartsWith("I") &&
+    interfaceType.Namespace != null &&
+    interfaceType.Namespace.Contains("Services.Interfaces"));
 
+builder.Services.AddScoped<ProjectSeeder>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

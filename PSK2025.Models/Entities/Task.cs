@@ -39,6 +39,8 @@ public class Task
     public PriorityStatus? Priority { get; private set; }
     public TaskEntityStatus Status { get; private set; }
 
+    [Timestamp]
+    public uint Version { get; set; }
     public virtual Project Project { get; set; } = null!;
     public virtual User? User { get; set; }
 
