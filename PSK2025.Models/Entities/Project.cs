@@ -1,4 +1,5 @@
 using PSK2025.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace PSK2025.Models.Entities;
 
@@ -13,6 +14,8 @@ public class Project
     // Required navigation property
     public User Owner { get; set; } = null!;
 
+    [Timestamp]
+    public uint Version { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public string? Description { get; set; }
