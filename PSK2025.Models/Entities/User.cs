@@ -10,6 +10,7 @@ namespace PSK2025.Models.Entities
         // more custom fields if needed etc.
         
         public ICollection<UserProject> UserProjects { get; set; } = new List<UserProject>();
+        public ICollection<Project> Projects { get; set; } = new List<Project>();
 
         private readonly List<RefreshToken> _refreshTokens = new();
 

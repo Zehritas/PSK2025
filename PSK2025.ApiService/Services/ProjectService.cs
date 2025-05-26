@@ -19,6 +19,7 @@ public class ProjectService : IProjectService
     private readonly AppDbContext _context;
     private readonly IUserContextService _userContextService;
     private readonly ILogger _logger;
+
     public ProjectService(AppDbContext context, IUserContextService userContextService, ILogger<ProjectService> logger)
     {
         _context = context;
@@ -28,11 +29,11 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectsResponse> CreateAsync(CreateProjectRequest request)
     {
-        var ownerid = _userContextService.GetCurrentUserId(); 
+        var ownerid = _userContextService.GetCurrentUserId();
         var startDate = request.StartDate ?? DateTime.UtcNow;
         DateTime endDate = request.EndDate ?? startDate.AddDays(30);
         ProjectStatus status = request.Status ?? ProjectStatus.Planned;
-        
+
         if (request.EndDate.HasValue && request.EndDate.Value < startDate)
         {
             throw new ArgumentException("End date must be after the start date.");
@@ -59,7 +60,7 @@ public class ProjectService : IProjectService
             Name = entity.Name,
             Owner = new OwnerDto
             {
-                Id = entity.Owner.Id, 
+                Id = entity.Owner.Id,
                 FirstName = entity.Owner.FirstName!,
                 LastName = entity.Owner.LastName!
             },
@@ -76,6 +77,7 @@ public class ProjectService : IProjectService
         var entity = await _context.Projects.Include("Owner")
                                    .Where(p => p.Id == id)
                                    .FirstOrDefaultAsync();
+
         if (entity == null) throw new KeyNotFoundException("Project not found");
 
         _logger.LogInformation("Current Project Version before update: {Version}", entity.Version);
@@ -95,7 +97,7 @@ public class ProjectService : IProjectService
             Status = entity.Status,
             Owner = new OwnerDto
             {
-                Id = entity.Owner.Id, 
+                Id = entity.Owner.Id,
                 FirstName = entity.Owner.FirstName!,
                 LastName = entity.Owner.LastName!
             },
@@ -110,11 +112,11 @@ public class ProjectService : IProjectService
         var currentUserId = _userContextService.GetCurrentUserId();
 
         var entity = await _context.Projects
-            .Include(p => p.Owner) 
-            .Include(p => p.UserProjects) 
-            .ThenInclude(up => up.User) 
-            .Where(p => p.Id == request.id) 
-            .FirstOrDefaultAsync(); 
+                                   .Include(p => p.Owner)
+                                   .Include(p => p.UserProjects)
+                                   .ThenInclude(up => up.User)
+                                   .Where(p => p.Id == request.id)
+                                   .FirstOrDefaultAsync();
 
         if (entity == null)
         {
@@ -126,8 +128,7 @@ public class ProjectService : IProjectService
 
         if (!isOwner && !isMember)
         {
-
-            throw new KeyNotFoundException("Project not found"); 
+            throw new KeyNotFoundException("Project not found");
         }
 
         return new ProjectsResponse(new ProjectDto
@@ -138,7 +139,7 @@ public class ProjectService : IProjectService
             Description = entity.Description,
             Owner = new OwnerDto
             {
-                Id = entity.Owner.Id, 
+                Id = entity.Owner.Id,
                 FirstName = entity.Owner.FirstName,
                 LastName = entity.Owner.LastName
             },
@@ -154,9 +155,9 @@ public class ProjectService : IProjectService
         var userId = _userContextService.GetCurrentUserId();
 
         var query = _context.Projects
-            .Include(p => p.Owner) 
-            .Include(p => p.UserProjects)
-            .Where(p => p.OwnerId == userId || p.UserProjects.Any(up => up.UserId == userId));
+                            .Include(p => p.Owner)
+                            .Include(p => p.UserProjects)
+                            .Where(p => p.OwnerId == userId || p.UserProjects.Any(up => up.UserId == userId));
 
         if (status.HasValue)
         {
@@ -166,25 +167,25 @@ public class ProjectService : IProjectService
         var totalCount = await query.CountAsync();
 
         var items = await query
-            .OrderBy(p => p.Id)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .Select(p => new ProjectsResponse(new ProjectDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Status = p.Status,
-                Owner = new OwnerDto
-                {
-                    Id = p.Owner.Id,
-                    FirstName = p.Owner.FirstName,
-                    LastName = p.Owner.LastName
-                },
-                Description = p.Description,
-                StartDate = p.StartDate,
-                EndDate = p.EndDate
-            }))
-            .ToListAsync();
+                          .OrderBy(p => p.Id)
+                          .Skip((pageNumber - 1) * pageSize)
+                          .Take(pageSize)
+                          .Select(p => new ProjectsResponse(new ProjectDto
+                          {
+                              Id = p.Id,
+                              Name = p.Name,
+                              Status = p.Status,
+                              Owner = new OwnerDto
+                              {
+                                  Id = p.Owner.Id,
+                                  FirstName = p.Owner.FirstName,
+                                  LastName = p.Owner.LastName
+                              },
+                              Description = p.Description,
+                              StartDate = p.StartDate,
+                              EndDate = p.EndDate
+                          }))
+                          .ToListAsync();
 
         return new PaginatedResult<ProjectsResponse>
         {
@@ -204,13 +205,12 @@ public class ProjectService : IProjectService
         _context.Projects.Remove(entity);
         await _context.SaveChangesAsync();
     }
-    
+
     public async Task<List<UserDto>> GetProjectUsersAsync(Guid projectId)
     {
-        var users = await _context.UserProjects
-            .Where(up => up.ProjectId == projectId)
-            .Select(up => up.User) // Get the User entities
-            .ToListAsync();
+        var users = await _context.Users
+                                  .Where(u => u.UserProjects.Any(up => up.ProjectId == projectId) || u.Projects.Any(p => p.Id == projectId))
+                                  .ToListAsync();
 
         return users.Select(u => new UserDto
         {
@@ -221,6 +221,4 @@ public class ProjectService : IProjectService
             // Map other fields if needed
         }).ToList();
     }
-
-
 }

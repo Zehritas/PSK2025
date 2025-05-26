@@ -1,19 +1,19 @@
 <template>
-  <UDashboardPanel id="projects">
+  <UDashboardPanel id="tasks">
     <template #header>
-      <UDashboardNavbar title="Projects">
+      <UDashboardNavbar title="Tasks">
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
 
         <template #right>
-          <ProjectAddModal />
+          <TaskCreate />
         </template>
       </UDashboardNavbar>
     </template>
 
     <template #body>
-      <ProjectTable />
+      <TaskTable />
     </template>
   </UDashboardPanel>
 </template>

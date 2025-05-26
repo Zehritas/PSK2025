@@ -2,7 +2,6 @@
 import * as z from 'zod'
 import { type Project, ProjectStatus, type UpdateProjectRequest } from '~/types/project'
 import { projectStatusColor, projectStatusText } from '~/constants/project'
-import { useUserStore } from '~/store/user'
 
 const projectStatusItems = [
   ...Object.keys(ProjectStatus)

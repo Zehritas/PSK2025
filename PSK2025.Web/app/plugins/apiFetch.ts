@@ -31,6 +31,10 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
     },
     onRequestError: async (context) => {
+      if (context.error.name === 'AbortError') {
+        return
+      }
+
       if ('showError' in context.options && context.options.showError === false) {
         return
       }

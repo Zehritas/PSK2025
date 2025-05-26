@@ -15,24 +15,29 @@ using TaskEntity = PSK2025.Models.Entities.Task;
 using System.Linq.Expressions;
 
 
-
 namespace PSK2025.ApiService.Services;
 
 public class TaskService(
-    ITaskRepository taskRepository, 
+    ITaskRepository taskRepository,
     IUserProjectRepository userProjectRepository,
     IProjectRepository projectRepository,
-    UserManager<User> userManager, 
+    UserManager<User> userManager,
     IUserContextService userContextService,
     AppDbContext context) : ITaskService
 {
     public async Task<Result<Guid>> CreateTaskAsync(CreateTaskRequest request, CancellationToken cancellationToken = default)
     {
-
-        var task = TaskEntity.Create(
-            request.ProjectId,
-            request.Name,
-            null);
+        var task = new TaskEntity
+        {
+            ProjectId = request.ProjectId,
+            UserId = request.UserId,
+            Name = request.Name,
+            Deadline = request.Deadline,
+            Priority = request.Priority,
+            Status = request.Status,
+            StartedAt = request.StartedAt,
+            FinishedAt = request.FinishedAt,
+        };
 
         await taskRepository.AddAsync(task, cancellationToken);
         await context.SaveChangesAsync();
@@ -40,7 +45,10 @@ public class TaskService(
         return Result<Guid>.Success(task.Id);
     }
 
-    public async Task<Result> EditTaskAsync(UpdateTaskRequest request, bool bypassConcurrency = false, CancellationToken cancellationToken = default)
+    public async Task<Result> EditTaskAsync(
+        UpdateTaskRequest request,
+        bool bypassConcurrency = false,
+        CancellationToken cancellationToken = default)
     {
         var currentTask = await taskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 
@@ -112,80 +120,101 @@ public class TaskService(
         return Result.Success();
     }
 
-    public async Task<Result<GetTasksResponse>> GetTasksAsync(
+    public async Task<TaskDto> GetByIdAsync(Guid id, CancellationToken token)
+    {
+        var userId = userContextService.GetCurrentUserId();
+
+        var entity = await context.Tasks
+                                   .Include(t => t.Project)
+                                   .Include(t => t.User)
+                                   .Where(p => p.UserId == userId || p.Project.UserProjects.Any(up => up.UserId == userId) || p.Project.OwnerId == userId)
+                                   .Where(p => p.Id == id)
+                                   .FirstOrDefaultAsync(cancellationToken:token);
+
+        if (entity == null)
+        {
+            throw new KeyNotFoundException("Task not found");
+        }
+
+        return new TaskDto
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            Status = entity.Status,
+            Assignee = entity.User != null ? new TaskAssigneeDto(entity.User.Id, entity.User.FirstName, entity.User.LastName) : null,
+            StartedAt = entity.StartedAt,
+            FinishedAt = entity.FinishedAt,
+            Deadline = entity.Deadline,
+            Priority = entity.Priority,
+            Project = new ProjectDto
+            {
+                Name = entity.Project.Name
+            },
+        };
+    }
+    
+    public async Task<PaginatedResult<TaskDto>> GetTasksAsync(
         GetTasksRequest request,
         CancellationToken cancellationToken = default)
     {
-        var currentUserId = userContextService.GetCurrentUserId();
-        Guid? projectId = request.ProjectId;
-        string? userId = request.UserId;
+        var pageNumber = Math.Max(1, request.Pagination.PageNumber);
+        var pageSize = Math.Clamp(request.Pagination.PageSize, 1, 50);
+        var userId = userContextService.GetCurrentUserId();
 
-
-        if (projectId.HasValue)
-        {
-            bool currentUserInProject = await taskRepository.IsUserInProjectAsync(
-                projectId.Value, currentUserId, cancellationToken);
-
-            if (!currentUserInProject)
-                return Result<GetTasksResponse>.Failure(TaskErrors.UserNotInProjectError);
-
-            if (userId != null)
-            {
-                bool targetUserInProject = await taskRepository.IsUserInProjectAsync(
-                    projectId.Value, userId, cancellationToken);
-
-                if (!targetUserInProject)
-                    return Result<GetTasksResponse>.Failure(TaskErrors.QueriedUserNotInProjectError);
-            }
-        }
-        else if (userId != null && userId != currentUserId)
-        {
-            return Result<GetTasksResponse>.Failure(TaskErrors.UserIdMismatchError);
-        }
+        var query = context.Tasks
+                           .Include(p => p.User)
+                           .Include(p => p.Project)
+                           .Where(p => p.UserId == userId || p.Project.UserProjects.Any(up => up.UserId == userId) || p.Project.OwnerId == userId);
 
         int skip = (request.Pagination.PageNumber - 1) * request.Pagination.PageSize;
         int take = request.Pagination.PageSize;
-        PriorityStatus? priorityStatus = request.Priority;
-        TaskEntityStatus? entityStatus = request.Status;
 
-
-        var taskEntities = await taskRepository.GetUserAccessibleTasksAsync(
-            currentUserId,
-            projectId,
-            userId,
-            priorityStatus,
-            entityStatus,
-            skip,
-            take,
-            cancellationToken);
-
-        var taskDtos = taskEntities.Select(task => {
-        // Create the TaskAssigneeDto if we have user information
-        TaskAssigneeDto? assigneeDto = null;
-        if (task.User != null)
+        if (request.Priority.HasValue)
         {
-            assigneeDto = new TaskAssigneeDto(
-                task.User.Id,
-                task.User.FirstName ?? string.Empty,
-                task.User.LastName ?? string.Empty
-            );
+            query = query.Where(p => p.Priority == request.Priority);
         }
-        
-        return new TaskDto(
-            task.Id,
-            assigneeDto, // Pass the assignee dto
-            task.Name,
-            task.StartedAt,
-            task.FinishedAt,
-            task.Deadline,
-            task.Status,
-            task.Priority
-        );
-    }).ToList();
 
-        var response = new GetTasksResponse(taskDtos);
-        return Result<GetTasksResponse>.Success(response);
+        if (request.Status.HasValue)
+        {
+            query = query.Where(p => p.Status == request.Status);
+        }
+
+        if (request.ProjectId.HasValue)
+        {
+            query = query.Where(p => p.ProjectId == request.ProjectId);
+        }
+
+        if (request.UserId != null)
+        {
+            query = query.Where(p => p.UserId == request.UserId);
+        } 
+
+        var totalCount = await query.CountAsync();
+
+        var items = await query
+                          .OrderBy(p => p.StartedAt)
+                          .Skip((pageNumber - 1) * pageSize)
+                          .Take(pageSize)
+                          .Select(p => new TaskDto
+                          {
+                              Id = p.Id,
+                              Name = p.Name,
+                              Status = p.Status,
+                              Assignee = p.User != null ? new TaskAssigneeDto(p.User.Id, p.User.FirstName, p.User.LastName) : null,
+                              StartedAt = p.StartedAt,
+                              FinishedAt = p.FinishedAt,
+                              Deadline = p.Deadline,
+                              Priority = p.Priority,
+                              Project = new ProjectDto{Name = p.Project.Name},
+                          })
+                          .ToListAsync();
+
+        return new PaginatedResult<TaskDto>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            CurrentPage = pageNumber,
+            PageSize = pageSize
+        };
     }
-
-
 }

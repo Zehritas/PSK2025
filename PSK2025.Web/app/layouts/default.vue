@@ -18,6 +18,8 @@
           </span>
         </div>
 
+        <ProjectMenu :collapsed="collapsed" />
+
         <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" />
 
         <UNavigationMenu
@@ -60,8 +62,16 @@ const links = [
     },
     {
       label: 'Projects',
-      icon: 'i-lucide-component',
+      icon: 'i-lucide-folder-tree',
       to: '/projects',
+      onSelect: () => {
+        open.value = false
+      }
+    },
+    {
+      label: 'Tasks',
+      icon: 'i-lucide-list-todo',
+      to: '/tasks',
       onSelect: () => {
         open.value = false
       }

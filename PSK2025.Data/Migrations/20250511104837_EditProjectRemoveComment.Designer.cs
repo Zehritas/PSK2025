@@ -233,7 +233,7 @@ namespace PSK2025.Data.Migrations
                     b.Property<Guid>("Projectid")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("StartedAt")
+                    b.Property<DateTime?>("StartedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Status")
