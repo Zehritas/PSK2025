@@ -59,7 +59,7 @@ export const useUserStore = defineStore(
 
       refreshPromise.value = (async () => {
         try {
-          const resp = await useApiDollarFetch<RefreshResponse>('/api/refresh', {
+          const resp = await useApiDollarFetch<RefreshResponse>('/api/auth/refresh-token', {
             method: 'POST',
             body: {
               token: refreshToken.value

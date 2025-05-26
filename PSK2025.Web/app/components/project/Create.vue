@@ -1,108 +1,6 @@
-<script setup lang="ts">
-import * as z from 'zod'
-import { type CreateProjectRequest, type Project, ProjectStatus } from '~/types/project'
-import { projectStatusColor, projectStatusText } from '~/constants/project'
-import { useProjectStore } from '~/store/project'
-
-const props = defineProps({
-  showButton: {
-    type: Boolean,
-    default: true
-  }
-})
-
-const projectStatusItems = [
-  ...Object.keys(ProjectStatus)
-    .filter((key) => Number(key) === ProjectStatus.PLANNED || Number(key) === ProjectStatus.ACTIVE)
-    .map((key) => ({
-      label: projectStatusText(Number(key)),
-      value: key,
-      chip: {
-        color: projectStatusColor(Number(key))
-      }
-    }))
-]
-
-const schema = z.object({
-  name: z.string().min(1, 'This field is required.'),
-  status: z.nativeEnum(ProjectStatus),
-  startDate: z.string().date().optional().nullable(),
-  endDate: z.string().date().optional().nullable().refine((val) => {
-    if (val && state.startDate) {
-      return new Date(val) > new Date(state.startDate)
-    }
-
-    return true
-  }, {
-    message: 'End date must be after start date.'
-  }),
-  description: z.string()
-})
-const open = ref(false)
-
-const state = reactive({
-  name: '',
-  status: ProjectStatus.PLANNED,
-  startDate: undefined,
-  endDate: undefined,
-  description: ''
-})
-
-const toast = useToast()
-const projectSt = useProjectStore()
-const { projectId } = storeToRefs(projectSt)
-const loading = ref(false)
-
-async function onSubmit() {
-  loading.value = true
-
-  try {
-    const project = await useApiDollarFetch<Project>('/api/projects', {
-      method: 'POST',
-      body: {
-        status: state.status,
-        name: state.name,
-        startDate: state.startDate ? `${state.startDate}T00:00:00.0000Z` : null,
-        endDate: state.endDate ? `${state.endDate}T00:00:00.0000Z` : null,
-        description: state.description.trim().length > 0 ? state.description : null
-      } as CreateProjectRequest
-    })
-
-    open.value = false
-    resetState()
-    toast.add({
-      title: 'Project created',
-      description: 'A new project has been created successfully.',
-      color: 'success'
-    })
-    await projectSt.refreshProjects(true)
-    projectId.value = project.id
-    await navigateTo(`/projects/${project.id}`)
-  } catch (e) {
-    console.debug(e)
-  } finally {
-    loading.value = false
-  }
-}
-
-const resetState = () => {
-  state.name = ''
-  state.description = ''
-  state.status = ProjectStatus.PLANNED
-  state.startDate = undefined
-  state.endDate = undefined
-}
-
-const nuxtApp = useNuxtApp()
-
-nuxtApp.hook('project:create', () => {
-  open.value = true
-})
-</script>
-
 <template>
   <UModal v-model:open="open" title="New project" description="Create a new project." :dismissible="!loading">
-    <UButton v-if="showButton" label="New project" icon="i-lucide-plus" />
+    <UButton label="New project" icon="i-lucide-plus" />
 
     <template #body>
       <UForm
@@ -150,3 +48,97 @@ nuxtApp.hook('project:create', () => {
     </template>
   </UModal>
 </template>
+
+<script setup lang="ts">
+import * as z from 'zod'
+import { useProjectStore } from '~/store/project'
+import { type Project, ProjectStatus } from '~/types/project'
+import { projectStatusColor, projectStatusText } from '~/constants/project'
+
+const projectStatusItems = [
+  ...Object.keys(ProjectStatus)
+    .filter((key) => Number(key) === ProjectStatus.PLANNED || Number(key) === ProjectStatus.ACTIVE)
+    .map((key) => ({
+      label: projectStatusText(Number(key)),
+      value: key,
+      chip: {
+        color: projectStatusColor(Number(key))
+      }
+    }))
+]
+const nuxtApp = useNuxtApp()
+
+const schema = z.object({
+  name: z.string().min(1, 'This field is required.'),
+  status: z.nativeEnum(ProjectStatus),
+  startDate: z.string().date().optional().nullable(),
+  endDate: z.string().date().optional().nullable().refine((val) => {
+    if (val && state.startDate) {
+      return new Date(val) > new Date(state.startDate)
+    }
+
+    return true
+  }, {
+    message: 'End date must be after start date.'
+  }),
+  description: z.string()
+})
+const open = ref(false)
+
+const state = reactive({
+  name: '',
+  status: ProjectStatus.PLANNED,
+  startDate: undefined,
+  endDate: undefined,
+  description: ''
+})
+
+const toast = useToast()
+const projectSt = useProjectStore()
+const { projectId } = storeToRefs(projectSt)
+const loading = ref(false)
+
+async function onSubmit() {
+  loading.value = true
+
+  try {
+    const project = await useApiDollarFetch<Project>('/api/projects', {
+      method: 'POST',
+      body: {
+        status: state.status,
+        name: state.name,
+        startDate: state.startDate ? `${state.startDate}T00:00:00.0000Z` : null,
+        endDate: state.endDate ? `${state.endDate}T00:00:00.0000Z` : null,
+        description: state.description.trim().length > 0 ? state.description : null
+      }
+    })
+
+    await projectSt.refreshProjects(true)
+    projectId.value = project.id
+    open.value = false
+    resetState()
+    toast.add({
+      title: 'Project created',
+      description: 'A new project has been created successfully.',
+      color: 'success'
+    })
+    await nuxtApp.callHook('project:created')
+  } catch (e) {
+    console.debug(e)
+  } finally {
+    loading.value = false
+  }
+}
+
+const resetState = () => {
+  state.name = ''
+  state.description = ''
+  state.status = ProjectStatus.PLANNED
+  state.startDate = undefined
+  state.endDate = undefined
+}
+
+nuxtApp.hook('project:create', () => {
+  open.value = true
+})
+</script>

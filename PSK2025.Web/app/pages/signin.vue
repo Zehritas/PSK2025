@@ -73,6 +73,7 @@ import type { FormSubmitEvent } from '#ui/types'
 import { getErrorMessage } from '~/utils/api'
 import { useUserStore } from '~/store/user'
 import type { LoginRequest, LoginResponse } from '~/types/auth'
+import { useProjectStore } from '~/store/project'
 
 definePageMeta({
   layout: 'guest'
@@ -82,6 +83,7 @@ useSeoMeta({
 })
 
 const userSt = useUserStore()
+const projectSt = useProjectStore()
 const showPassword = ref(false)
 const loading = ref(false)
 const error = ref<string | null>(null)
@@ -114,6 +116,7 @@ const submit = async (event: FormSubmitEvent<Schema>) => {
 
     userSt.setAccessToken(resp.token)
     userSt.setRefreshToken(resp.refreshToken)
+    await projectSt.refreshProjects(true)
 
     await navigateTo('/dashboard')
   } catch (e) {

@@ -13,13 +13,27 @@ public class GetProjectUsersEndpoint : IEndpoint
 
     public void MapEndpoints(RouteGroupBuilder group)
     {
-        group.MapGet("/{id}/users", async ([FromRoute] Guid id, IProjectService service) =>
-            {
-                var users = await service.GetProjectUsersAsync(id);
-                return Results.Ok(users);
-            })
-            .WithName("Get Project Users")
-            .Produces<List<UserDto>>(200)
-            .Produces(404);
+        group.MapGet("/{id}/users", async (
+                 [FromQuery] int? pageNumber,
+                 [FromQuery] int? pageSize,
+                 [FromRoute] Guid id,
+                 IProjectService service
+             ) =>
+             {
+                 var result = await service.GetProjectUsersAsync(id, pageNumber, pageSize);
+
+                 return Results.Ok(new PaginatedResult<UserDto>
+                 {
+                     Items = result.Items.ToList(),
+                     TotalCount = result.TotalCount,
+                     CurrentPage = result.CurrentPage,
+                     PageSize = result.PageSize
+                 });
+                 
+             })
+             .RequireAuthorization()
+             .WithName("Get Project Users")
+             .Produces<PaginatedResult<UserDto>>(200)
+             .Produces(404);
     }
 }

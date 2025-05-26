@@ -13,5 +13,5 @@ public interface IProjectService
     Task<PaginatedResult<ProjectsResponse>> GetProjectsAsync(int pageNumber, int pageSize, ProjectStatus? status = null);
     Task DeleteAsync(ProjectRequest request);
     
-    Task<List<UserDto>> GetProjectUsersAsync(Guid projectId);
+    Task<PaginatedResult<UserDto>> GetProjectUsersAsync(Guid projectId, int? pageNumber, int? pageSize);
 }

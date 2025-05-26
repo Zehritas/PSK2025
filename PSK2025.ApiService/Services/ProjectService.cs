@@ -206,19 +206,37 @@ public class ProjectService : IProjectService
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<UserDto>> GetProjectUsersAsync(Guid projectId)
+    public async Task<PaginatedResult<UserDto>> GetProjectUsersAsync(Guid projectId, int? pageNumber, int? pageSize)
     {
-        var users = await _context.Users
-                                  .Where(u => u.UserProjects.Any(up => up.ProjectId == projectId) || u.Projects.Any(p => p.Id == projectId))
-                                  .ToListAsync();
+        var userId = _userContextService.GetCurrentUserId();
 
-        return users.Select(u => new UserDto
+        var query = _context.Users
+                            .Where(u => u.UserProjects.Any(up => up.ProjectId == projectId) || u.Projects.Any(p => p.Id == projectId));
+
+        var totalCount = await query.CountAsync();
+
+        if (pageNumber != null || pageSize != null)
         {
-            Id = u.Id,
-            Email = u.Email,
-            FirstName = u.FirstName,
-            LastName = u.LastName,
-            // Map other fields if needed
-        }).ToList();
+            query = query.Skip((Math.Max(1, pageNumber ?? 0) - 1) * Math.Clamp(pageSize ?? 0, 1, 50))
+                         .Take(Math.Clamp(pageSize ?? 0, 1, 50));
+        }
+
+        var items = await query.OrderBy(u => u.Id)
+                               .Select(u => new UserDto
+                               {
+                                   Id = u.Id,
+                                   FirstName = u.FirstName,
+                                   LastName = u.LastName,
+                                   Email = u.Email,
+                               })
+                               .ToListAsync();
+
+        return new PaginatedResult<UserDto>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            CurrentPage = pageNumber,
+            PageSize = pageSize
+        };
     }
 }

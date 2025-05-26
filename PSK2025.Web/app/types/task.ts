@@ -11,6 +11,7 @@ export interface Task {
   status: TaskStatus,
   priority: TaskPriority,
   project: Project | null,
+  version: number
 }
 
 export enum TaskStatus {

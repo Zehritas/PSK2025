@@ -14,4 +14,5 @@ public class ProjectDto
     public DateTime? EndDate { get; set; }
     public string? Description { get; set; }
     public ProjectStatus Status { get; set; }
+    public uint Version { get; set; }
 }

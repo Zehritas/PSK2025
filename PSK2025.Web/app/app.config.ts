@@ -4,5 +4,8 @@ export default defineAppConfig({
       primary: 'indigo',
       neutral: 'neutral'
     }
+  },
+  toaster: {
+    position: 'top-center' as const
   }
 })

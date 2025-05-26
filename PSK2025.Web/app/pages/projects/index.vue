@@ -7,13 +7,14 @@
         </template>
 
         <template #right>
-          <ProjectAddModal />
+          <ProjectCreate />
         </template>
       </UDashboardNavbar>
     </template>
 
     <template #body>
       <ProjectTable />
+      <ProjectEdit />
     </template>
   </UDashboardPanel>
 </template>

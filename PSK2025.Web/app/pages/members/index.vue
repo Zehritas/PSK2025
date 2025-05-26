@@ -1,20 +1,19 @@
 <template>
-  <UDashboardPanel id="tasks">
+  <UDashboardPanel id="members">
     <template #header>
-      <UDashboardNavbar title="Tasks">
+      <UDashboardNavbar title="Members">
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
 
         <template #right>
-          <TaskCreate />
+          <MemberCreate />
         </template>
       </UDashboardNavbar>
     </template>
 
     <template #body>
-      <TaskTable />
-      <TaskEdit />
+      <MemberTable />
     </template>
   </UDashboardPanel>
 </template>

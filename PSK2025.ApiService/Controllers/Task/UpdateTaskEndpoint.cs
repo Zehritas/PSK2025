@@ -26,6 +26,7 @@ public class UpdateTaskEndpoint : IEndpoint
                         ? Results.Ok(new { Message = "Task updated successfully." })
                         : result.Error.MapErrorToResponse();
                 })
+             .RequireAuthorization()
             .WithName("Update Task")
             .Produces(200)
             .Produces(400)

@@ -9,14 +9,10 @@ export const useProjectStore = defineStore(
     const projectsPromise = ref<Promise<void> | null>(null)
 
     const project = computed(() => {
-      if (projects.value === null) {
-        return null
-      }
-
-      projectId.value = projectId.value ?? Object.keys(projects.value)[0] ?? null
+      updateProjectId()
 
       if (projectId.value !== null) {
-        return projects.value[projectId.value] ?? null
+        return projects.value![projectId.value] ?? null
       }
 
       return null
@@ -24,10 +20,14 @@ export const useProjectStore = defineStore(
 
     const refreshProjects = async (force: boolean = false): Promise<void> => {
       if (projectsPromise.value) {
+        updateProjectId()
+
         return projectsPromise.value
       }
 
       if (!force && projects.value !== null) {
+        updateProjectId()
+
         return
       }
 
@@ -49,9 +49,19 @@ export const useProjectStore = defineStore(
         }).catch((e) => {
           reject(e)
         }).finally(() => {
+          updateProjectId()
+
           projectsPromise.value = null
         })
       })
+    }
+
+    const updateProjectId = () => {
+      if (projects.value === null) {
+        return null
+      }
+
+      projectId.value = projectId.value ?? Object.keys(projects.value)[0] ?? null
     }
 
     return {

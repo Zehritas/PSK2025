@@ -18,8 +18,13 @@
             th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
             td: 'border-b border-default'
           }"
-    @select="async (row: TableRow<Project>) => await navigateTo(`/projects/${row.original.id}`)"
+    @select="async (row: TableRow<Project>) => {
+      currentProjectId = row.original.id
+      viewOpen = true
+    }"
   />
+
+  <ProjectView :id="currentProjectId" v-model="viewOpen" />
 
   <div class="flex items-center justify-center gap-3 border-t border-default pt-4 mt-auto w-full">
     <UPagination
@@ -36,6 +41,7 @@ import type { PaginatedList } from '~/types/list'
 import { type Project, ProjectStatus } from '~/types/project'
 import type { TableColumn, TableRow } from '@nuxt/ui'
 import { projectStatusColor, projectStatusText } from '~/constants/project'
+import type { Task } from '~/types/task'
 
 const propertyDate = resolveComponent('PropertyDate')
 
@@ -87,7 +93,7 @@ const projectStatusItems = [
 ]
 
 const page = ref(1)
-const pageSize = ref(10)
+const pageSize = ref(11)
 const projectStatus = ref<string | undefined>(undefined)
 const query = computed(() => {
   const q: Record<string, string | number> = {
@@ -102,10 +108,22 @@ const query = computed(() => {
   return q
 })
 
-const { data, status } = await useApiFetch<PaginatedList<Project>>(
+const { data, status, refresh } = await useApiFetch<PaginatedList<Project>>(
   '/api/projects',
   {
     query: query
   }
 )
+
+const nuxtApp = useNuxtApp()
+
+nuxtApp.hook('project:created', () => {
+  refresh()
+})
+nuxtApp.hook('project:updated', () => {
+  refresh()
+})
+
+const currentProjectId = ref<string | null>(null)
+const viewOpen = ref(false)
 </script>

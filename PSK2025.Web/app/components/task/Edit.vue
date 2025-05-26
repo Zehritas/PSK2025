@@ -1,7 +1,5 @@
 <template>
-  <UModal v-model:open="open" title="New task" description="Create a new task." :dismissible="!loading">
-    <UButton label="New task" icon="i-lucide-plus" />
-
+  <UModal v-model:open="open" title="Edit task" description="Update an existing task." :dismissible="!loading">
     <template #body>
       <UForm
         :schema="schema"
@@ -43,7 +41,7 @@
             @click="open = false"
           />
           <UButton
-            label="Create"
+            label="Update"
             color="primary"
             variant="solid"
             type="submit"
@@ -51,6 +49,29 @@
           />
         </div>
       </UForm>
+    </template>
+  </UModal>
+
+  <UModal
+    v-model:open="lockModal"
+    title="Optimistic locking conflict"
+    :dismissible="false"
+  >
+    <template #body>
+      The data was updated by someone else. You can either cancel to discard your changes or bypass to overwrite the
+      latest update.
+    </template>
+    <template #footer>
+      <div class="flex justify-end gap-2 w-full">
+        <UButton
+          :disabled="lockLoading"
+          color="neutral" label="Cancel" @click="() => {
+          lockModal = false
+          open = false
+          nuxtApp.callHook('task:updated')
+        }" />
+        <UButton label="Bypass" :loading="lockLoading" @click="() => update(true)" />
+      </div>
     </template>
   </UModal>
 </template>
@@ -61,18 +82,7 @@ import { useProjectStore } from '~/store/project'
 import { type Task, TaskPriority, TaskStatus } from '~/types/task'
 import { taskPriorityColor, taskPriorityText, taskStatusColor, taskStatusText } from '~/constants/task'
 import type { User } from '~/types/user'
-
-const props = defineProps({
-  id: {
-    type: String,
-    default: null
-  },
-  modelValue: {
-    type: Boolean,
-    default: false
-  }
-})
-const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>()
+import type { PaginatedList } from '~/types/list'
 
 const taskStatusItems = Object.keys(TaskStatus)
   .filter((key) => !isNaN(Number(key)))
@@ -108,16 +118,25 @@ const state = reactive({
   status: TaskStatus.NOT_STARTED,
   priority: TaskPriority.MEDIUM,
   assignee: undefined,
-  deadline: undefined
+  deadline: undefined,
+  version: undefined
 })
 
 const toast = useToast()
 const projectSt = useProjectStore()
 const { projectId } = storeToRefs(projectSt)
 const loading = ref(false)
+const task = ref<Task | null>(null)
+const lockModal = ref(false)
+const lockLoading = ref(false)
 
 async function onSubmit() {
+  await update()
+}
+
+async function update(bypassConcurrency: boolean = false) {
   loading.value = true
+  lockLoading.value = true
 
   try {
     let startedAt = undefined
@@ -125,78 +144,80 @@ async function onSubmit() {
 
     switch (state.status) {
       case TaskStatus.IN_PROGRESS:
-        startedAt = new Date().toISOString()
+        startedAt = task.value!.startedAt ?? new Date().toISOString()
         break
       case TaskStatus.COMPLETED:
-        startedAt = new Date().toISOString()
-        finishedAt = new Date().toISOString()
+        startedAt = task.value!.startedAt ?? new Date().toISOString()
+        finishedAt = task.value!.finishedAt ?? new Date().toISOString()
     }
 
-    await useApiDollarFetch('/api/tasks', {
-      method: 'POST',
+    await useApiDollarFetch(`/api/tasks/${task.value!.id}`, {
+      method: 'PUT',
       body: {
-        projectId: projectId.value,
+        taskId: task.value!.id,
         name: state.name,
         status: state.status,
         priority: state.priority,
         userId: state.assignee,
         deadline: state.deadline ? `${state.deadline}T00:00:00.0000Z` : null,
         startedAt: startedAt,
-        finishedAt: finishedAt
+        finishedAt: finishedAt,
+        version: state.version
+      },
+      query: {
+        bypassConcurrency: bypassConcurrency ? true : undefined
       }
     })
 
     open.value = false
-    resetState()
     toast.add({
       title: 'Task updated',
       description: 'A task has been updated successfully.',
       color: 'success'
     })
     await nuxtApp.callHook('task:updated')
-  } catch (e) {
-    console.debug(e)
-  } finally {
     loading.value = false
+    lockLoading.value = false
+    lockModal.value = false
+  } catch (e) {
+    loading.value = false
+    lockLoading.value = false
+    lockModal.value = true
+    open.value = false
+
+    if ((e?.statusCode ?? null) === 409) {
+      lockModal.value = true
+      lockLoading.value = false
+    }
   }
 }
 
-const resetState = () => {
-  state.name = ''
-  state.status = TaskStatus.NOT_STARTED
-  state.priority = TaskPriority.MEDIUM
-  state.assignee = undefined
-  state.deadline = undefined
+const setState = (task: Task) => {
+  state.name = task.name
+  state.status = task.status ?? TaskStatus.NOT_STARTED
+  state.priority = task.priority ?? TaskPriority.MEDIUM
+  state.assignee = task.assignee ? task.assignee.userId! : undefined
+  state.deadline = task.deadline ? task.deadline.split('T')[0] : undefined
+  state.version = task.version
 }
 
-const { data: userData, status: userStatus } = await useApiFetch<User[]>(
+const { data: userData, status: userStatus } = await useApiFetch<PaginatedList<User>>(
   () => `/api/projects/${projectId.value}/users`
 )
 
 const userItems = computed(() => {
   return [
     { label: 'None', value: undefined },
-    ...userData.value?.map((user) => ({
+    ...userData.value?.items.map((user) => ({
       label: `${user.firstName} ${user.lastName}`,
       value: user.id
     })) ?? []
   ]
 })
 
-const { data } = await useApiFetch<Task>(
-  () => `/api/tasks/${props.id}`,
-  {
-    immediate: false
-  }
-)
-
-watch(data, () => {
-  if (data.value) {
-    state.name = data.value.name
-    state.status = data.value.status
-    state.priority = data.value.priority
-    state.assignee = data.value.assignee?.id ?? undefined
-    state.deadline = data.value.deadline ? data.value.deadline.split('T')[0] : undefined
-  }
+nuxtApp.hook('task:update', (t: Task) => {
+  task.value = t
+  setState(t)
+  open.value = true
 })
 </script>

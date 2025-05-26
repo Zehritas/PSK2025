@@ -18,4 +18,5 @@ public record TaskDto
     public TaskEntityStatus Status { get; set; }
     public PriorityStatus? Priority { get; set; }
     public ProjectDto Project { get; set; } = null!;
+    public uint Version { get; set; }
 }

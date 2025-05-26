@@ -57,54 +57,26 @@ public class TaskService(
             return Result.Failure(TaskErrors.TaskNotFoundError);
         }
 
+        if (currentTask.Version != request.Version && !bypassConcurrency)
+        {
+            return Result<TaskDto>.Failure(ConcurrencyErrors.OptimisticLockingError);
+        }
+
         currentTask.Update(
             request.Name,
             request.UserId,
             request.Deadline,
             request.Status,
-            request.PriorityStatus,
-            request.FinishedAt
+            request.Priority,
+            request.FinishedAt,
+            request.StartedAt
         );
 
         taskRepository.Update(currentTask);
 
-        try
-        {
-            await context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            var entry = ex.Entries.Single();
-            var databaseValues = await entry.GetDatabaseValuesAsync();
+        await context.SaveChangesAsync(cancellationToken);
 
-            if (databaseValues == null)
-                return Result.Failure(TaskErrors.TaskNotFoundError);
-
-            var databaseEntity = (TaskEntity)databaseValues.ToObject();
-
-            if (bypassConcurrency)
-            {
-                databaseEntity.Update(
-                    request.Name,
-                    request.UserId,
-                    request.Deadline,
-                    request.Status,
-                    request.PriorityStatus,
-                    request.FinishedAt
-                );
-
-                entry.OriginalValues.SetValues(databaseValues);
-                entry.CurrentValues.SetValues(databaseEntity);
-
-                await context.SaveChangesAsync(cancellationToken);
-                return Result.Success();
-            }
-            else
-            {
-                return Result<TaskDto>.Failure(ConcurrencyErrors.OptimisticLockingError);
-            }
-        }
+        return Result.Success();
     }
 
 
@@ -125,11 +97,13 @@ public class TaskService(
         var userId = userContextService.GetCurrentUserId();
 
         var entity = await context.Tasks
-                                   .Include(t => t.Project)
-                                   .Include(t => t.User)
-                                   .Where(p => p.UserId == userId || p.Project.UserProjects.Any(up => up.UserId == userId) || p.Project.OwnerId == userId)
-                                   .Where(p => p.Id == id)
-                                   .FirstOrDefaultAsync(cancellationToken:token);
+                                  .Include(t => t.Project)
+                                  .Include(t => t.User)
+                                  .Where(p => p.UserId == userId
+                                           || p.Project.UserProjects.Any(up => up.UserId == userId)
+                                           || p.Project.OwnerId == userId)
+                                  .Where(p => p.Id == id)
+                                  .FirstOrDefaultAsync(cancellationToken: token);
 
         if (entity == null)
         {
@@ -150,24 +124,24 @@ public class TaskService(
             {
                 Name = entity.Project.Name
             },
+            Version = entity.Version,
         };
     }
-    
+
     public async Task<PaginatedResult<TaskDto>> GetTasksAsync(
         GetTasksRequest request,
         CancellationToken cancellationToken = default)
     {
         var pageNumber = Math.Max(1, request.Pagination.PageNumber);
-        var pageSize = Math.Clamp(request.Pagination.PageSize, 1, 50);
+        var pageSize = Math.Clamp(request.Pagination.PageSize, 1, 1000);
         var userId = userContextService.GetCurrentUserId();
 
         var query = context.Tasks
                            .Include(p => p.User)
                            .Include(p => p.Project)
-                           .Where(p => p.UserId == userId || p.Project.UserProjects.Any(up => up.UserId == userId) || p.Project.OwnerId == userId);
-
-        int skip = (request.Pagination.PageNumber - 1) * request.Pagination.PageSize;
-        int take = request.Pagination.PageSize;
+                           .Where(p => p.UserId == userId
+                                    || p.Project.UserProjects.Any(up => up.UserId == userId)
+                                    || p.Project.OwnerId == userId);
 
         if (request.Priority.HasValue)
         {
@@ -187,7 +161,7 @@ public class TaskService(
         if (request.UserId != null)
         {
             query = query.Where(p => p.UserId == request.UserId);
-        } 
+        }
 
         var totalCount = await query.CountAsync();
 
@@ -195,17 +169,21 @@ public class TaskService(
                           .OrderBy(p => p.StartedAt)
                           .Skip((pageNumber - 1) * pageSize)
                           .Take(pageSize)
-                          .Select(p => new TaskDto
+                          .Select(t => new TaskDto
                           {
-                              Id = p.Id,
-                              Name = p.Name,
-                              Status = p.Status,
-                              Assignee = p.User != null ? new TaskAssigneeDto(p.User.Id, p.User.FirstName, p.User.LastName) : null,
-                              StartedAt = p.StartedAt,
-                              FinishedAt = p.FinishedAt,
-                              Deadline = p.Deadline,
-                              Priority = p.Priority,
-                              Project = new ProjectDto{Name = p.Project.Name},
+                              Id = t.Id,
+                              Name = t.Name,
+                              Status = t.Status,
+                              Assignee = t.User != null ? new TaskAssigneeDto(t.User.Id, t.User.FirstName, t.User.LastName) : null,
+                              StartedAt = t.StartedAt,
+                              FinishedAt = t.FinishedAt,
+                              Deadline = t.Deadline,
+                              Priority = t.Priority,
+                              Project = new ProjectDto
+                              {
+                                  Name = t.Project.Name
+                              },
+                              Version = t.Version,
                           })
                           .ToListAsync();
 

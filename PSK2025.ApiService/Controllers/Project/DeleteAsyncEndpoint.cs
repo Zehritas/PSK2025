@@ -18,6 +18,7 @@ public class DeleteAsyncEndpoint : IEndpoint
                 await service.DeleteAsync(request);
                 return Results.NoContent();
             })
+             .RequireAuthorization()
             .WithName("Delete Project")
             .Produces(204)
             .Produces(404)

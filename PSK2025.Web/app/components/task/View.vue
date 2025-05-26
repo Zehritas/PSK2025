@@ -42,9 +42,7 @@
     <template #footer>
       <div class="flex justify-end w-full">
         <UButton
-          label="Edit task" icon="i-lucide-pencil" @click="() => {
-          emit('update:modelValue', false)
-        }" />
+          label="Edit task" icon="i-lucide-pencil" @click="editTask" />
       </div>
     </template>
   </USlideover>
@@ -65,10 +63,24 @@ const props = defineProps({
 })
 const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>()
 
-const { data } = await useApiFetch<Task>(
+const { data, refresh } = await useApiFetch<Task>(
   () => `/api/tasks/${props.id}`,
   {
-    immediate: false
+    immediate: false,
+    watch: false
   }
 )
+
+watch(() => props.modelValue, () => {
+  if (props.modelValue) {
+    refresh()
+  }
+})
+
+const nuxtApp = useNuxtApp()
+
+const editTask = async () => {
+  emit('update:modelValue', false)
+  await nuxtApp.callHook('task:update', data.value)
+}
 </script>

@@ -61,6 +61,7 @@ import { useProjectStore } from '~/store/project'
 import { TaskPriority, TaskStatus } from '~/types/task'
 import { taskPriorityColor, taskPriorityText, taskStatusColor, taskStatusText } from '~/constants/task'
 import type { User } from '~/types/user'
+import type { PaginatedList } from '~/types/list'
 
 const taskStatusItems = Object.keys(TaskStatus)
   .filter((key) => !isNaN(Number(key)))
@@ -157,14 +158,14 @@ const resetState = () => {
   state.deadline = undefined
 }
 
-const { data: userData, status: userStatus } = await useApiFetch<User[]>(
+const { data: userData, status: userStatus } = await useApiFetch<PaginatedList<User>>(
   () => `/api/projects/${projectId.value}/users`
 )
 
 const userItems = computed(() => {
   return [
     { label: 'None', value: undefined },
-    ...userData.value?.map((user) => ({
+    ...userData.value?.items.map((user) => ({
       label: `${user.firstName} ${user.lastName}`,
       value: user.id
     })) ?? []

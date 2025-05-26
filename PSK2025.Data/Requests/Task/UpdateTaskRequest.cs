@@ -20,10 +20,13 @@ public class UpdateTaskRequest
 
     public DateTime? Deadline { get; set; }
 
+    public DateTime? StartedAt { get; set; }
     public DateTime? FinishedAt { get; set; }
 
     [Required(ErrorMessage = "Status is required.")]
     public TaskEntityStatus Status { get; set; }
 
-    public PriorityStatus PriorityStatus { get; set; }
+    public PriorityStatus Priority { get; set; }
+
+    public uint Version { get; set; }
 }

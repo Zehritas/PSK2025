@@ -125,7 +125,7 @@ const taskPriorityItems = [
 ]
 
 const page = ref(1)
-const pageSize = ref(10)
+const pageSize = ref(11)
 const taskStatus = ref<string | undefined>(undefined)
 const taskPriority = ref<string | undefined>(undefined)
 const taskUser = ref<string | undefined>(undefined)
@@ -168,15 +168,18 @@ const nuxtApp = useNuxtApp()
 nuxtApp.hook('task:created', () => {
   refresh()
 })
+nuxtApp.hook('task:updated', () => {
+  refresh()
+})
 
-const { data: userData, status: userStatus } = await useApiFetch<User[]>(
+const { data: userData, status: userStatus } = await useApiFetch<PaginatedList<User>>(
   () => `/api/projects/${projectId.value}/users`
 )
 
 const userItems = computed(() => {
   return [
     { label: 'All', value: undefined },
-    ...userData.value?.map((user) => ({
+    ...userData.value?.items.map((user) => ({
       label: `${user.firstName} ${user.lastName}`,
       value: user.id
     })) ?? []

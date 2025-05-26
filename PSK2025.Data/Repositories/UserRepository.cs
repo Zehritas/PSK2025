@@ -17,9 +17,15 @@ namespace PSK2025.Data.Repositories
         public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await _context.Users
-                .AsNoTracking()
-                .FirstOrDefaultAsync(u => u.Id == id.ToString(), cancellationToken);
+                                 .AsNoTracking()
+                                 .FirstOrDefaultAsync(u => u.Id == id.ToString(), cancellationToken);
         }
-        
+
+        public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+        {
+            return await _context.Users
+                                 .AsNoTracking()
+                                 .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+        }
     }
 }

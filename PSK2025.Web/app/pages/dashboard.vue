@@ -23,7 +23,9 @@
               :color="projectId === project.id ? 'primary' : 'neutral'"
               trailing-icon="i-lucide-star"
               :disabled="projectId === project.id"
-              @click="() => {projectId = project.id}"
+              @click="() => {
+                projectId = project.id
+              }"
             >
               {{ project.name }}
             </UButton>
@@ -32,7 +34,7 @@
 
         <div v-if="tasksStatus === 'success'" class="">
           <div class="font-semibold text-highlighted truncate mt-2 mb-4">
-            Task statistics
+            Your tasks
           </div>
 
           <UPageGrid class="lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-px">
@@ -60,10 +62,6 @@
         </div>
 
         <div v-if="tasksStatus === 'success'" class="">
-          <div class="font-semibold text-highlighted truncate mt-2 mb-4">
-            Your recent tasks
-          </div>
-
           <UTable
             ref="table"
             class="shrink-0"
@@ -77,8 +75,24 @@
             th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
             td: 'border-b border-default'
           }"
+            @select="async (row: TableRow<Task>) => {
+              currentTaskId = row.original.id
+              taskViewOpen = true
+            }"
           />
+
+          <div class="flex items-center justify-center gap-3 border-t border-default pt-4 mt-auto w-full">
+            <UPagination
+              :default-page="1"
+              :items-per-page="5"
+              :total="yourTasksData?.totalCount"
+              @update:page="(v: number) => yourTasksPage = v"
+            />
+          </div>
         </div>
+
+        <TaskEdit />
+        <TaskView :id="currentTaskId" v-model="taskViewOpen" />
       </div>
     </template>
   </UDashboardPanel>
@@ -90,7 +104,7 @@ import type { PaginatedList } from '~/types/list'
 import { useProjectStore } from '~/store/project'
 import { type Task, TaskStatus } from '~/types/task'
 import { useUserStore } from '~/store/user'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, TableRow } from '@nuxt/ui'
 
 useSeoMeta({
   title: 'Dashboard | CoStudent'
@@ -116,7 +130,8 @@ const { data: tasksData, status: tasksStatus } = await useApiFetch<PaginatedList
   {
     query: {
       pageSize: 1000,
-      pageNumber: 1
+      pageNumber: 1,
+      userId: user.id
     }
   }
 )
@@ -173,20 +188,27 @@ const columns: TableColumn<Task> [] = [
   {
     id: 'status',
     header: 'Status',
-    cell: ({ row }) => h(resolveComponent('ProjectStatusBadge'), {
+    cell: ({ row }) => h(resolveComponent('TaskStatusBadge'), {
       value: row.original.status
     })
   },
   {
-    id: 'startedAt',
-    header: 'Started at',
+    id: 'priority',
+    header: 'Priority',
+    cell: ({ row }) => h(resolveComponent('TaskPriorityBadge'), {
+      value: row.original.priority
+    })
+  },
+  {
+    id: 'startDate',
+    header: 'Start date',
     cell: ({ row }) => h(propertyDate, {
       value: row.original.startedAt
     })
   },
   {
-    id: 'finishedAt',
-    header: 'Finished at',
+    id: 'endDate',
+    header: 'End date',
     cell: ({ row }) => h(propertyDate, {
       value: row.original.finishedAt
     })
@@ -200,14 +222,30 @@ const columns: TableColumn<Task> [] = [
   }
 ]
 
-const { data: yourTasksData, status: yourTasksStatus } = await useApiFetch<PaginatedList<Task>>(
+
+const yourTasksPage = ref(1)
+
+const {
+  data: yourTasksData,
+  status: yourTasksStatus,
+  refresh: refreshYourTasks
+} = await useApiFetch<PaginatedList<Task>>(
   '/api/tasks',
   {
     query: {
-      pageSize: 5,
-      pageNumber: 1,
+      pageSize: 6,
+      pageNumber: yourTasksPage,
       userId: user.id
     }
   }
 )
+
+const nuxtApp = useNuxtApp()
+
+nuxtApp.hook('task:updated', () => {
+  refreshYourTasks()
+})
+
+const currentTaskId = ref<string | null>(null)
+const taskViewOpen = ref(false)
 </script>

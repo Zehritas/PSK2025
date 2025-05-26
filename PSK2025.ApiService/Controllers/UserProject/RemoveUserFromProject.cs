@@ -25,6 +25,7 @@ public class RemoveUserFromProjectEndpoint : IEndpoint
                     return Results.BadRequest(ex.Message);
                 }
             })
+             .RequireAuthorization()
             .WithName("RemoveUserFromProject")
             .Produces<UserProjectResponse>(200)
             .Produces(400)

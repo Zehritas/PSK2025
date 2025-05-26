@@ -48,7 +48,13 @@
 </template>
 
 <script setup lang="ts">
+import { useProjectStore } from '~/store/project'
+
 const open = ref(false)
+
+const projectSt = useProjectStore()
+await projectSt.refreshProjects()
+const { projectId } = storeToRefs(projectSt)
 
 const links = [
   [
@@ -75,15 +81,36 @@ const links = [
       onSelect: () => {
         open.value = false
       }
+    },
+    {
+      label: 'Members',
+      icon: 'i-lucide-users',
+      to: '/members',
+      onSelect: () => {
+        open.value = false
+      }
     }
   ]
 ]
 
 const groups = computed(() => [
-  {
-    id: 'links',
-    label: 'Go to',
-    items: links.flat()
-  }
-])
+    {
+      id: 'links',
+      label: 'Go to',
+      items: links.flat()
+    },
+    {
+      id: 'projects',
+      label: 'Switch project',
+      items: Object.keys(projectSt.projects ?? {}).map((key) => ({
+        label: projectSt.projects![key]!.name,
+        icon: 'i-lucide-arrow-right',
+        onSelect: async () => {
+          open.value = false
+          projectId.value = key
+        }
+      }))
+    }
+  ]
+)
 </script>

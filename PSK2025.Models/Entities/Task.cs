@@ -56,7 +56,7 @@ public class Task
         return task;
     }
 
-    public void Update(string? name, string? userId, DateTime? deadline, TaskEntityStatus status, PriorityStatus priority, DateTime? finishedAt)
+    public void Update(string? name, string? userId, DateTime? deadline, TaskEntityStatus status, PriorityStatus priority, DateTime? finishedAt, DateTime? startedAt)
     {
         if (!string.IsNullOrWhiteSpace(name))
             Name = name;
@@ -66,9 +66,14 @@ public class Task
         Status = status;
         Priority = priority;
 
-        if (status == TaskEntityStatus.Completed)
-            FinishedAt = finishedAt ?? DateTime.UtcNow;
-        else
-            FinishedAt = null;
+        if (startedAt != null)
+        {
+            StartedAt = startedAt;
+        }
+
+        if (finishedAt != null)
+        {
+            FinishedAt = finishedAt;
+        }
     }
 }

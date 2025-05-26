@@ -19,6 +19,7 @@ public class UpdateAsyncEndpoint : IEndpoint
 
                 return Results.Ok(result.Project);
             })
+             .RequireAuthorization()
             .WithName("Update Project")
             .Produces<ProjectDto>(200)
             .Produces(400)

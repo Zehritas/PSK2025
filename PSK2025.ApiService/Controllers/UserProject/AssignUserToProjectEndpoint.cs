@@ -18,6 +18,7 @@ public class AssignUserToProjectEndpoint : IEndpoint
                 var response = await service.AssignAsync(request);
                 return Results.Ok(response.UserProject);
             })
+             .RequireAuthorization()
             .WithName("AssignUserToProject")
             .Produces<UserProjectResponse>(200)
             .Produces(400)
