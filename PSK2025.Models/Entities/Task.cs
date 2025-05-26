@@ -28,16 +28,16 @@ public class Task
         Deadline = deadline;
     }
 
-    public Guid Id { get; private set; }
+    public Guid Id { get; set; }
     public Guid ProjectId { get; set; }
     public String? UserId { get; set; }
-    public String Name { get; private set; }
-    public DateTime StartedAt { get; private set; }
-    public DateTime? FinishedAt { get; private set; }
+    public String Name { get; set; }
+    public DateTime? StartedAt { get; set; }
+    public DateTime? FinishedAt { get; set; }
     public DateTime? Deadline { get; set; }
 
-    public PriorityStatus? Priority { get; private set; }
-    public TaskEntityStatus Status { get; private set; }
+    public PriorityStatus? Priority { get; set; }
+    public TaskEntityStatus Status { get; set; }
 
     [Timestamp]
     public uint Version { get; set; }

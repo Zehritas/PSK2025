@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using PSK2025.Data.Requests;
 using PSK2025.Data.Requests.Task;
 using PSK2025.ApiService.Extensions;
+using PSK2025.Models.DTOs;
 
 namespace PSK2025.ApiService.Controllers.Task;
 
@@ -35,10 +36,14 @@ public class GetTasksEndpoint : IEndpoint
                     );
 
                     var result = await service.GetTasksAsync(request);
-
-                    return result.IsSuccess
-                        ? Results.Ok(result.Value)
-                        : result.Error.MapErrorToResponse();
+    
+                    return Results.Ok(new PaginatedResult<TaskDto>
+                    {
+                        Items = result.Items.ToList(),
+                        TotalCount = result.TotalCount,
+                        CurrentPage = result.CurrentPage,
+                        PageSize = result.PageSize
+                    });
                 })
             .WithName("Get Tasks")
             .Produces(200)

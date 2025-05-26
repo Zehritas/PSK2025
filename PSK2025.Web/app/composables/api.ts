@@ -21,6 +21,7 @@ export const useApiFetch = <T, O extends ApiFetchOptions<T> = ApiFetchOptions<T>
 ): ReturnType<typeof useFetch<T>> => {
   return useFetch<T>(request, {
     ...opts,
+    server: false,
     $fetch: useNuxtApp().$apiFetch
   })
 }

@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import * as z from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui'
 import { type CreateProjectRequest, type Project, ProjectStatus } from '~/types/project'
 import { projectStatusColor, projectStatusText } from '~/constants/project'
-import { useUserStore } from '~/store/user'
+import { useProjectStore } from '~/store/project'
+
+const props = defineProps({
+  showButton: {
+    type: Boolean,
+    default: true
+  }
+})
 
 const projectStatusItems = [
   ...Object.keys(ProjectStatus)
@@ -43,6 +49,8 @@ const state = reactive({
 })
 
 const toast = useToast()
+const projectSt = useProjectStore()
+const { projectId } = storeToRefs(projectSt)
 const loading = ref(false)
 
 async function onSubmit() {
@@ -67,6 +75,8 @@ async function onSubmit() {
       description: 'A new project has been created successfully.',
       color: 'success'
     })
+    await projectSt.refreshProjects(true)
+    projectId.value = project.id
     await navigateTo(`/projects/${project.id}`)
   } catch (e) {
     console.debug(e)
@@ -82,11 +92,17 @@ const resetState = () => {
   state.startDate = undefined
   state.endDate = undefined
 }
+
+const nuxtApp = useNuxtApp()
+
+nuxtApp.hook('project:create', () => {
+  open.value = true
+})
 </script>
 
 <template>
   <UModal v-model:open="open" title="New project" description="Create a new project." :dismissible="!loading">
-    <UButton label="New project" icon="i-lucide-plus" />
+    <UButton v-if="showButton" label="New project" icon="i-lucide-plus" />
 
     <template #body>
       <UForm
